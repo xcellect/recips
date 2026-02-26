@@ -1,0 +1,4 @@
+model,mean_tail_duration,std_tail_duration,mean_ns_peak,mean_ns_half_life,mean_ns_auc_above_baseline,std_ns_auc_above_baseline,mean_arousal_integral,mean_turn_rate_tail,mean_forward_rate_tail,n
+Recon,5.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,1.0,20
+Ipsundrum,5.05,0.22360679774997894,1.0,0.0,0.24438297658234537,0.0013133800832961886,0.0,0.027500000000000004,0.9724999999999999,20
+Ipsundrum+affect,89.85,92.61878574935115,1.0,0.0,0.15437392709006198,0.056645808556465976,26.238601491486556,0.7025,0.2975,20

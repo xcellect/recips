@@ -1,0 +1,11 @@
+# Core runtime dependencies
+numpy
+pandas
+matplotlib
+
+# Optional / interactive
+ipython
+networkx
+
+# Dev / test
+pytest

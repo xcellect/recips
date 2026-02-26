@@ -1,0 +1,35 @@
+\begin{tabular}{p{0.48\linewidth}p{0.28\linewidth}p{0.18\linewidth}}
+\toprule
+Parameter & Value & Notes \
+\midrule
+Loop gain g & 1 & Ipsundrum \
+Motor gain h & 1 & Ipsundrum \
+Internal decay d & 0.6 & Ipsundrum \
+Sensor bias & 0.5 & signed I_t in [-1,1] \
+Divisive norm & 0.8 & Ns saturation control \
+Affect enabled & True & affect variants \
+Valence scale & 3 & affect readout \
+k_homeo & 0.1 & body-budget update \
+k_pe & 0.5 & body-budget update \
+Demand motor & 0.2 & body-budget update \
+Demand stim & 0.3 & body-budget update \
+Modulate g & True & affect coupling \
+k_g_arousal & 0.8 & affect coupling \
+k_g_unpleasant & 0.8 & affect coupling \
+Modulate precision & True & affect coupling \
+Precision base & 1 & affect coupling \
+k_precision_arousal & 0.5 & affect coupling \
+Score w_valence & 2 & internal score \
+Score w_arousal & -1.2 & internal score \
+Score w_ns & -0.8 & internal score \
+Score w_bb_err & -0.4 & internal score \
+Seeds (familiarity) & [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] & config \
+Seeds (exploratory play) & [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] & config \
+Seeds (lesion) & [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] & config \
+Play steps & 200 & config \
+Familiarity steps & 80 & config \
+Lesion post window & 150 & config \
+Pain-tail post steps & 200 & config \
+Goal horizons & [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] & config \
+\bottomrule
+\end{tabular}

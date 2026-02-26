@@ -1,0 +1,73 @@
+============================================================
+PAIN-TAIL ASSAY
+============================================================
+Running pain-tail: model=recon, seed=0
+Running pain-tail: model=recon, seed=1
+Running pain-tail: model=recon, seed=2
+Running pain-tail: model=recon, seed=3
+Running pain-tail: model=recon, seed=4
+Running pain-tail: model=recon, seed=5
+Running pain-tail: model=recon, seed=6
+Running pain-tail: model=recon, seed=7
+Running pain-tail: model=recon, seed=8
+Running pain-tail: model=recon, seed=9
+Running pain-tail: model=recon, seed=10
+Running pain-tail: model=recon, seed=11
+Running pain-tail: model=recon, seed=12
+Running pain-tail: model=recon, seed=13
+Running pain-tail: model=recon, seed=14
+Running pain-tail: model=recon, seed=15
+Running pain-tail: model=recon, seed=16
+Running pain-tail: model=recon, seed=17
+Running pain-tail: model=recon, seed=18
+Running pain-tail: model=recon, seed=19
+Running pain-tail: model=humphrey, seed=0
+Running pain-tail: model=humphrey, seed=1
+Running pain-tail: model=humphrey, seed=2
+Running pain-tail: model=humphrey, seed=3
+Running pain-tail: model=humphrey, seed=4
+Running pain-tail: model=humphrey, seed=5
+Running pain-tail: model=humphrey, seed=6
+Running pain-tail: model=humphrey, seed=7
+Running pain-tail: model=humphrey, seed=8
+Running pain-tail: model=humphrey, seed=9
+Running pain-tail: model=humphrey, seed=10
+Running pain-tail: model=humphrey, seed=11
+Running pain-tail: model=humphrey, seed=12
+Running pain-tail: model=humphrey, seed=13
+Running pain-tail: model=humphrey, seed=14
+Running pain-tail: model=humphrey, seed=15
+Running pain-tail: model=humphrey, seed=16
+Running pain-tail: model=humphrey, seed=17
+Running pain-tail: model=humphrey, seed=18
+Running pain-tail: model=humphrey, seed=19
+Running pain-tail: model=humphrey_barrett, seed=0
+Running pain-tail: model=humphrey_barrett, seed=1
+Running pain-tail: model=humphrey_barrett, seed=2
+Running pain-tail: model=humphrey_barrett, seed=3
+Running pain-tail: model=humphrey_barrett, seed=4
+Running pain-tail: model=humphrey_barrett, seed=5
+Running pain-tail: model=humphrey_barrett, seed=6
+Running pain-tail: model=humphrey_barrett, seed=7
+Running pain-tail: model=humphrey_barrett, seed=8
+Running pain-tail: model=humphrey_barrett, seed=9
+Running pain-tail: model=humphrey_barrett, seed=10
+Running pain-tail: model=humphrey_barrett, seed=11
+Running pain-tail: model=humphrey_barrett, seed=12
+Running pain-tail: model=humphrey_barrett, seed=13
+Running pain-tail: model=humphrey_barrett, seed=14
+Running pain-tail: model=humphrey_barrett, seed=15
+Running pain-tail: model=humphrey_barrett, seed=16
+Running pain-tail: model=humphrey_barrett, seed=17
+Running pain-tail: model=humphrey_barrett, seed=18
+Running pain-tail: model=humphrey_barrett, seed=19
+
+============================================================
+SUMMARY
+============================================================
+           model  mean_tail_duration  std_tail_duration  mean_ns_peak  mean_ns_half_life  mean_ns_auc_above_baseline  std_ns_auc_above_baseline  mean_arousal_integral  mean_turn_rate_tail  mean_forward_rate_tail  n
+           Recon                5.00           0.000000           1.0                0.0                    0.000000                   0.000000               0.000000               0.0000                  1.0000 20
+       Ipsundrum                5.05           0.223607           1.0                0.0                    0.244383                   0.001313               0.000000               0.0275                  0.9725 20
+Ipsundrum+affect               89.85          92.618786           1.0                0.0                    0.154374                   0.056646              26.238601               0.7025                  0.2975 20
+
+Plot saved: results/pain-tail/results.png

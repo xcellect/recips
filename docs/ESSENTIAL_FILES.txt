@@ -1,0 +1,87 @@
+ESSENTIAL FILES FOR REPRODUCING RESULTS (CURRENT)
+=================================================
+Last Updated: 2026-01-30
+
+ENTRYPOINTS
+-----------
+run_experiments.sh  # Runs the full pipeline (assays + figures + paper exports)
+run_pytest.sh       # Pytest runner (matches ReCoN strict-mode defaults)
+
+RUN CONFIG (run_experiments.sh)
+-------------------------------
+PROFILE can be "paper" (default) or "quick".
+
+Defaults by profile:
+- paper: SEEDS_HEADLINE=20, GOAL_DIRECTED_SEEDS=20, QUALIAPHILIA_SEEDS=20, PAIN_POST_STEPS=200
+- quick: SEEDS_HEADLINE=5,  GOAL_DIRECTED_SEEDS=10, QUALIAPHILIA_SEEDS=5,  PAIN_POST_STEPS=50
+
+Other fixed defaults:
+- EXPLORATORY_STEPS=200
+- FAMILIARITY_POST_REPEATS=5
+- LESION_POST_WINDOW=150
+- PAIN_TAIL_SEEDS=20 (unless overridden via the environment)
+
+Other toggles:
+- RECON_STRICT=1 by default (set RECON_STRICT=0 for compatibility mode)
+- RUN_WEIGHT_SWEEP=1 enables an optional weight sweep into results/ablations/weight-sweep/ (log: logs/weight_sweep.log)
+
+Important behavior:
+- run_experiments.sh deletes and recreates results/ and logs/ at startup.
+- The exact run configuration is saved to results/config_metadata.json.
+
+MODULES EXECUTED BY run_experiments.sh
+--------------------------------------
+experiments/goal_directed_sweeps.py
+experiments/pain_tail_assay.py
+experiments/qualiaphilia_assay.py
+experiments/exploratory_play.py
+experiments/familiarity_control.py
+experiments/familiarity_internal.py   # fixed seeds 0-4; outputs are timestamped
+experiments/lesion_causal.py
+experiments/viz_utils/publication_figures.py
+analysis/paper_claims.py
+analysis/export_params.py
+analysis/build_dissociation_table.py
+experiments/weight_sweep.py           # optional (RUN_WEIGHT_SWEEP=1)
+
+CORE CODE (DIRECTORIES)
+-----------------------
+core/         # ReCoN primitives + Ipsundrum(+affect) loop + env/driver utilities
+experiments/  # harness + assays + figure generation
+analysis/      # exporters ("claims-as-code", params table, dissociation table)
+utils/         # plot style + model naming helpers
+tests/         # unit tests
+
+OUTPUTS (AUTO-CREATED)
+----------------------
+results/config_metadata.json           # seeds/horizons/windows for the run
+results/goal-directed/                 # corridor_*.csv, gridworld_*.csv + plots
+results/pain-tail/                     # episodes.csv, summary.csv, results.png
+results/qualiaphilia/                  # episodes.csv, summary.csv, results.png
+results/exploratory-play/              # final_viewpoints.csv + tagged CSVs/plots
+results/familiarity/                   # episodes_improved.csv + summary.csv + side_bias.csv + familiarity_internal_*.{csv,png}
+results/lesion/                        # episodes_extended.csv + ns_traces.npz
+results/publication-figures/           # fig1_play.png, fig2.png, fig2_supp.png, fig3.png (+ debug/)
+results/ablations/                     # familiarity/ + exploratory-play/ (+ weight-sweep/ if enabled)
+results/paper/                         # claims.{json,tex,md} + params_table.{tex,csv} + dissociation_table.tex
+
+logs/*.log                             # stage logs (tee output)
+
+REPRODUCTION WORKFLOW
+---------------------
+1) Run: ./run_experiments.sh
+   (or: PROFILE=quick ./run_experiments.sh)
+2) Check: results/config_metadata.json for exact seeds/params used.
+3) Check: results/paper/claims.json for computed metrics (and their sources).
+
+CURRENT METRICS SNAPSHOT (from results/paper/claims.json)
+---------------------------------------------------------
+Exploratory play: play_scan_events_recon = 0.95; play_scan_events_hb = 31.35
+Familiarity: fam_delta_scenic_entry_recon = 0.07; fam_delta_scenic_entry_hb = 0.01  (dull − scenic)
+Pain-tail: pain_tail_duration_recon = 5; pain_tail_duration_hb = 90
+Lesion: lesion_auc_drop_recon = 0.00; lesion_auc_drop_hb = 27.62
+
+DEPENDENCIES
+------------
+Python packages: see requirements.txt
+LaTeX toolchain: optional (only needed to build docs/paper-3-v9.tex)

@@ -1,0 +1,82 @@
+============================================================
+QUALIAPHILIA ASSAY
+============================================================
+Running qualiaphilia: model=recon, seed=0, scenic=left
+Running qualiaphilia: model=recon, seed=1, scenic=right
+Running qualiaphilia: model=recon, seed=2, scenic=left
+Running qualiaphilia: model=recon, seed=3, scenic=right
+Running qualiaphilia: model=recon, seed=4, scenic=left
+Running qualiaphilia: model=recon, seed=5, scenic=right
+Running qualiaphilia: model=recon, seed=6, scenic=left
+Running qualiaphilia: model=recon, seed=7, scenic=right
+Running qualiaphilia: model=recon, seed=8, scenic=left
+Running qualiaphilia: model=recon, seed=9, scenic=right
+Running qualiaphilia: model=recon, seed=10, scenic=left
+Running qualiaphilia: model=recon, seed=11, scenic=right
+Running qualiaphilia: model=recon, seed=12, scenic=left
+Running qualiaphilia: model=recon, seed=13, scenic=right
+Running qualiaphilia: model=recon, seed=14, scenic=left
+Running qualiaphilia: model=recon, seed=15, scenic=right
+Running qualiaphilia: model=recon, seed=16, scenic=left
+Running qualiaphilia: model=recon, seed=17, scenic=right
+Running qualiaphilia: model=recon, seed=18, scenic=left
+Running qualiaphilia: model=recon, seed=19, scenic=right
+Running qualiaphilia: model=humphrey, seed=0, scenic=left
+Running qualiaphilia: model=humphrey, seed=1, scenic=right
+Running qualiaphilia: model=humphrey, seed=2, scenic=left
+Running qualiaphilia: model=humphrey, seed=3, scenic=right
+Running qualiaphilia: model=humphrey, seed=4, scenic=left
+Running qualiaphilia: model=humphrey, seed=5, scenic=right
+Running qualiaphilia: model=humphrey, seed=6, scenic=left
+Running qualiaphilia: model=humphrey, seed=7, scenic=right
+Running qualiaphilia: model=humphrey, seed=8, scenic=left
+Running qualiaphilia: model=humphrey, seed=9, scenic=right
+Running qualiaphilia: model=humphrey, seed=10, scenic=left
+Running qualiaphilia: model=humphrey, seed=11, scenic=right
+Running qualiaphilia: model=humphrey, seed=12, scenic=left
+Running qualiaphilia: model=humphrey, seed=13, scenic=right
+Running qualiaphilia: model=humphrey, seed=14, scenic=left
+Running qualiaphilia: model=humphrey, seed=15, scenic=right
+Running qualiaphilia: model=humphrey, seed=16, scenic=left
+Running qualiaphilia: model=humphrey, seed=17, scenic=right
+Running qualiaphilia: model=humphrey, seed=18, scenic=left
+Running qualiaphilia: model=humphrey, seed=19, scenic=right
+Running qualiaphilia: model=humphrey_barrett, seed=0, scenic=left
+Running qualiaphilia: model=humphrey_barrett, seed=1, scenic=right
+Running qualiaphilia: model=humphrey_barrett, seed=2, scenic=left
+Running qualiaphilia: model=humphrey_barrett, seed=3, scenic=right
+Running qualiaphilia: model=humphrey_barrett, seed=4, scenic=left
+Running qualiaphilia: model=humphrey_barrett, seed=5, scenic=right
+Running qualiaphilia: model=humphrey_barrett, seed=6, scenic=left
+Running qualiaphilia: model=humphrey_barrett, seed=7, scenic=right
+Running qualiaphilia: model=humphrey_barrett, seed=8, scenic=left
+Running qualiaphilia: model=humphrey_barrett, seed=9, scenic=right
+Running qualiaphilia: model=humphrey_barrett, seed=10, scenic=left
+Running qualiaphilia: model=humphrey_barrett, seed=11, scenic=right
+Running qualiaphilia: model=humphrey_barrett, seed=12, scenic=left
+Running qualiaphilia: model=humphrey_barrett, seed=13, scenic=right
+Running qualiaphilia: model=humphrey_barrett, seed=14, scenic=left
+Running qualiaphilia: model=humphrey_barrett, seed=15, scenic=right
+Running qualiaphilia: model=humphrey_barrett, seed=16, scenic=left
+Running qualiaphilia: model=humphrey_barrett, seed=17, scenic=right
+Running qualiaphilia: model=humphrey_barrett, seed=18, scenic=left
+Running qualiaphilia: model=humphrey_barrett, seed=19, scenic=right
+
+============================================================
+SUMMARY
+============================================================
+           model  decided_rate  mean_time_scenic  mean_time_dull  mean_time_center  mean_scenic_time_share  mean_time_scenic_barrier  mean_time_dull_barrier  scenic_time_share_barrier_mean  success_rate  mean_hazards  mean_valence_scenic  mean_valence_dull  mean_arousal_scenic  mean_arousal_dull  n  scenic_rate_entry  scenic_rate_commit
+           Recon           1.0             20.80           12.65             18.60                0.645412                     11.65                    7.50                            0.63          0.75           0.0                  NaN                NaN                  NaN                NaN 20             0.6500            0.700000
+       Ipsundrum           1.0             20.80           12.65             18.60                0.645412                     11.65                    7.50                            0.63          0.75           0.0                  NaN                NaN                  NaN                NaN 20             0.6500            0.700000
+Ipsundrum+affect           0.8             18.25            1.50             43.05                0.800000                     10.65                    1.15                            0.75          0.65           0.0             0.748151           0.539052             0.107286           0.154539 20             0.9375            0.941176
+
+Plot saved: results/qualiaphilia/results.png
+
+============================================================
+INTERPRETATION
+============================================================
+Chance = 50% (random choice between paths)
+Evidence for qualiaphilia: preference significantly > 50%
+  Recon               :  65.0% (+15.0% vs chance), decided=100.0%
+  Ipsundrum           :  65.0% (+15.0% vs chance), decided=100.0%
+  Ipsundrum+affect    :  93.8% (+43.8% vs chance), decided= 80.0%

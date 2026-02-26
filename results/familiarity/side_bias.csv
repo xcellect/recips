@@ -1,0 +1,4 @@
+model,scenic_rate_left,scenic_rate_right,n_left,n_right
+Recon,0.36,0.56,50,50
+Ipsundrum,0.36,0.56,50,50
+Ipsundrum+affect,0.8974358974358975,1.0,39,50

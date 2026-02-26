@@ -1,0 +1,1334 @@
+{
+  "fam_post_scenic_entry_recon_scenic": {
+    "value": 0.4600000000000001,
+    "ci": [
+      0.33,
+      0.5900000000000001
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv"
+    }
+  },
+  "fam_post_scenic_entry_humphrey_scenic": {
+    "value": 0.4600000000000001,
+    "ci": [
+      0.33,
+      0.5900000000000001
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv"
+    }
+  },
+  "fam_post_scenic_entry_hb_scenic": {
+    "value": 0.9444444444444444,
+    "ci": [
+      0.8333333333333334,
+      1.0
+    ],
+    "n": 18,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv"
+    }
+  },
+  "fam_post_scenic_entry_recon_dull": {
+    "value": 0.53,
+    "ci": [
+      0.41974999999999996,
+      0.65
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv"
+    }
+  },
+  "fam_post_scenic_entry_humphrey_dull": {
+    "value": 0.53,
+    "ci": [
+      0.41974999999999996,
+      0.65
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv"
+    }
+  },
+  "fam_post_scenic_entry_hb_dull": {
+    "value": 0.9555555555555555,
+    "ci": [
+      0.8666666666666667,
+      1.0
+    ],
+    "n": 18,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv"
+    }
+  },
+  "fam_delta_scenic_entry_recon": {
+    "value": 0.06999999999999999,
+    "ci": [
+      -0.01999999999999999,
+      0.16
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv",
+      "definition": "dull - scenic"
+    }
+  },
+  "fam_delta_scenic_entry_humphrey": {
+    "value": 0.06999999999999999,
+    "ci": [
+      -0.01999999999999999,
+      0.16
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv",
+      "definition": "dull - scenic"
+    }
+  },
+  "fam_delta_scenic_entry_hb": {
+    "value": 0.011111111111111112,
+    "ci": [
+      0.0,
+      0.03333333333333334
+    ],
+    "n": 18,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv",
+      "definition": "dull - scenic"
+    }
+  },
+  "fam_median_delta_novelty_hb_scenic": {
+    "value": -0.4262659525005299,
+    "ci": null,
+    "n": 18,
+    "type": "scalar",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv"
+    }
+  },
+  "fam_valence_scenic_hb": {
+    "value": 0.7361185317446743,
+    "ci": [
+      0.7113460545293707,
+      0.7653838608643894
+    ],
+    "n": 18,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv"
+    }
+  },
+  "fam_valence_dull_hb": {
+    "value": 0.5778059973053598,
+    "ci": [
+      0.5778059973053598,
+      0.5778059973053598
+    ],
+    "n": 1,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv",
+      "note": "seeds with dull visits"
+    }
+  },
+  "fam_arousal_scenic_hb": {
+    "value": 0.11502490799611895,
+    "ci": [
+      0.10478364663028494,
+      0.126138599751239
+    ],
+    "n": 18,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv"
+    }
+  },
+  "fam_arousal_dull_hb": {
+    "value": 0.13507157997690977,
+    "ci": [
+      0.13507157997690977,
+      0.13507157997690977
+    ],
+    "n": 1,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv",
+      "note": "seeds with dull visits"
+    }
+  },
+  "fam_probe_valence_scenic_hb": {
+    "value": 0.906232787477439,
+    "ci": [
+      0.9003282456613179,
+      0.9124847093885423
+    ],
+    "n": 18,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv",
+      "definition": "horizon-5 split rollout"
+    }
+  },
+  "fam_probe_valence_dull_hb": {
+    "value": 0.8756622851711967,
+    "ci": [
+      0.875553394726467,
+      0.8757898439965184
+    ],
+    "n": 18,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv",
+      "definition": "horizon-5 split rollout"
+    }
+  },
+  "fam_probe_arousal_scenic_hb": {
+    "value": 0.2405482214658642,
+    "ci": [
+      0.22462718442240104,
+      0.25552019063499026
+    ],
+    "n": 18,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv",
+      "definition": "horizon-5 split rollout"
+    }
+  },
+  "fam_probe_arousal_dull_hb": {
+    "value": 0.31773201372262627,
+    "ci": [
+      0.31759176429303526,
+      0.3178460163700364
+    ],
+    "n": 18,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv",
+      "definition": "horizon-5 split rollout"
+    }
+  },
+  "fam_n_seeds": {
+    "value": 20.0,
+    "ci": null,
+    "n": 20,
+    "type": "scalar",
+    "digits": 0,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv"
+    }
+  },
+  "fam_post_repeats": {
+    "value": 5.0,
+    "ci": null,
+    "n": 5,
+    "type": "scalar",
+    "digits": 0,
+    "meta": {
+      "source": "results/familiarity/episodes_improved.csv"
+    }
+  },
+  "play_unique_viewpoints_recon": {
+    "value": 136.3,
+    "ci": [
+      128.15,
+      144.35
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 0,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv"
+    }
+  },
+  "play_unique_viewpoints_humphrey": {
+    "value": 139.7,
+    "ci": [
+      132.8,
+      146.55
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 0,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv"
+    }
+  },
+  "play_unique_viewpoints_hb": {
+    "value": 138.0,
+    "ci": [
+      123.9475,
+      149.95125
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 0,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv"
+    }
+  },
+  "play_unique_viewpoints_range": {
+    "value": [
+      136.3,
+      139.7
+    ],
+    "ci": null,
+    "n": null,
+    "type": "range",
+    "digits": 0,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv"
+    }
+  },
+  "play_neutral_entropy_recon": {
+    "value": 4.807983807776219,
+    "ci": [
+      4.773899120561805,
+      4.844781166546059
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv",
+      "column": "neutral_sensory_entropy"
+    }
+  },
+  "play_neutral_entropy_humphrey": {
+    "value": 4.808886565733705,
+    "ci": [
+      4.763734222739277,
+      4.849735462189331
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv",
+      "column": "neutral_sensory_entropy"
+    }
+  },
+  "play_neutral_entropy_hb": {
+    "value": 4.5669641218708215,
+    "ci": [
+      4.408395943810511,
+      4.693955090478216
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv",
+      "column": "neutral_sensory_entropy"
+    }
+  },
+  "play_neutral_entropy_range": {
+    "value": [
+      4.5669641218708215,
+      4.808886565733705
+    ],
+    "ci": null,
+    "n": null,
+    "type": "range",
+    "digits": 2,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv",
+      "column": "neutral_sensory_entropy"
+    }
+  },
+  "play_internal_actuator_recon_zero": {
+    "value": true,
+    "ci": null,
+    "n": null,
+    "type": "boolean",
+    "digits": null,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv"
+    }
+  },
+  "play_internal_actuator_ipsundrum_nontrivial": {
+    "value": true,
+    "ci": null,
+    "n": null,
+    "type": "boolean",
+    "digits": null,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv",
+      "threshold": 0.05
+    }
+  },
+  "play_scan_events_recon": {
+    "value": 0.95,
+    "ci": [
+      0.55,
+      1.35
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 1,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv"
+    }
+  },
+  "play_scan_events_humphrey": {
+    "value": 1.1,
+    "ci": [
+      0.75,
+      1.45
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 1,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv"
+    }
+  },
+  "play_scan_events_hb": {
+    "value": 31.35,
+    "ci": [
+      25.75,
+      38.15124999999999
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 1,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv"
+    }
+  },
+  "play_cycle_score_hb": {
+    "value": 7.6,
+    "ci": [
+      1.2,
+      16.70124999999999
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 1,
+    "meta": {
+      "source": "results/exploratory-play/final_viewpoints.csv"
+    }
+  },
+  "play_action_entropy_hb_curiosity": {
+    "value": 1.2884677597841427,
+    "ci": [
+      1.2489694524937083,
+      1.3284298168567379
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/exploratory-play/exploratory_play_clarified_paper.csv"
+    }
+  },
+  "play_action_entropy_random": {
+    "value": 1.9881223752971144,
+    "ci": [
+      1.9840710443902214,
+      1.9921036685769875
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/exploratory-play/exploratory_play_clarified_paper.csv"
+    }
+  },
+  "play_dwell_p90_hb_curiosity": {
+    "value": 2.725,
+    "ci": [
+      2.5,
+      2.925
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 1,
+    "meta": {
+      "source": "results/exploratory-play/exploratory_play_clarified_paper.csv"
+    }
+  },
+  "play_dwell_p90_random": {
+    "value": 8.975,
+    "ci": [
+      8.294874999999998,
+      9.774999999999997
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/exploratory-play/exploratory_play_clarified_paper.csv"
+    }
+  },
+  "pain_ns_half_life_recon": {
+    "value": 0.0,
+    "ci": [
+      0.0,
+      0.0
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 0,
+    "meta": {
+      "source": "results/pain-tail/episodes.csv"
+    }
+  },
+  "pain_ns_half_life_humphrey": {
+    "value": 0.0,
+    "ci": [
+      0.0,
+      0.0
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 0,
+    "meta": {
+      "source": "results/pain-tail/episodes.csv"
+    }
+  },
+  "pain_ns_half_life_hb": {
+    "value": 0.0,
+    "ci": [
+      0.0,
+      0.0
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 0,
+    "meta": {
+      "source": "results/pain-tail/episodes.csv"
+    }
+  },
+  "pain_tail_duration_recon": {
+    "value": 5.0,
+    "ci": [
+      5.0,
+      5.0
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 0,
+    "meta": {
+      "source": "results/pain-tail/episodes.csv"
+    }
+  },
+  "pain_tail_duration_humphrey": {
+    "value": 5.05,
+    "ci": [
+      5.0,
+      5.15
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 0,
+    "meta": {
+      "source": "results/pain-tail/episodes.csv"
+    }
+  },
+  "pain_tail_duration_hb": {
+    "value": 89.85,
+    "ci": [
+      52.04875,
+      127.95749999999997
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 0,
+    "meta": {
+      "source": "results/pain-tail/episodes.csv"
+    }
+  },
+  "pain_ns_half_life_saturation_recon": {
+    "value": 0.0,
+    "ci": null,
+    "n": 20,
+    "type": "scalar",
+    "digits": 2,
+    "meta": {
+      "source": "results/pain-tail/episodes.csv",
+      "post_steps": 200
+    }
+  },
+  "pain_ns_half_life_saturation_humphrey": {
+    "value": 0.0,
+    "ci": null,
+    "n": 20,
+    "type": "scalar",
+    "digits": 2,
+    "meta": {
+      "source": "results/pain-tail/episodes.csv",
+      "post_steps": 200
+    }
+  },
+  "pain_ns_half_life_saturation_hb": {
+    "value": 0.0,
+    "ci": null,
+    "n": 20,
+    "type": "scalar",
+    "digits": 2,
+    "meta": {
+      "source": "results/pain-tail/episodes.csv",
+      "post_steps": 200
+    }
+  },
+  "lesion_auc_drop_recon": {
+    "value": 0.0,
+    "ci": [
+      0.0,
+      0.0
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/lesion/episodes_extended.csv"
+    }
+  },
+  "lesion_auc_drop_humphrey": {
+    "value": 19.12421946841075,
+    "ci": [
+      19.12421946841075,
+      19.12421946841075
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/lesion/episodes_extended.csv"
+    }
+  },
+  "lesion_auc_drop_hb": {
+    "value": 27.623455953827765,
+    "ci": [
+      27.60293798529816,
+      27.644177359584575
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/lesion/episodes_extended.csv"
+    }
+  },
+  "lesion_auc_drop_pct_humphrey": {
+    "value": 20.266207957352435,
+    "ci": [
+      20.266207957352435,
+      20.266207957352435
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 1,
+    "meta": {
+      "source": "results/lesion/episodes_extended.csv"
+    }
+  },
+  "lesion_auc_drop_pct_hb": {
+    "value": 27.851279834574132,
+    "ci": [
+      27.784125913711065,
+      27.918990175587606
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 1,
+    "meta": {
+      "source": "results/lesion/episodes_extended.csv"
+    }
+  },
+  "lesion_recon_auc_drop_near_zero": {
+    "value": true,
+    "ci": null,
+    "n": null,
+    "type": "boolean",
+    "digits": null,
+    "meta": {
+      "source": "results/lesion/episodes_extended.csv",
+      "mean": 0.0,
+      "ci": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "goal_corridor_hazards_max_hb": {
+    "value": 0.0,
+    "ci": null,
+    "n": 20,
+    "type": "scalar",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_summary.csv"
+    }
+  },
+  "goal_corridor_hazards_zero_hb": {
+    "value": true,
+    "ci": null,
+    "n": null,
+    "type": "boolean",
+    "digits": null,
+    "meta": {
+      "source": "results/goal-directed/corridor_summary.csv"
+    }
+  },
+  "goal_directed_seeds": {
+    "value": 20.0,
+    "ci": null,
+    "n": 20,
+    "type": "scalar",
+    "digits": 0,
+    "meta": {
+      "source": [
+        "results/goal-directed/corridor_episodes.csv",
+        "results/goal-directed/gridworld_episodes.csv"
+      ],
+      "corridor_n_unique_seeds": 20,
+      "gridworld_n_unique_seeds": 20
+    }
+  },
+  "goal_directed_horizons": {
+    "value": "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+    "ci": null,
+    "n": 20,
+    "type": "scalar",
+    "digits": null,
+    "meta": {
+      "source": [
+        "results/goal-directed/corridor_episodes.csv",
+        "results/goal-directed/gridworld_episodes.csv"
+      ],
+      "corridor_unique_horizons": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "gridworld_unique_horizons": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  },
+  "goal_directed_horizon_count": {
+    "value": 20.0,
+    "ci": null,
+    "n": 20,
+    "type": "scalar",
+    "digits": 0,
+    "meta": {
+      "source": [
+        "results/goal-directed/corridor_episodes.csv",
+        "results/goal-directed/gridworld_episodes.csv"
+      ],
+      "corridor_unique_horizons": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "gridworld_unique_horizons": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ]
+    }
+  },
+  "goal_directed_paper_horizon": {
+    "value": 5.0,
+    "ci": null,
+    "n": null,
+    "type": "scalar",
+    "digits": 0,
+    "meta": {
+      "source": "results/config_metadata.json",
+      "definition": "paper rollout horizon for goal-directed table"
+    }
+  },
+  "goal_corridor_h5_hazards_recon": {
+    "value": 3.05,
+    "ci": [
+      2.0,
+      4.25
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_h5_hazards_humphrey": {
+    "value": 2.9,
+    "ci": [
+      1.9,
+      4.05
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_h5_hazards_hb": {
+    "value": 0.0,
+    "ci": [
+      0.0,
+      0.0
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_h5_time_recon": {
+    "value": 50.0,
+    "ci": [
+      37.35,
+      63.2
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_h5_time_humphrey": {
+    "value": 50.0,
+    "ci": [
+      37.35,
+      63.2
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_h5_time_hb": {
+    "value": 63.15,
+    "ci": [
+      53.947500000000005,
+      71.45
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_h5_success_recon": {
+    "value": 0.55,
+    "ci": [
+      0.3,
+      0.75
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_h5_success_humphrey": {
+    "value": 0.55,
+    "ci": [
+      0.3,
+      0.75
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_h5_success_hb": {
+    "value": 0.45,
+    "ci": [
+      0.25,
+      0.65
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_gridworld_h5_hazards_recon": {
+    "value": 14.3,
+    "ci": [
+      8.9,
+      20.051249999999992
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_h5_hazards_humphrey": {
+    "value": 3.3,
+    "ci": [
+      1.35,
+      5.701249999999994
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_h5_hazards_hb": {
+    "value": 0.15,
+    "ci": [
+      0.0,
+      0.3
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_h5_time_recon": {
+    "value": 171.8,
+    "ci": [
+      131.2975,
+      211.10125
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_h5_time_humphrey": {
+    "value": 135.9,
+    "ci": [
+      94.95,
+      176.10125
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_h5_time_hb": {
+    "value": 17.75,
+    "ci": [
+      4.34875,
+      43.50124999999999
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_h5_success_recon": {
+    "value": 0.5,
+    "ci": [
+      0.3,
+      0.7
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_h5_success_humphrey": {
+    "value": 0.7,
+    "ci": [
+      0.5,
+      0.9
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_h5_success_hb": {
+    "value": 0.95,
+    "ci": [
+      0.85,
+      1.0
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_corridor_all_hazards_recon": {
+    "value": 3.05,
+    "ci": [
+      2.0,
+      4.25
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_all_hazards_humphrey": {
+    "value": 2.9,
+    "ci": [
+      1.9,
+      4.05
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_all_hazards_hb": {
+    "value": 0.0,
+    "ci": [
+      0.0,
+      0.0
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_all_time_recon": {
+    "value": 50.0,
+    "ci": [
+      37.35,
+      63.2
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_all_time_humphrey": {
+    "value": 49.725,
+    "ci": [
+      37.124375,
+      62.826874999999994
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_all_time_hb": {
+    "value": 52.709999999999994,
+    "ci": [
+      47.16493750000001,
+      58.39556250000001
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_all_success_recon": {
+    "value": 0.55,
+    "ci": [
+      0.3,
+      0.75
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_all_success_humphrey": {
+    "value": 0.5775,
+    "ci": [
+      0.35,
+      0.7775000000000001
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_corridor_all_success_hb": {
+    "value": 0.7274999999999999,
+    "ci": [
+      0.6099374999999999,
+      0.8324999999999999
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/corridor_episodes.csv"
+    }
+  },
+  "goal_gridworld_all_hazards_recon": {
+    "value": 14.3,
+    "ci": [
+      8.9,
+      20.051249999999992
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_all_hazards_humphrey": {
+    "value": 2.4549999999999996,
+    "ci": [
+      1.2650000000000001,
+      3.8506874999999963
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_all_hazards_hb": {
+    "value": 0.255,
+    "ci": [
+      0.1025,
+      0.4374999999999999
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_all_time_recon": {
+    "value": 171.8,
+    "ci": [
+      131.2975,
+      211.10125
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_all_time_humphrey": {
+    "value": 129.76749999999998,
+    "ci": [
+      90.62887500000001,
+      168.69624999999996
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_all_time_hb": {
+    "value": 9.537500000000001,
+    "ci": [
+      4.7475000000000005,
+      16.227749999999997
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_all_success_recon": {
+    "value": 0.5,
+    "ci": [
+      0.3,
+      0.7
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_all_success_humphrey": {
+    "value": 0.7224999999999999,
+    "ci": [
+      0.5298125,
+      0.8951249999999994
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "goal_gridworld_all_success_hb": {
+    "value": 0.99,
+    "ci": [
+      0.9724999999999999,
+      1.0
+    ],
+    "n": 20,
+    "type": "mean_ci",
+    "digits": 2,
+    "meta": {
+      "source": "results/goal-directed/gridworld_episodes.csv"
+    }
+  },
+  "headline_seeds": {
+    "value": 20.0,
+    "ci": null,
+    "n": 20,
+    "type": "scalar",
+    "digits": 0,
+    "meta": {
+      "source": "results/config_metadata.json"
+    }
+  },
+  "pain_post_steps": {
+    "value": 200.0,
+    "ci": null,
+    "n": null,
+    "type": "scalar",
+    "digits": 0,
+    "meta": {
+      "source": "results/config_metadata.json"
+    }
+  }
+}
