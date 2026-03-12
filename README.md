@@ -51,3 +51,24 @@ Requires a LaTeX toolchain (e.g. `latexmk`). Running the experiments will automa
 cd docs
 latexmk -pdf paper-3-v9.tex
 ```
+
+## Build the project page
+
+The static paper page lives in `paper-site/` and is generated from the current `results/` artifacts plus a few exported GIFs.
+
+```bash
+python3 -m analysis.build_paper_site
+```
+
+That command writes:
+
+- `paper-site/static/data/site-data.json`
+- `paper-site/static/media/*`
+
+To preview locally:
+
+```bash
+python3 -m http.server 8000 --directory paper-site
+```
+
+A GitHub Pages workflow is included at `.github/workflows/deploy-paper-site.yml` and rebuilds/deploys the page from `main`.

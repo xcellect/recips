@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReCoN-Ipsundrum | Project Page</title>
+  <meta name="description"
+    content="Project page for ReCoN-Ipsundrum with abstract, concise narrative sections, rollout media, paper figures, additional analysis, and BibTeX.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="static/css/site.css">
+  <script defer src="static/js/site.js"></script>
+</head>
+
+<body>
+  <header class="site-header reveal">
+    <div class="container narrow">
+      <p class="page-label">Project Page</p>
+      <h1>ReCoN-Ipsundrum: An Inspectable Recurrent Persistence Loop Agent with Affect-Coupled Control</h1>
+      <p class="authors">Anonymous Authors</p>
+      <div class="link-row">
+        <a class="button button-primary" id="paper-link" href="#">Paper PDF</a>
+        <a class="button" id="repo-link-top" href="#">Code</a>
+        <a class="button" id="colab-link" href="#">Colab Demo</a>
+      </div>
+      <nav class="site-nav">
+        <a href="#abstract">Abstract</a>
+        <a href="#method">Method</a>
+        <a href="#familiarity">Familiarity</a>
+        <a href="#play">Exploratory Play</a>
+        <a href="#persistence">Persistence</a>
+        <a href="#goals">Goal-Directed Control</a>
+        <a href="#analysis">Additional Analysis</a>
+        <a href="#bibtex">BibTeX</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section reveal">
+      <figure class="panel teaser">
+        <img id="hero-media" src="" alt="Animated corridor comparison across Recon, Ipsundrum, and Ipsundrum+affect">
+        <figcaption>
+          Corridor rollout across ReCoN, Ipsundrum, and Ipsundrum+affect over the full evaluation window.
+        </figcaption>
+      </figure>
+      <div class="metric-grid" id="headline-metrics"></div>
+    </section>
+
+    <section id="abstract" class="section section-narrow reveal">
+      <h2>Abstract</h2>
+      <p class="section-copy">
+        Indicator-based approaches to machine consciousness argue that evidence should be mechanism-linked, triangulated
+        across tasks, and supported by architectural inspection and causal intervention. Inspired by Humphrey's
+        ipsundrum
+        hypothesis for sentience, we implement <strong>ReCoN-Ipsundrum</strong>, an inspectable agent that extends a
+        ReCoN
+        state machine with a recurrent persistence loop over sensory salience Ns and an optional Barrett-inspired affect
+        proxy reporting valence/arousal. Across fixed-parameter ablations (ReCoN, Ipsundrum, Ipsundrum+affect), we
+        operationalize Humphrey's <em>qualiaphilia (preference for sensory experience for its own sake)</em> as a
+        familiarity-controlled scenic-over-dull route choice and find a novelty dissociation: non-affect variants are
+        novelty-sensitive (Delta scenic-entry = 0.07) whereas affect coupling is stable (Delta scenic-entry = 0.01) even
+        when scenic is less novel (median Delta novelty approximately -0.43). In reward-free exploratory play, the
+        affect
+        variant shows structured local investigation (scan events 31.4 vs. 0.9; cycle score 7.6). In a pain-tail probe,
+        only the affect variant sustains prolonged planned caution (tail duration 90 vs. 5). Lesioning
+        feedback+integration
+        selectively reduces post-stimulus persistence in ipsundrum variants (AUC drop 27.62, 27.9%) while leaving ReCoN
+        unchanged. These dissociations link recurrence to persistence and affect-coupled control to preference
+        stability,
+        scanning, and lingering caution, illustrating how indicator-like signatures can be engineered and why
+        mechanistic
+        and causal evidence should accompany behavioral markers.
+      </p>
+    </section>
+
+    <section id="method" class="section reveal">
+      <h2>Method Overview</h2>
+      <p class="section-copy section-narrow">
+        We evaluate three fixed-parameter variants: ReCoN (stage B), Ipsundrum (stage D), and Ipsundrum+affect (stage D
+        with the affect/interoceptive proxy). The staged diagram below summarizes the Humphrey-inspired extensions added
+        on
+        top of the ReCoN substrate.
+      </p>
+      <figure class="panel result-figure">
+        <img id="stage-strip" src="" alt="Stage A to D recurrent network strip">
+        <figcaption>Humphrey-inspired staged extensions on the ReCoN substrate.</figcaption>
+      </figure>
+    </section>
+
+    <section id="familiarity" class="section reveal">
+      <h2>Familiarity Control Separates Novelty From Preference</h2>
+      <p class="section-copy section-narrow">
+        Two equally safe routes lead to the same goal: a scenic lane with varying sensory features and a dull lane with
+        uniform features. Scenic entry is measured at the earliest committed choice point. ReCoN and Ipsundrum are
+        novelty-sensitive, whereas Ipsundrum+affect remains stable across the novelty manipulation even when scenic is
+        less novel.
+      </p>
+      <figure class="panel result-figure">
+        <img id="familiarity-summary-media" src="" alt="Familiarity control summary figure">
+        <figcaption>Familiarity-controlled corridor preference under novelty competition.</figcaption>
+      </figure>
+      <div class="support-grid">
+        <article class="panel">
+          <img id="familiarity-supp-media" src="" alt="Familiarity supplementary figure">
+          <h3>Supplementary familiarity view</h3>
+          <p>
+            Baseline and post-familiarization conditions make the novelty dissociation easier to inspect across
+            variants.
+          </p>
+        </article>
+        <article class="panel">
+          <img id="qualiaphilia-media" src="" alt="Qualiaphilia control figure">
+          <h3>Qualiaphilia control</h3>
+          <p>
+            Scenic-over-dull route choice without the familiarity manipulation provides the simpler control setting for
+            this assay family.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="play" class="section reveal">
+      <h2>Exploratory Play Shows Structured Local Investigation</h2>
+      <p class="section-copy section-narrow">
+        In reward-free exploratory play, coverage remains broad for all variants, but Ipsundrum+affect shows more
+        structured
+        local investigation: higher scan-event rate, stronger limit-cycle structure, action entropy below a random
+        baseline,
+        and short dwell tails.
+      </p>
+      <figure class="panel result-figure">
+        <img id="play-summary-media" src="" alt="Exploratory play summary figure">
+        <figcaption>Exploratory play: structured investigation rather than random dithering.</figcaption>
+      </figure>
+      <div class="support-grid">
+        <article class="panel">
+          <img id="play-trajectories-media" src="" alt="Exploratory play trajectories">
+          <h3>Seed-level trajectories</h3>
+          <p>
+            Time-ordered trajectories show where scan events and revisitation structure occur during play.
+          </p>
+        </article>
+        <article class="panel">
+          <img id="play-heatmaps-media" src="" alt="Exploratory play heatmaps">
+          <h3>Occupancy heatmaps</h3>
+          <p>
+            Occupancy heatmaps show how coverage, looping, and hazard avoidance interact spatially.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="persistence" class="section reveal">
+      <h2>Persistence Is Tested Both Behaviorally and Causally</h2>
+      <p class="section-copy section-narrow">
+        The pain-tail assay forces one hazard contact, removes the hazard, returns the agent to safety, and records
+        planned
+        actions over the post-stimulus window. The lesion assay disables ipsundrum feedback+integration at t=3 and
+        measures
+        the resulting AUC drop over a fixed post window.
+      </p>
+      <figure class="panel result-figure">
+        <img id="lesion-media" src="" alt="Animated lesion trace comparison">
+        <figcaption>Animated sham-vs-lesion traces across the full post-stimulus window.</figcaption>
+      </figure>
+      <div class="support-grid">
+        <article class="panel">
+          <img id="pain-tail-media" src="" alt="Pain-tail results figure">
+          <h3>Pain-tail assay</h3>
+          <p>
+            Ipsundrum variants show non-zero post-stimulus Ns AUC above baseline, but only Ipsundrum+affect shows
+            prolonged planned caution.
+          </p>
+        </article>
+        <article class="panel">
+          <img id="lesion-summary-media" src="" alt="Lesion summary figure">
+          <h3>Lesion summary</h3>
+          <p>
+            Lesioning feedback+integration reduces post-stimulus persistence in ipsundrum variants while leaving ReCoN
+            unchanged.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="goals" class="section reveal">
+      <h2>Goal-Directed Performance Acts as a Control</h2>
+      <p class="section-copy section-narrow">
+        CorridorWorld and GridWorld are competence and safety checks rather than consciousness indicators.
+        Ipsundrum+affect
+        reduces hazard contacts in both environments; in GridWorld this also improves success and time-to-goal, while in
+        CorridorWorld it remains hazard-free but slower. The planning-horizon sweep is shown in Additional Analysis
+        below.
+      </p>
+      <figure class="panel result-figure">
+        <img id="gridworld-media" src="" alt="Animated gridworld comparison">
+        <figcaption>GridWorld rollout across the three variants over the full 200-step window.</figcaption>
+      </figure>
+    </section>
+
+    <section id="analysis" class="section reveal">
+      <h2>Additional Analysis</h2>
+      <p class="section-copy section-narrow">
+        These panels provide direct access to the generated CSV outputs and the control analyses that support the main
+        paper figures.
+      </p>
+
+      <div class="chart-stack">
+        <article class="panel chart-panel">
+          <div class="panel-header">
+            <h3>Exploratory play</h3>
+            <div class="control-row">
+              <label>
+                X
+                <select id="play-x"></select>
+              </label>
+              <label>
+                Y
+                <select id="play-y"></select>
+              </label>
+            </div>
+          </div>
+          <svg id="play-scatter" viewBox="0 0 640 360" role="img" aria-label="Exploratory play scatter plot"></svg>
+        </article>
+
+        <article class="panel chart-panel">
+          <div class="panel-header">
+            <h3>Familiarity progression</h3>
+            <div class="control-row">
+              <label>
+                Metric
+                <select id="familiarity-metric"></select>
+              </label>
+              <label>
+                Condition
+                <select id="familiarity-condition"></select>
+              </label>
+            </div>
+          </div>
+          <svg id="familiarity-chart" viewBox="0 0 640 360" role="img" aria-label="Familiarity progression chart"></svg>
+        </article>
+
+        <article class="panel chart-panel">
+          <div class="panel-header">
+            <h3>Goal-directed sweeps</h3>
+            <div class="control-row">
+              <label>
+                Task
+                <select id="goal-task"></select>
+              </label>
+              <label>
+                Metric
+                <select id="goal-metric"></select>
+              </label>
+            </div>
+          </div>
+          <svg id="goal-chart" viewBox="0 0 640 360" role="img" aria-label="Goal-directed performance by horizon"></svg>
+        </article>
+
+        <article class="panel chart-panel">
+          <div class="panel-header">
+            <h3>Mean lesion traces</h3>
+            <div class="control-row">
+              <label>
+                Model
+                <select id="lesion-model"></select>
+              </label>
+            </div>
+          </div>
+          <svg id="lesion-chart" viewBox="0 0 640 360" role="img" aria-label="Mean lesion traces chart"></svg>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <h2>Supplementary Figures</h2>
+      <div class="gallery-grid" id="gallery-grid"></div>
+    </section>
+
+    <section id="repro" class="section reveal">
+      <h2>Reproducibility</h2>
+      <div class="repro-grid">
+        <article class="panel">
+          <h3>Run metadata</h3>
+          <dl class="config-list" id="config-list"></dl>
+        </article>
+        <article class="panel">
+          <h3>Links</h3>
+          <div class="link-row">
+            <a class="button button-primary" id="paper-link-secondary" href="#">Paper PDF</a>
+            <a class="button" id="repo-link" href="#">Repository</a>
+            <a class="button" id="colab-link-secondary" href="#">Colab Demo</a>
+          </div>
+          <p class="section-copy">
+            All figures and charts on this page are generated from the current local `results/` artifacts.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="bibtex" class="section section-narrow reveal">
+      <h2>BibTeX</h2>
+      <div class="panel">
+        <pre class="bibtex-block">@article{anonymous2026reconipsundrum,
+  title   = {ReCoN-Ipsundrum: An Inspectable Recurrent Persistence Loop Agent with Affect-Coupled Control and Mechanism-Linked Consciousness Indicator Assays},
+  author  = {Anonymous Authors},
+  year    = {2026},
+  journal = {AAAI Spring Symposium Submission},
+  note    = {Project page and code release}
+}</pre>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

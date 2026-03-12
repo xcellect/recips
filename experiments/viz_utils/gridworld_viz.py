@@ -6,7 +6,7 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-from matplotlib.animation import FuncAnimation
+from matplotlib.animation import FuncAnimation, PillowWriter
 from matplotlib.patches import Polygon, Circle
 
 from utils.plot_style import apply_times_style
@@ -15,7 +15,7 @@ from utils.plot_style import apply_times_style
 apply_times_style()
 
 
-def run_animation(horizon: int = 10):
+def build_animation(horizon: int = 10, frames: int = 200, figsize=(14, 8)):
     from experiments.gridworld_exp import GridWorld, Agent
 
     env = GridWorld(H=18, W=18, seed=0)
@@ -29,7 +29,7 @@ def run_animation(horizon: int = 10):
 
     bg = env.beauty - env.hazard
 
-    fig = plt.figure(figsize=(14, 8))
+    fig = plt.figure(figsize=figsize)
     gs = fig.add_gridspec(3, 3, height_ratios=[3.0, 1.4, 1.4], hspace=0.35, wspace=0.3, top=0.95, bottom=0.08)
 
     ax_env = [fig.add_subplot(gs[0, i]) for i in range(3)]
@@ -101,7 +101,7 @@ def run_animation(horizon: int = 10):
             pts.append((x + radius * math.cos(aa), y + radius * math.sin(aa)))
         return pts
 
-    tmax = 200
+    tmax = int(frames)
 
     def update(frame):
         for i, ag in enumerate(agents):
@@ -145,7 +145,28 @@ def run_animation(horizon: int = 10):
         return (*dots, *cones, *lines_ns, line_nv, line_na, line_alpha)
 
     ani = FuncAnimation(fig, update, frames=tmax, interval=120, blit=False)
-    return HTML(ani.to_jshtml())
+    return fig, ani
+
+
+def run_animation(horizon: int = 10, frames: int = 200):
+    fig, ani = build_animation(horizon=horizon, frames=frames)
+    html = HTML(ani.to_jshtml())
+    plt.close(fig)
+    return html
+
+
+def save_animation_gif(
+    out_path: str,
+    *,
+    horizon: int = 10,
+    frames: int = 200,
+    fps: int = 8,
+    dpi: int = 90,
+    figsize=(12, 7),
+):
+    fig, ani = build_animation(horizon=horizon, frames=frames, figsize=figsize)
+    ani.save(out_path, writer=PillowWriter(fps=fps), dpi=dpi)
+    plt.close(fig)
 
 
 if __name__ == "__main__":
