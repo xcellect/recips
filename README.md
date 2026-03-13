@@ -2,9 +2,16 @@
 
 Inspectable ReCoN-based agents with Humphrey-inspired recurrent persistence (“ipsundrum”) loop and affect-coupled control, plus mechanism-linked indicator assays (goal-directed tasks, exploratory play, familiarity/qualiaphilia, pain-tail, and causal lesions).
 
-**Aishik Sanyal**
+**[Aishik Sanyal](https://xcellect.com)**
 
-[Paper PDF](https://arxiv.org/pdf/2602.23232.pdf) | [arXiv Abstract](https://arxiv.org/abs/2602.23232) | [Author](https://xcellect.com)
+[Paper PDF](https://arxiv.org/pdf/2602.23232.pdf) | [arXiv Abstract](https://arxiv.org/abs/2602.23232)
+
+## Quick Start: Run in Google Colab (One-Click)
+
+Click the link below to open and run the demonstration notebook directly in Google Colab (no installation required):
+
+**[Open Demo in Colab](https://colab.research.google.com/github/xcellect/recips/blob/main/playground.ipynb)**
+
 
 ## Key Animations
 
@@ -49,12 +56,6 @@ Inspectable ReCoN-based agents with Humphrey-inspired recurrent persistence (“
   note          = {Accepted at AAAI 2026 Spring Symposium - Machine Consciousness: Integrating Theory, Technology, and Philosophy}
 }
 ```
-
-## Quick Start: Run in Google Colab (One-Click)
-
-Click the link below to open and run the demonstration notebook directly in Google Colab (no installation required):
-
-**[Open Demo in Colab](https://colab.research.google.com/github/xcellect/recips/blob/main/playground.ipynb)**
 
 ## Setup
 
