@@ -15,7 +15,7 @@
   <a href="https://colab.research.google.com/github/xcellect/recips/blob/main/playground.ipynb">Colab Demo</a> (no setup required)
 </p>
 
-Welcome to the ReCoN-Ipsundrum codebase. This repository contains the core agent implementation, assay definitions, experiment generation and analysis scripts, as well as the paper source and the static paper website. The structure of this paper is inspired by [Wolfram's notion of a Computational Essay](https://writings.stephenwolfram.com/2017/11/what-is-a-computational-essay/).
+Welcome to the ReCoN-Ipsundrum codebase. This repository contains the core agent implementation, assay definitions, experiment generation and analysis scripts, as well as the paper source and the static paper website. The structure of this paper is inspired by [Wolfram's Computational Essay](https://writings.stephenwolfram.com/2017/11/what-is-a-computational-essay/).
 
 ## Contents
 
