@@ -1,7 +1,7 @@
 <h1 align="center">ReCoN-Ipsundrum</h1>
 
 <p align="center">
-  Inspectable recurrent persistence loop agents with affect-coupled control and mechanism-linked machine consciousness indicator assays.
+  An inspectable recurrent persistence loop agent with affect-coupled control and mechanism-linked consciousness indicator assays.
 </p>
 
 <p align="center">
@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://xcellect.github.io/recips/">Paper Website</a> |
   <a href="https://arxiv.org/pdf/2602.23232.pdf">Paper PDF</a> |
-  <a href="https://arxiv.org/abs/2602.23232">arXiv Abstract</a> |
+  <a href="https://arxiv.org/abs/2602.23232">ArXiv Page</a> |
   <a href="https://colab.research.google.com/github/xcellect/recips/blob/main/playground.ipynb">Colab Demo</a> (no setup required)
 </p>
 
@@ -25,6 +25,7 @@ Welcome to the ReCoN-Ipsundrum codebase. This repository contains the core agent
 - [Repository layout](#repository-layout)
 - [Build the paper PDF](#build-the-paper-pdf-optional)
 - [Build the paper website](#build-the-paper-website-optional)
+- [Abstract](#abstract)
 - [BibTeX](#bibtex)
 
 ## Setup
@@ -91,6 +92,12 @@ python3 -m http.server 8000 --directory paper-site
 ```
 
 A GitHub Pages workflow is included at `.github/workflows/deploy-paper-site.yml` and rebuilds/deploys the page from `main`.
+
+## Abstract
+
+```
+Indicator-based approaches to machine consciousness recommend mechanism-linked evidence triangulated across tasks, supported by architectural inspection and causal intervention. Inspired by Humphrey's ipsundrum hypothesis, we implement ReCoN-Ipsundrum, an inspectable agent that extends a ReCoN state machine with a recurrent persistence loop over sensory salience Ns and an optional affect proxy reporting valence/arousal. Across fixed-parameter ablations (ReCoN, Ipsundrum, Ipsundrum+affect), we operationalize Humphrey's qualiaphilia (preference for sensory experience for its own sake) as a familiarity-controlled scenic-over-dull route choice. We find a novelty dissociation: non-affect variants are novelty-sensitive (Delta scenic-entry = 0.07). Affect coupling is stable (Delta scenic-entry = 0.01) even when scenic is less novel (median Delta novelty approx. -0.43). In reward-free exploratory play, the affect variant shows structured local investigation (scan events 31.4 vs. 0.9; cycle score 7.6). In a pain-tail probe, only the affect variant sustains prolonged planned caution (tail duration 90 vs. 5). Lesioning feedback+integration selectively reduces post-stimulus persistence in ipsundrum variants (AUC drop 27.62, 27.9%) while leaving ReCoN unchanged. These dissociations link recurrence to persistence and affect-coupled control to preference stability, scanning, and lingering caution, illustrating how indicator-like signatures can be engineered and why mechanistic and causal evidence should accompany behavioral markers.
+```
 
 ## BibTeX
 
