@@ -15,7 +15,7 @@
   <a href="https://colab.research.google.com/github/xcellect/recips/blob/main/playground.ipynb">Colab Demo</a> (no setup required)
 </p>
 
-Welcome to the codebase for the paper page and experiments behind ReCoN-Ipsundrum. This repository contains the core agent implementation, assay definitions, result-generation scripts, paper source, and the static project page.
+Welcome to the ReCoN-Ipsundrum codebase. This repository contains the core agent implementation, assay definitions, experiment generation and analysis scripts, as well as the paper source and the static paper website. The structure of this paper is inspired by [Wolfram's notion of a Computational Essay](https://writings.stephenwolfram.com/2017/11/what-is-a-computational-essay/).
 
 ## Contents
 
@@ -24,7 +24,7 @@ Welcome to the codebase for the paper page and experiments behind ReCoN-Ipsundru
 - [Run tests](#run-tests)
 - [Repository layout](#repository-layout)
 - [Build the paper PDF](#build-the-paper-pdf-optional)
-- [Build the project page](#build-the-project-page-optional)
+- [Build the paper website](#build-the-paper-website-optional)
 - [BibTeX](#bibtex)
 
 ## Setup
@@ -71,9 +71,9 @@ cd docs
 latexmk -pdf paper-3-v9.tex
 ```
 
-## Build the project page (optional)
+## Build the paper website (optional)
 
-The static paper page lives in `paper-site/` and is generated from the current `results/` artifacts plus a few exported GIFs.
+The static paper website lives in `paper-site/` and is generated from the current `results/` artifacts plus a few exported GIFs.
 
 ```bash
 python3 -m analysis.build_paper_site
