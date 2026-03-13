@@ -4,7 +4,7 @@ Inspectable ReCoN-based agents with Humphrey-inspired recurrent persistence (“
 
 **[Aishik Sanyal](https://xcellect.com)**
 
-[Paper PDF](https://arxiv.org/pdf/2602.23232.pdf) | [arXiv Abstract](https://arxiv.org/abs/2602.23232)
+[Paper PDF](https://arxiv.org/pdf/2602.23232.pdf) | [arXiv Abstract](https://arxiv.org/abs/2602.23232) | [Paper Page](https://xcellect.github.io/recips/)
 
 ## Quick Start: Run in Google Colab (One-Click)
 
