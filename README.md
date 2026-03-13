@@ -1,7 +1,7 @@
 <h1 align="center">ReCoN-Ipsundrum</h1>
 
 <p align="center">
-  An inspectable recurrent persistence loop agent with affect-coupled control and mechanism-linked consciousness indicator assays.
+  An Inspectable Recurrent Persistence Loop Agent with Affect-Coupled Control and Mechanism-Linked Consciousness Indicator Assays
 </p>
 
 <p align="center">
