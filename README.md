@@ -1,7 +1,7 @@
 <h1 align="center">ReCoN-Ipsundrum</h1>
 
 <p align="center">
-  Inspectable recurrent persistence loop agents with affect-coupled control and mechanism-linked indicator assays.
+  Inspectable recurrent persistence loop agents with affect-coupled control and mechanism-linked machine consciousness indicator assays.
 </p>
 
 <p align="center">
@@ -12,7 +12,7 @@
   <a href="https://xcellect.github.io/recips/">Paper Page</a> |
   <a href="https://arxiv.org/pdf/2602.23232.pdf">Paper PDF</a> |
   <a href="https://arxiv.org/abs/2602.23232">arXiv Abstract</a> |
-  <a href="https://colab.research.google.com/github/xcellect/recips/blob/main/playground.ipynb">Colab Demo</a>
+  <a href="https://colab.research.google.com/github/xcellect/recips/blob/main/playground.ipynb">Colab Demo</a> (no setup required)
 </p>
 
 Welcome to the codebase for the paper page and experiments behind ReCoN-Ipsundrum. This repository contains the core agent implementation, assay definitions, result-generation scripts, paper source, and the static project page.
