@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://xcellect.github.io/recips/">Paper Page</a> |
+  <a href="https://xcellect.github.io/recips/">Paper Website</a> |
   <a href="https://arxiv.org/pdf/2602.23232.pdf">Paper PDF</a> |
   <a href="https://arxiv.org/abs/2602.23232">arXiv Abstract</a> |
   <a href="https://colab.research.google.com/github/xcellect/recips/blob/main/playground.ipynb">Colab Demo</a> (no setup required)

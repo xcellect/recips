@@ -194,7 +194,7 @@ function renderPaper(paper) {
   setText("paper-abstract", paper.abstract);
   setText("bibtex-block", paper.bibtex);
 
-  document.title = "ReCoN-Ipsundrum | Paper Page";
+  document.title = "ReCoN-Ipsundrum | Paper Website";
   const metaDescription = document.querySelector('meta[name="description"]');
   if (metaDescription && paper.abstract) {
     metaDescription.setAttribute("content", paper.abstract);
