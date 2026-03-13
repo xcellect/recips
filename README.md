@@ -1,16 +1,33 @@
-# ReCoN-Ipsundrum
+<h1 align="center">ReCoN-Ipsundrum</h1>
 
-Inspectable ReCoN-based agents with Humphrey-inspired recurrent persistence (“ipsundrum”) loop and affect-coupled control, plus mechanism-linked indicator assays (goal-directed tasks, exploratory play, familiarity/qualiaphilia, pain-tail, and causal lesions).
+<p align="center">
+  Inspectable recurrent persistence loop agents with affect-coupled control and mechanism-linked indicator assays.
+</p>
 
-**[Aishik Sanyal](https://xcellect.com)**
+<p align="center">
+  <a href="https://xcellect.com">Aishik Sanyal</a>
+</p>
 
-[Paper PDF](https://arxiv.org/pdf/2602.23232.pdf) | [arXiv Abstract](https://arxiv.org/abs/2602.23232) | [Paper Page](https://xcellect.github.io/recips/)
+<p align="center">
+  <a href="https://xcellect.github.io/recips/">Paper Page</a> |
+  <a href="https://arxiv.org/pdf/2602.23232.pdf">Paper PDF</a> |
+  <a href="https://arxiv.org/abs/2602.23232">arXiv Abstract</a> |
+  <a href="https://colab.research.google.com/github/xcellect/recips/blob/main/playground.ipynb">Colab Demo</a>
+</p>
 
-## Quick Start: Run in Google Colab (One-Click)
+Welcome to the codebase for the paper page and experiments behind ReCoN-Ipsundrum. This repository contains the core agent implementation, assay definitions, result-generation scripts, paper source, and the static project page.
 
-Click the link below to open and run the demonstration notebook directly in Google Colab (no installation required):
+## Contents
 
-**[Open Demo in Colab](https://colab.research.google.com/github/xcellect/recips/blob/main/playground.ipynb)**
+- [Key Animations](#key-animations)
+- [Key Figures](#key-figures)
+- [BibTeX](#bibtex)
+- [Setup](#setup)
+- [Run the full experiment suite](#run-the-full-experiment-suite)
+- [Run tests](#run-tests)
+- [Repository layout](#repository-layout)
+- [Build the paper PDF](#build-the-paper-pdf-optional)
+- [Build the project page](#build-the-project-page)
 
 
 ## Key Animations
