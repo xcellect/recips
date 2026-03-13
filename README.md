@@ -2,6 +2,54 @@
 
 Inspectable ReCoN-based agents with Humphrey-inspired recurrent persistence (“ipsundrum”) loop and affect-coupled control, plus mechanism-linked indicator assays (goal-directed tasks, exploratory play, familiarity/qualiaphilia, pain-tail, and causal lesions).
 
+**Aishik Sanyal**
+
+[Paper PDF](https://arxiv.org/pdf/2602.23232.pdf) | [arXiv Abstract](https://arxiv.org/abs/2602.23232) | [Author](https://xcellect.com)
+
+## Key Animations
+
+### Corridor rollout
+
+![Corridor rollout across ReCoN, Ipsundrum, and Ipsundrum+affect](paper-site/static/media/corridor-compare.gif)
+
+### GridWorld rollout
+
+![GridWorld rollout across ReCoN, Ipsundrum, and Ipsundrum+affect](paper-site/static/media/gridworld-compare.gif)
+
+### Mean lesion traces
+
+![Animated sham-vs-lesion traces across models](paper-site/static/media/lesion-traces.gif)
+
+## Key Figures
+
+### Familiarity control
+
+![Familiarity-controlled corridor preference summary](paper-site/static/media/fig-familiarity-summary.png)
+
+### Exploratory play
+
+![Exploratory play summary](paper-site/static/media/fig-play-summary.png)
+
+### Persistence and lesion summary
+
+![Lesion summary](paper-site/static/media/fig-lesion-summary.png)
+
+## BibTeX
+
+```bibtex
+@misc{sanyal2026reconipsundrum,
+  title         = {ReCoN-Ipsundrum: An Inspectable Recurrent Persistence Loop Agent with Affect-Coupled Control and Mechanism-Linked Consciousness Indicator Assays},
+  author        = {Aishik Sanyal},
+  year          = {2026},
+  eprint        = {2602.23232},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  doi           = {10.48550/arXiv.2602.23232},
+  url           = {https://arxiv.org/abs/2602.23232},
+  note          = {Accepted at AAAI 2026 Spring Symposium - Machine Consciousness: Integrating Theory, Technology, and Philosophy}
+}
+```
+
 ## Quick Start: Run in Google Colab (One-Click)
 
 Click the link below to open and run the demonstration notebook directly in Google Colab (no installation required):

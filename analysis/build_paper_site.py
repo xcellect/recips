@@ -24,6 +24,52 @@ STATIC_DIR = SITE_DIR / "static"
 MEDIA_DIR = STATIC_DIR / "media"
 DATA_DIR = STATIC_DIR / "data"
 
+ARXIV_PAPER = {
+    "title": "ReCoN-Ipsundrum: An Inspectable Recurrent Persistence Loop Agent with Affect-Coupled Control and Mechanism-Linked Consciousness Indicator Assays",
+    "authors": ["Aishik Sanyal"],
+    "authors_display": "Aishik Sanyal",
+    "author_url": "https://xcellect.com",
+    "arxiv_id": "arXiv:2602.23232",
+    "arxiv_id_versioned": "arXiv:2602.23232v2",
+    "abs_url": "https://arxiv.org/abs/2602.23232",
+    "pdf_url": "https://arxiv.org/pdf/2602.23232.pdf",
+    "doi": "10.48550/arXiv.2602.23232",
+    "doi_url": "https://doi.org/10.48550/arXiv.2602.23232",
+    "subject": "Artificial Intelligence (cs.AI)",
+    "submitted": "Submitted on 26 Feb 2026",
+    "revised": "last revised 1 Mar 2026 (this version, v2)",
+    "comments": "Accepted at AAAI 2026 Spring Symposium - Machine Consciousness: Integrating Theory, Technology, and Philosophy",
+    "abstract": (
+        "Indicator-based approaches to machine consciousness recommend mechanism-linked evidence triangulated across tasks, "
+        "supported by architectural inspection and causal intervention. Inspired by Humphrey's ipsundrum hypothesis, we "
+        "implement ReCoN-Ipsundrum, an inspectable agent that extends a ReCoN state machine with a recurrent persistence "
+        "loop over sensory salience Ns and an optional affect proxy reporting valence/arousal. Across fixed-parameter "
+        "ablations (ReCoN, Ipsundrum, Ipsundrum+affect), we operationalize Humphrey's qualiaphilia (preference for sensory "
+        "experience for its own sake) as a familiarity-controlled scenic-over-dull route choice. We find a novelty "
+        "dissociation: non-affect variants are novelty-sensitive (Delta scenic-entry = 0.07). Affect coupling is stable "
+        "(Delta scenic-entry = 0.01) even when scenic is less novel (median Delta novelty approx. -0.43). In reward-free "
+        "exploratory play, the affect variant shows structured local investigation (scan events 31.4 vs. 0.9; cycle score "
+        "7.6). In a pain-tail probe, only the affect variant sustains prolonged planned caution (tail duration 90 vs. 5). "
+        "Lesioning feedback+integration selectively reduces post-stimulus persistence in ipsundrum variants (AUC drop 27.62, "
+        "27.9%) while leaving ReCoN unchanged. These dissociations link recurrence to persistence and affect-coupled control "
+        "to preference stability, scanning, and lingering caution, illustrating how indicator-like signatures can be "
+        "engineered and why mechanistic and causal evidence should accompany behavioral markers."
+    ),
+    "bibtex": (
+        "@misc{sanyal2026reconipsundrum,\n"
+        "  title         = {ReCoN-Ipsundrum: An Inspectable Recurrent Persistence Loop Agent with Affect-Coupled Control and Mechanism-Linked Consciousness Indicator Assays},\n"
+        "  author        = {Aishik Sanyal},\n"
+        "  year          = {2026},\n"
+        "  eprint        = {2602.23232},\n"
+        "  archivePrefix = {arXiv},\n"
+        "  primaryClass  = {cs.AI},\n"
+        "  doi           = {10.48550/arXiv.2602.23232},\n"
+        "  url           = {https://arxiv.org/abs/2602.23232},\n"
+        "  note          = {Accepted at AAAI 2026 Spring Symposium - Machine Consciousness: Integrating Theory, Technology, and Philosophy}\n"
+        "}"
+    ),
+}
+
 
 def ensure_dirs() -> None:
     for path in (MEDIA_DIR, DATA_DIR):
@@ -278,7 +324,6 @@ def render_lesion_gif(out_path: Path, mean_traces: Dict[str, Dict[str, List[floa
 
 def export_media() -> Dict[str, str]:
     copied = {
-        "paper_pdf": ("docs/paper-3-v9.pdf", "paper.pdf"),
         "play_summary": ("results/publication-figures/fig1_play.png", "fig-play-summary.png"),
         "familiarity_summary": ("results/publication-figures/fig2.png", "fig-familiarity-summary.png"),
         "familiarity_supp": ("results/publication-figures/fig2_supp.png", "fig-familiarity-supp.png"),
@@ -403,6 +448,7 @@ def build_site_data(asset_paths: Dict[str, str]) -> dict:
 
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
+        "paper": ARXIV_PAPER,
         "headline_metrics": headline_metrics,
         "claims": claims,
         "config": {
@@ -413,7 +459,7 @@ def build_site_data(asset_paths: Dict[str, str]) -> dict:
             "lesion_time": config.get("lesion", {}).get("lesion_time", 3),
         },
         "links": {
-            "paper_pdf": asset_paths.get("paper_pdf", ""),
+            "paper_pdf": ARXIV_PAPER["pdf_url"],
             "colab": "https://colab.research.google.com/github/xcellect/recips/blob/main/playground.ipynb",
             "repo": "https://github.com/xcellect/recips",
         },

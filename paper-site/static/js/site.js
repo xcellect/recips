@@ -5,6 +5,20 @@ const COLORS = {
   default: "#d8dde4",
 };
 
+const CHART_THEME = {
+  axis: "rgba(24, 24, 24, 0.28)",
+  grid: "rgba(0, 0, 0, 0.08)",
+  plotFill: "#ffffff",
+  plotStroke: "rgba(0,0,0,0.08)",
+  text: "#161616",
+  muted: "#4a4f54",
+  sham: "#f4efe6",
+  lesion: "#de684a",
+  lesionMarker: "#ffcf96",
+  lesionBand: "rgba(240, 162, 69, 0.08)",
+};
+let ASSET_VERSION = "";
+
 function modelColor(model) {
   return COLORS[model] || COLORS.default;
 }
@@ -34,14 +48,86 @@ function setLink(id, href) {
   const node = select(id);
   if (node && href) {
     node.href = href;
+    node.target = "_blank";
+    node.rel = "noopener noreferrer";
+  }
+}
+
+function setText(id, value) {
+  const node = select(id);
+  if (node && value) {
+    node.textContent = value;
   }
 }
 
 function setImage(id, src) {
   const node = select(id);
   if (node && src) {
-    node.src = src;
+    node.src = assetUrl(src);
   }
+}
+
+function assetUrl(src) {
+  if (!src) {
+    return src;
+  }
+  const glue = src.includes("?") ? "&" : "?";
+  return ASSET_VERSION ? `${src}${glue}v=${encodeURIComponent(ASSET_VERSION)}` : src;
+}
+
+function installImageLightbox() {
+  const contentRoot = document.querySelector("main");
+  const modal = select("image-modal");
+  const modalImage = select("image-modal-image");
+  const closeButton = select("image-modal-close");
+  if (!contentRoot || !modal || !modalImage || !closeButton) {
+    return;
+  }
+
+  let closeTimer = null;
+
+  const closeModal = () => {
+    if (!modal.classList.contains("is-open")) {
+      return;
+    }
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    window.clearTimeout(closeTimer);
+    closeTimer = window.setTimeout(() => {
+      if (!modal.classList.contains("is-open")) {
+        modal.hidden = true;
+        modalImage.removeAttribute("src");
+        modalImage.alt = "";
+      }
+    }, 160);
+  };
+
+  contentRoot.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLImageElement) || !target.currentSrc) {
+      return;
+    }
+    modalImage.src = target.currentSrc;
+    modalImage.alt = target.alt || "";
+    modal.hidden = false;
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    window.clearTimeout(closeTimer);
+    window.requestAnimationFrame(() => modal.classList.add("is-open"));
+  });
+
+  closeButton.addEventListener("click", closeModal);
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeModal();
+    }
+  });
 }
 
 function renderHeadlineMetrics(metrics) {
@@ -66,7 +152,7 @@ function renderGallery(items) {
     const article = document.createElement("article");
     article.className = "panel gallery-card";
     article.innerHTML = `
-      <img src="${item.src}" alt="${item.title}">
+      <img src="${assetUrl(item.src)}" alt="${item.title}">
       <h3>${item.title}</h3>
       <p>${item.caption}</p>
     `;
@@ -91,6 +177,28 @@ function renderConfig(config) {
     dd.textContent = value;
     root.append(dt, dd);
   });
+}
+
+function renderPaper(paper) {
+  if (!paper) {
+    return;
+  }
+
+  setText("paper-title", paper.title);
+  setText("paper-author-link", paper.authors_display);
+  setLink("paper-author-link", paper.author_url);
+  setText(
+    "paper-meta",
+    `${paper.arxiv_id_versioned} · ${paper.subject} · ${paper.submitted}; ${paper.revised} · ${paper.comments}`,
+  );
+  setText("paper-abstract", paper.abstract);
+  setText("bibtex-block", paper.bibtex);
+
+  document.title = "ReCoN-Ipsundrum | Paper Page";
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription && paper.abstract) {
+    metaDescription.setAttribute("content", paper.abstract);
+  }
 }
 
 function chartBounds() {
@@ -131,7 +239,7 @@ function scaleLinear(domain, range) {
 
 function drawAxes(svg, xLabel, yLabel, xTicks, yTicks) {
   const bounds = chartBounds();
-  const axisColor = "rgba(24, 24, 24, 0.28)";
+  const axisColor = CHART_THEME.axis;
 
   svg.appendChild(svgNode("rect", {
     x: bounds.x,
@@ -139,8 +247,8 @@ function drawAxes(svg, xLabel, yLabel, xTicks, yTicks) {
     width: bounds.width,
     height: bounds.height,
     rx: 16,
-    fill: "#ffffff",
-    stroke: "rgba(0,0,0,0.08)",
+    fill: CHART_THEME.plotFill,
+    stroke: CHART_THEME.plotStroke,
   }));
 
   xTicks.forEach((tick) => {
@@ -155,7 +263,7 @@ function drawAxes(svg, xLabel, yLabel, xTicks, yTicks) {
     const label = svgNode("text", {
       x: tick.x,
       y: bounds.y + bounds.height + 22,
-      fill: "#4a4f54",
+      fill: CHART_THEME.muted,
       "font-size": 11,
       "text-anchor": "middle",
     });
@@ -169,7 +277,7 @@ function drawAxes(svg, xLabel, yLabel, xTicks, yTicks) {
       x2: bounds.x + bounds.width,
       y1: tick.y,
       y2: tick.y,
-      stroke: "rgba(0,0,0,0.08)",
+      stroke: CHART_THEME.grid,
       "stroke-width": 1,
     });
     const line = svgNode("line", {
@@ -183,7 +291,7 @@ function drawAxes(svg, xLabel, yLabel, xTicks, yTicks) {
     const label = svgNode("text", {
       x: bounds.x - 10,
       y: tick.y + 4,
-      fill: "#4a4f54",
+      fill: CHART_THEME.muted,
       "font-size": 11,
       "text-anchor": "end",
     });
@@ -210,7 +318,7 @@ function drawAxes(svg, xLabel, yLabel, xTicks, yTicks) {
   const xText = svgNode("text", {
     x: bounds.x + bounds.width / 2,
     y: bounds.y + bounds.height + 42,
-    fill: "#161616",
+    fill: CHART_THEME.text,
     "font-size": 12,
     "text-anchor": "middle",
   });
@@ -218,7 +326,7 @@ function drawAxes(svg, xLabel, yLabel, xTicks, yTicks) {
   const yText = svgNode("text", {
     x: bounds.x - 48,
     y: bounds.y + bounds.height / 2,
-    fill: "#161616",
+    fill: CHART_THEME.text,
     "font-size": 12,
     transform: `rotate(-90 ${bounds.x - 48} ${bounds.y + bounds.height / 2})`,
     "text-anchor": "middle",
@@ -241,7 +349,7 @@ function drawLegend(svg, labels) {
     const text = svgNode("text", {
       x: x + 12,
       y: startY + 4,
-      fill: "#161616",
+      fill: CHART_THEME.text,
       "font-size": 11,
     });
     text.textContent = label;
@@ -422,7 +530,7 @@ function renderLesionChart(data) {
   const modelText = svgNode("text", {
     x: 68,
     y: 18,
-    fill: "#161616",
+    fill: CHART_THEME.text,
     "font-size": 11,
   });
   modelText.textContent = model;
@@ -430,7 +538,7 @@ function renderLesionChart(data) {
   const zoomText = svgNode("text", {
     x: bounds.x + bounds.width,
     y: 18,
-    fill: "#4a4f54",
+    fill: CHART_THEME.muted,
     "font-size": 11,
     "text-anchor": "end",
   });
@@ -441,13 +549,13 @@ function renderLesionChart(data) {
     x2: 178,
     y1: 14,
     y2: 14,
-    stroke: "#f4efe6",
+    stroke: CHART_THEME.sham,
     "stroke-width": 2.8,
   }));
   const shamText = svgNode("text", {
     x: 184,
     y: 18,
-    fill: "#161616",
+    fill: CHART_THEME.text,
     "font-size": 11,
   });
   shamText.textContent = "Sham";
@@ -457,14 +565,14 @@ function renderLesionChart(data) {
     x2: 260,
     y1: 14,
     y2: 14,
-    stroke: "#de684a",
+    stroke: CHART_THEME.lesion,
     "stroke-width": 2.8,
     "stroke-dasharray": "8 6",
   }));
   const lesionText = svgNode("text", {
     x: 266,
     y: 18,
-    fill: "#161616",
+    fill: CHART_THEME.text,
     "font-size": 11,
   });
   lesionText.textContent = "Lesion";
@@ -474,7 +582,7 @@ function renderLesionChart(data) {
     y: bounds.y,
     width: xScale(windowEnd) - xScale(lesionT),
     height: bounds.height,
-    fill: "rgba(240, 162, 69, 0.08)",
+    fill: CHART_THEME.lesionBand,
   });
   svg.appendChild(lesionBand);
   const lesionLine = svgNode("line", {
@@ -482,7 +590,7 @@ function renderLesionChart(data) {
     x2: xScale(lesionT),
     y1: bounds.y,
     y2: bounds.y + bounds.height,
-    stroke: "#ffcf96",
+    stroke: CHART_THEME.lesionMarker,
     "stroke-width": 1.4,
     "stroke-dasharray": "6 4",
   });
@@ -494,13 +602,13 @@ function renderLesionChart(data) {
   svg.appendChild(svgNode("path", {
     d: makePath(sham),
     fill: "none",
-    stroke: "#f4efe6",
+    stroke: CHART_THEME.sham,
     "stroke-width": 2.8,
   }));
   svg.appendChild(svgNode("path", {
     d: makePath(lesion),
     fill: "none",
-    stroke: "#de684a",
+    stroke: CHART_THEME.lesion,
     "stroke-width": 2.8,
     "stroke-dasharray": "8 6",
   }));
@@ -520,7 +628,9 @@ function installRevealObserver() {
 async function main() {
   const response = await fetch("static/data/site-data.json");
   const data = await response.json();
+  ASSET_VERSION = data.generated_at || "";
 
+  renderPaper(data.paper);
   renderHeadlineMetrics(data.headline_metrics);
   renderGallery(data.gallery);
   renderConfig(data.config);
@@ -544,6 +654,7 @@ async function main() {
   setImage("lesion-summary-media", data.assets.lesion_summary);
   setImage("pain-tail-media", data.assets.pain_tail);
   setImage("qualiaphilia-media", data.assets.qualiaphilia);
+  installImageLightbox();
 
   populateSelect(
     select("play-x"),
