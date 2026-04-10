@@ -123,7 +123,9 @@ echo "ABLATIONS: Affect Readout vs Modulation (Corridor + Play)"
 echo "======================================================================"
 python3 -m experiments.familiarity_control --seeds "${SEEDS_HEADLINE}" --post_repeats "${FAMILIARITY_POST_REPEATS}" --models Ipsundrum+affect,Ipsundrum+affect_readout_only,Ipsundrum+affect_modulation_only --outdir results/ablations/familiarity 2>&1 | tee logs/ablations_familiarity.log
 python3 -m experiments.exploratory_play --profile "${PROFILE}" --seeds "${SEEDS_HEADLINE}" --steps "${EXPLORATORY_STEPS}" --outdir results/ablations/exploratory-play --config_set ablation --tag "ablation_${PROFILE}" 2>&1 | tee logs/ablations_play.log
-echo "✓ Completed ablations. Logs: logs/ablations_familiarity.log, logs/ablations_play.log"
+python3 -m experiments.lesion_causal --seeds "${SEEDS_HEADLINE}" --post_window "${LESION_POST_WINDOW}" --models Ipsundrum+affect,Ipsundrum+affect_readout_only,Ipsundrum+affect_modulation_only --outdir results/ablations/lesion 2>&1 | tee logs/ablations_lesion.log
+python3 -m experiments.pain_tail_assay --seeds "${SEEDS_HEADLINE}" --post_steps "${PAIN_POST_STEPS}" --models Ipsundrum+affect,Ipsundrum+affect_readout_only,Ipsundrum+affect_modulation_only --outdir results/ablations/pain-tail 2>&1 | tee logs/ablations_pain_tail.log
+echo "✓ Completed ablations. Logs: logs/ablations_familiarity.log, logs/ablations_play.log, logs/ablations_lesion.log, logs/ablations_pain_tail.log"
 
 # Optional weight sweep (default OFF)
 if [[ "${RUN_WEIGHT_SWEEP:-0}" == "1" ]]; then
@@ -257,6 +259,10 @@ echo "  - results/ablations/familiarity/episodes_improved.csv"
 echo "  - results/ablations/familiarity/summary.csv"
 echo "  - results/ablations/exploratory-play/exploratory_play_clarified_ablation_${PROFILE}.csv"
 echo "  - results/ablations/exploratory-play/summary_ablation_${PROFILE}.csv"
+echo "  - results/ablations/lesion/episodes_extended.csv"
+echo "  - results/ablations/lesion/ns_traces.npz"
+echo "  - results/ablations/pain-tail/episodes.csv"
+echo "  - results/ablations/pain-tail/summary.csv"
 echo ""
 echo "Logs:"
 echo "  - logs/goal_directed.log"

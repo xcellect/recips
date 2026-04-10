@@ -1,0 +1,6 @@
+model,mean_tail_duration,std_tail_duration,mean_ns_peak,mean_ns_half_life,mean_ns_auc_above_baseline,std_ns_auc_above_baseline,mean_arousal_integral,mean_turn_rate_tail,mean_forward_rate_tail,n
+Ipsundrum+affect,128.2,92.78745125883732,1.0,0.0,0.15803762607663832,0.05817313446541064,28.41182600402115,0.89,0.11000000000000001,10
+Ipsundrum+affect_modulation_only,120.6,88.4058821572411,1.0,0.0,0.15803762607663832,0.05817313446541064,28.41182600402115,0.9400000000000001,0.06,10
+Ipsundrum+affect_readout_only,125.8,95.94188055507585,1.0,0.0,0.23389616078304137,0.01093491151606299,25.857437709618047,0.78,0.22000000000000003,10
+Recon,,,,,,,,,,0
+Ipsundrum,,,,,,,,,,0

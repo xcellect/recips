@@ -21,7 +21,7 @@ apply_times_style()
 import experiments.gridworld_exp as gw
 from experiments.evaluation_harness import EvalAgent, build_model_network, MODEL_ORDER, order_models
 from core.recon_core import ScriptState
-from utils.model_naming import MODEL_DISPLAY_ORDER, canonical_model_display
+from utils.model_naming import MODEL_DISPLAY_ORDER, canonical_model_display, canonical_model_id
 
 
 @dataclass
@@ -339,14 +339,20 @@ if __name__ == "__main__":
     parser.add_argument("--seeds", type=int, default=10, help="Number of seeds")
     parser.add_argument("--post_steps", type=int, default=50, help="Post-stimulus steps")
     parser.add_argument("--outdir", type=str, default="results/pain-tail", help="Output directory")
+    parser.add_argument("--models", type=str, default="", help="Comma-separated model list (optional)")
     args = parser.parse_args()
 
     print("="*60)
     print("PAIN-TAIL ASSAY")
     print("="*60)
     
+    if args.models.strip():
+        model_list = tuple(canonical_model_id(m) for m in args.models.split(",") if m.strip())
+    else:
+        model_list = tuple(MODEL_ORDER)
+
     df, summary = run_pain_tail_sweep(
-        models=tuple(MODEL_ORDER),
+        models=model_list,
         seeds=tuple(range(args.seeds)),
         post_stimulus_steps=args.post_steps,
     )
