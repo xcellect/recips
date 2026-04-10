@@ -1,0 +1,6 @@
+model,mean_tail_duration,std_tail_duration,mean_ns_peak,mean_ns_half_life,mean_ns_auc_above_baseline,std_ns_auc_above_baseline,mean_arousal_integral,mean_turn_rate_tail,mean_forward_rate_tail,n
+humphrey_barrett,89.85,92.61878574935115,1.0,0.0,0.15437392709006198,0.05664580855646598,26.238601491486556,0.7025,0.2975,20
+humphrey_barrett_modulation_only,75.95,86.57669249983233,1.0,0.0,0.15437392709006198,0.05664580855646598,26.238601491486556,0.6900000000000001,0.31,20
+humphrey_barrett_readout_only,87.8,94.29327151303839,1.0,0.0,0.2315416283998105,0.009845875026435405,23.69415811530014,0.6075,0.39249999999999996,20
+recon,,,,,,,,,,0
+humphrey,,,,,,,,,,0
