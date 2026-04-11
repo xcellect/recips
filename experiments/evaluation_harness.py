@@ -183,7 +183,7 @@ def build_model_network(model: str, efference_threshold: float = 0.05) -> Tuple[
         b = Builder(params=loop, affect=default_affect_params(False))
         net, _ = b.stage_D(efference_threshold=efference_threshold)
 
-    elif model in ("humphrey_barrett", "full"):
+    elif model in ("humphrey_barrett", "full", "social_none", "social_cognitive_direct", "social_affective_direct", "social_full_direct"):
         b = Builder(params=loop, affect=default_affect_params(True))
         net, _ = b.stage_D(efference_threshold=efference_threshold)
 

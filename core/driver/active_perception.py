@@ -19,6 +19,7 @@ class PolicyContext:
     aff: Any
     net_state: Dict[str, Any]
     efference_threshold: Optional[float] = None
+    social_ctx: Any = None
 
 
 @dataclass
@@ -106,7 +107,7 @@ def score_internal_components(
     Ns = float(s.get("Ns", 0.0))
     bb = float(s.get("bb_model", 0.0))
     sp = float(getattr(aff, "setpoint", 0.0))
-    bb_err = abs(bb - sp)
+    bb_err = float(s.get("bb_err", abs(bb - sp)))
 
     base = (
         float(w_valence) * Nv
@@ -242,6 +243,9 @@ def choose_action_feelings(
                 aff,
                 predicted_I,
                 rng=ctx.rng,
+                social_ctx=ctx.social_ctx,
+                action=a,
+                eval_info=eval_info,
             )
 
         s_pred["action"] = a

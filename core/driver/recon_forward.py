@@ -12,6 +12,7 @@ def predict_one_step_recon(
     aff: Any,
     I_ext: float,
     rng: np.random.Generator,
+    **_: Any,
 ) -> dict:
     """
     One-step forward model for Stage-B (ReCoN) planning.

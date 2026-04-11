@@ -1,0 +1,9 @@
+env_name,condition,lesion_mode,help_rate_when_partner_distressed_mean,help_rate_when_partner_distressed_ci_low,help_rate_when_partner_distressed_ci_high,mutual_viability_mean,mutual_viability_ci_low,mutual_viability_ci_high,rescue_latency_mean,rescue_latency_ci_low,rescue_latency_ci_high,self_cost_of_help_mean,self_cost_of_help_ci_low,self_cost_of_help_ci_high,episode_joint_longevity_mean,episode_joint_longevity_ci_low,episode_joint_longevity_ci_high
+FoodShareToy,social_affective_direct,none,1.0,1.0,1.0,1.0,1.0,1.0,0.0,0.0,0.0,0.01,0.01,0.01,1.0,1.0,1.0
+FoodShareToy,social_cognitive_direct,none,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0
+FoodShareToy,social_full_direct,none,1.0,1.0,1.0,1.0,1.0,1.0,0.0,0.0,0.0,0.01,0.01,0.01,1.0,1.0,1.0
+FoodShareToy,social_none,none,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0
+SocialCorridorWorld,social_affective_direct,none,1.0,1.0,1.0,1.0,1.0,1.0,10.0,10.0,10.0,0.055,0.055,0.055,18.0,18.0,18.0
+SocialCorridorWorld,social_cognitive_direct,none,0.0,0.0,0.0,1.0,1.0,1.0,18.0,18.0,18.0,0.055,0.055,0.055,18.0,18.0,18.0
+SocialCorridorWorld,social_full_direct,none,1.0,1.0,1.0,1.0,1.0,1.0,10.0,10.0,10.0,0.055,0.055,0.055,18.0,18.0,18.0
+SocialCorridorWorld,social_none,none,0.0,0.0,0.0,1.0,1.0,1.0,18.0,18.0,18.0,0.055,0.055,0.055,18.0,18.0,18.0

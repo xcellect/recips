@@ -13,6 +13,7 @@ def predict_one_step(
     aff: Any,
     I_ext: float,
     rng: np.random.Generator,
+    **_: Any,
 ) -> dict:
     """
     One-step internal forward model aligned with ipsundrum_model update_sensor.

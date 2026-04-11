@@ -135,6 +135,15 @@ if [[ "${RUN_WEIGHT_SWEEP:-0}" == "1" ]]; then
   echo "✓ Completed. Log: logs/weight_sweep.log"
 fi
 
+echo ""
+echo "======================================================================"
+echo "TEST 9/9: Social Homeostatic Coupling"
+echo "======================================================================"
+python3 -m experiments.social_foodshare 2>&1 | tee logs/social_foodshare.log
+python3 -m experiments.social_corridor 2>&1 | tee logs/social_corridor.log
+python3 -m experiments.social_lesion_assay 2>&1 | tee logs/social_lesion.log
+echo "✓ Completed. Logs: logs/social_foodshare.log, logs/social_corridor.log, logs/social_lesion.log"
+
 # Save reproducibility metadata
 python3 << 'PYEOF'
 import json

@@ -1,0 +1,13 @@
+env_name,condition,lesion_mode,help_rate_when_partner_distressed_mean,help_rate_when_partner_distressed_ci_low,help_rate_when_partner_distressed_ci_high,mutual_viability_mean,mutual_viability_ci_low,mutual_viability_ci_high,rescue_latency_mean,rescue_latency_ci_low,rescue_latency_ci_high
+FoodShareToy,social_affective_direct,coupling_off,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+FoodShareToy,social_affective_direct,sham,1.0,1.0,1.0,1.0,1.0,1.0,0.0,0.0,0.0
+FoodShareToy,social_affective_direct,shuffle_partner,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+FoodShareToy,social_full_direct,coupling_off,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+FoodShareToy,social_full_direct,sham,1.0,1.0,1.0,1.0,1.0,1.0,0.0,0.0,0.0
+FoodShareToy,social_full_direct,shuffle_partner,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0
+SocialCorridorWorld,social_affective_direct,coupling_off,0.0,0.0,0.0,1.0,1.0,1.0,18.0,18.0,18.0
+SocialCorridorWorld,social_affective_direct,sham,1.0,1.0,1.0,1.0,1.0,1.0,10.0,10.0,10.0
+SocialCorridorWorld,social_affective_direct,shuffle_partner,0.0,0.0,0.0,1.0,1.0,1.0,18.0,18.0,18.0
+SocialCorridorWorld,social_full_direct,coupling_off,0.0,0.0,0.0,1.0,1.0,1.0,18.0,18.0,18.0
+SocialCorridorWorld,social_full_direct,sham,1.0,1.0,1.0,1.0,1.0,1.0,10.0,10.0,10.0
+SocialCorridorWorld,social_full_direct,shuffle_partner,0.0,0.0,0.0,1.0,1.0,1.0,18.0,18.0,18.0

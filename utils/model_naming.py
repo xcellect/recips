@@ -25,6 +25,10 @@ MODEL_ID_ORDER: List[str] = [
     MODEL_ID_RECON,
     MODEL_ID_IPSUNDRUM,
     MODEL_ID_IPSUNDRUM_AFFECT,
+    "social_none",
+    "social_cognitive_direct",
+    "social_affective_direct",
+    "social_full_direct",
 ]
 
 # Standardized display names for all saved results (csv/plots/tables)
@@ -36,12 +40,20 @@ MODEL_DISPLAY_ORDER: List[str] = [
     MODEL_NAME_RECON,
     MODEL_NAME_IPSUNDRUM,
     MODEL_NAME_IPSUNDRUM_AFFECT,
+    "Social none",
+    "Social cognitive direct",
+    "Social affective direct",
+    "Social full direct",
 ]
 
 _DISPLAY_BY_ID = {
     MODEL_ID_RECON: MODEL_NAME_RECON,
     MODEL_ID_IPSUNDRUM: MODEL_NAME_IPSUNDRUM,
     MODEL_ID_IPSUNDRUM_AFFECT: MODEL_NAME_IPSUNDRUM_AFFECT,
+    "social_none": "Social none",
+    "social_cognitive_direct": "Social cognitive direct",
+    "social_affective_direct": "Social affective direct",
+    "social_full_direct": "Social full direct",
 }
 
 
@@ -67,6 +79,14 @@ def canonical_model_id(name: str) -> str:
 
     if key in ("humphrey", "ipsundrum"):
         return MODEL_ID_IPSUNDRUM
+
+    if key in (
+        "social_none",
+        "social_cognitive_direct",
+        "social_affective_direct",
+        "social_full_direct",
+    ):
+        return key
 
     if key in (
         "humphrey_barrett",
