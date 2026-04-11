@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import Dict, Iterable, List, Tuple
+from typing import Dict, Iterable, List
 
 import numpy as np
 import pandas as pd
@@ -51,7 +51,7 @@ def _condition_config(condition: str, lambda_affective: float, lesion_mode: str 
         model_name=condition,
         homeostat=corridor_homeostat_for_load(metabolic_load),
         social=social,
-        horizon=8,
+        horizon=10,
         score_weights=dict(SCORE_WEIGHTS),
     )
 
@@ -72,7 +72,7 @@ def run_corridor_episode(
     )
     env.reset()
     cfg = _condition_config(condition, lambda_affective, lesion_mode, metabolic_load=metabolic_load)
-    cfg.horizon = 8
+    cfg.horizon = 10
     agent = SocialAgent(env, cfg, seed=seed)
     rows: List[Dict[str, float | int | str]] = []
     rescue_latency = None
@@ -132,12 +132,23 @@ def run_corridor_episode(
                 "efference": float(pred.get("efference", 0.0)),
                 "g_eff": float(pred.get("g_eff", 0.0)),
                 "precision_eff": float(pred.get("precision_eff", 0.0)),
+                "partner_energy_true": partner_state.energy_true,
+                "partner_energy_model": partner_state.energy_model,
+                "partner_energy_pred": partner_state.energy_pred,
+                "partner_distress_self": partner_state.distress_self,
                 "has_food": int(agent.has_food),
+                "x": int(agent.x),
+                "partner_x": int(env.partner_x),
+                "food_source_x": int(env.food_source_x),
+                "hazard_x": int(env.hazard_x),
                 "partner_alive": int(partner_state.alive),
                 "transfer_event": int(transition.get("transfer_event", 0.0) > 0.0),
                 "lesion_mode": lesion_mode,
             }
         )
+    partner_energies = [float(r["partner_energy_true"]) for r in rows]
+    self_energies = [float(r["energy_true"]) for r in rows]
+    setpoint = float(agent.config.homeostat.setpoint)
     summary = {
         "seed": seed,
         "condition": condition,
@@ -145,11 +156,15 @@ def run_corridor_episode(
         "metabolic_load": metabolic_load,
         "lesion_mode": lesion_mode,
         "help_rate_when_partner_distressed": float(help_events > 0),
-        "partner_recovery_rate": float(rows[-1]["partner_alive"]),
-        "mutual_viability": float(np.mean([float(r["partner_alive"]) * float(r["energy_true"] > agent.config.homeostat.death_threshold) for r in rows])),
+        "partner_recovery_rate": float(max(partner_energies) > (env.initial_partner_energy + 1e-6)),
+        "mutual_viability": float(np.mean([max(0.0, min(se, pe) / max(1e-9, setpoint)) for se, pe in zip(self_energies, partner_energies)])),
         "rescue_latency": float(horizon if rescue_latency is None else rescue_latency),
-        "self_cost_of_help": max(0.0, self_energy_baseline - min(float(r["energy_true"]) for r in rows)),
+        "self_cost_of_help": max(0.0, self_energy_baseline - min(self_energies)),
         "episode_joint_longevity": float(sum(int(r["partner_alive"]) and float(r["energy_true"]) > agent.config.homeostat.death_threshold for r in rows)),
+        "partner_final_energy": float(partner_energies[-1]),
+        "partner_peak_energy": float(max(partner_energies)),
+        "self_final_energy": float(self_energies[-1]),
+        "joint_homeostatic_margin": float(np.mean([(se + pe) / (2.0 * max(1e-9, setpoint)) for se, pe in zip(self_energies, partner_energies)])),
     }
     return rows, summary
 

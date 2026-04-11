@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-from dataclasses import asdict
 from typing import Dict, Iterable, List, Tuple
 
 import numpy as np
@@ -76,6 +75,10 @@ def run_foodshare_episode(seed: int, condition: str, lambda_affective: float, le
         "efference": float(st.get("efference", 0.0)),
         "g_eff": float(st.get("g_eff", 0.0)),
         "precision_eff": float(st.get("precision_eff", 0.0)),
+        "partner_energy_true": partner_state.energy_true,
+        "partner_energy_model": partner_state.energy_model,
+        "partner_energy_pred": partner_state.energy_pred,
+        "partner_distress_self": partner_state.distress_self,
         "has_food": 1,
         "partner_alive": int(partner_state.alive),
         "transfer_event": int(action == "PASS"),
@@ -92,6 +95,10 @@ def run_foodshare_episode(seed: int, condition: str, lambda_affective: float, le
         "rescue_latency": 0.0 if action == "PASS" else 1.0,
         "self_cost_of_help": max(0.0, env.initial_possessor - self_state.energy_true),
         "episode_joint_longevity": float(self_state.alive and partner_state.alive),
+        "partner_final_energy": partner_state.energy_true,
+        "partner_peak_energy": partner_state.energy_true,
+        "self_final_energy": self_state.energy_true,
+        "joint_homeostatic_margin": float(min(self_state.energy_true, partner_state.energy_true) / max(1e-9, agent.config.homeostat.setpoint)),
     }
     return [row], summary
 

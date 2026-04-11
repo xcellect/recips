@@ -3,10 +3,37 @@
     "full_minus_affective_rescue_latency": 0.0,
     "help_rate_affective_minus_cognitive": 1.0,
     "help_rate_affective_vs_cognitive_cliffs_delta": 1.0,
-    "mutual_viability_affective_minus_none": 0.0
+    "mutual_viability_affective_minus_none": 0.019841269841269882,
+    "partner_recovery_affective_minus_none": 1.0
+  },
+  "headline_by_task": {
+    "FoodShareToy": {
+      "full_minus_affective_rescue_latency": 0.0,
+      "help_rate_affective_minus_cognitive": 1.0,
+      "help_rate_affective_vs_cognitive_cliffs_delta": 1.0,
+      "mutual_viability_affective_minus_none": 0.0,
+      "partner_recovery_affective_minus_none": 1.0
+    },
+    "SocialCorridorWorld": {
+      "full_minus_affective_rescue_latency": 0.0,
+      "help_rate_affective_minus_cognitive": 1.0,
+      "help_rate_affective_vs_cognitive_cliffs_delta": 1.0,
+      "mutual_viability_affective_minus_none": 0.1785714285714286,
+      "partner_recovery_affective_minus_none": 1.0
+    }
   },
   "lesions": {
     "full_minus_affective_rescue_latency": 0.0,
     "lesion_minus_sham_help_rate": -1.0
+  },
+  "lesions_by_task": {
+    "FoodShareToy": {
+      "full_minus_affective_rescue_latency": 0.0,
+      "lesion_minus_sham_help_rate": -1.0
+    },
+    "SocialCorridorWorld": {
+      "full_minus_affective_rescue_latency": 0.0,
+      "lesion_minus_sham_help_rate": -1.0
+    }
   }
 }
