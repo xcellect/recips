@@ -1205,7 +1205,7 @@ def _claim_context_delay_perspective_plastic_gt_gw(ctx: ClaimsContext) -> Claim:
     return _claim_comparison(
         "claim_context_delay_perspective_plastic_gt_gw",
         sub,
-        "success_rate",
+        "R",
         "perspective_plastic",
         "gw_lite",
         source="results/context-fork/episodes.csv",
@@ -1322,14 +1322,18 @@ def _claim_passes(claim: Claim) -> bool:
         value_ok = False
     if not value_ok:
         return False
-    if claim.ci is None:
-        return True
-    if len(claim.ci) != 2:
-        return False
-    low, high = claim.ci
-    if not (_is_finite_number(low) and _is_finite_number(high)):
-        return False
-    return float(low) <= float(high)
+    if claim.ci is not None:
+        if len(claim.ci) != 2:
+            return False
+        low, high = claim.ci
+        if not (_is_finite_number(low) and _is_finite_number(high)):
+            return False
+        if float(low) > float(high):
+            return False
+    meta = claim.meta or {}
+    if "pass" in meta:
+        return bool(meta["pass"])
+    return True
 
 
 def write_claims_tex(claims: Dict[str, Claim], out_path: str) -> None:

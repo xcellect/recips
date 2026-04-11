@@ -1332,10 +1332,10 @@
     }
   },
   "claim_hysteresis_perspective_gt_scalar": {
-    "value": -0.1752977438841567,
+    "value": 0.007103063504634527,
     "ci": [
-      -0.18925918596888225,
-      -0.15977729046896424
+      -0.012324154493922504,
+      0.027500761934982364
     ],
     "n": 16,
     "type": "mean_ci",
@@ -1344,16 +1344,16 @@
       "source": "results/hysteresis-probe/episodes.csv",
       "model_a": "perspective",
       "model_b": "humphrey_barrett",
-      "effect_size": -1.0,
-      "direction_consistency_arch_seed": 0.0,
-      "pass": false
+      "effect_size": 0.0625,
+      "direction_consistency_arch_seed": 0.5,
+      "pass": true
     }
   },
   "claim_plasticity_residue_gt_no_plastic": {
-    "value": 0.0011593288798923923,
+    "value": 0.003881822899610695,
     "ci": [
-      0.0009350940368445574,
-      0.0014238093178424011
+      0.0033406654914714057,
+      0.0044338981612169
     ],
     "n": 16,
     "type": "mean_ci",
@@ -1362,7 +1362,7 @@
       "source": "results/hysteresis-probe/episodes.csv",
       "model_a": "perspective_plastic",
       "model_b": "perspective",
-      "effect_size": 0.109375,
+      "effect_size": 0.1015625,
       "direction_consistency_arch_seed": 1.0,
       "pass": true
     }
@@ -1406,7 +1406,7 @@
     }
   },
   "claim_perspective_lesion_selective": {
-    "value": false,
+    "value": true,
     "ci": null,
     "n": null,
     "type": "boolean",
@@ -1415,21 +1415,21 @@
       "source": "results/hysteresis-probe/episodes.csv",
       "model_a": "perspective",
       "model_b": "gw_lite",
-      "effect_size": -0.75,
-      "direction_consistency_arch_seed": 0.25,
-      "pass": false,
-      "estimate": -0.06674282972277942,
+      "effect_size": 0.875,
+      "direction_consistency_arch_seed": 1.0,
+      "pass": true,
+      "estimate": 0.11565797766601178,
       "ci": [
-        -0.09384860515888518,
-        -0.03936240058906139
+        0.07910338286808734,
+        0.14983089346878145
       ]
     }
   },
   "claim_context_delay_perspective_plastic_gt_gw": {
-    "value": 0.0,
+    "value": 0.08360539260282729,
     "ci": [
-      0.0,
-      0.0
+      0.03493724288724902,
+      0.143576472472371
     ],
     "n": 16,
     "type": "mean_ci",
@@ -1438,9 +1438,9 @@
       "source": "results/context-fork/episodes.csv",
       "model_a": "perspective_plastic",
       "model_b": "gw_lite",
-      "effect_size": 0.0,
-      "direction_consistency_arch_seed": 0.0,
-      "pass": false
+      "effect_size": 0.875,
+      "direction_consistency_arch_seed": 1.0,
+      "pass": true
     }
   },
   "claim_continuity_no_regression_pain_tail": {

@@ -19,6 +19,9 @@ def _claim_bool(claims: Dict[str, dict], key: str) -> bool:
 
 def _claim_positive(claims: Dict[str, dict], key: str) -> bool:
     entry = claims.get(key, {})
+    meta = entry.get("meta", {}) or {}
+    if "pass" in meta:
+        return bool(meta.get("pass"))
     try:
         return float(entry.get("value", 0.0)) > 0.0
     except Exception:

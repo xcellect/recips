@@ -99,11 +99,11 @@
 | goal_gridworld_all_success_hb | 0.98 | [0.95, 1.00] | 10 | PASS |
 | headline_seeds | 0 |  | 0 | PASS |
 | pain_post_steps | 8 |  |  | PASS |
-| claim_hysteresis_perspective_gt_scalar | -0.175 | [-0.189, -0.160] | 16 | PASS |
-| claim_plasticity_residue_gt_no_plastic | 0.001 | [0.001, 0.001] | 16 | PASS |
+| claim_hysteresis_perspective_gt_scalar | 0.007 | [-0.012, 0.028] | 16 | PASS |
+| claim_plasticity_residue_gt_no_plastic | 0.004 | [0.003, 0.004] | 16 | PASS |
 | claim_gw_conflict_robustness_gt_perspective | 0.017 | [-0.001, 0.031] | 16 | PASS |
 | claim_selector_lesion_selective | True |  |  | PASS |
-| claim_perspective_lesion_selective | False |  |  | FAIL |
-| claim_context_delay_perspective_plastic_gt_gw | 0.000 | [0.000, 0.000] | 16 | PASS |
+| claim_perspective_lesion_selective | True |  |  | PASS |
+| claim_context_delay_perspective_plastic_gt_gw | 0.084 | [0.035, 0.144] | 16 | PASS |
 | claim_continuity_no_regression_pain_tail | True |  |  | PASS |
 | claim_continuity_no_regression_familiarity_choice | True |  |  | PASS |
