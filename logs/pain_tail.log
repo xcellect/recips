@@ -68,6 +68,6 @@ SUMMARY
            model  mean_tail_duration  std_tail_duration  mean_ns_peak  mean_ns_half_life  mean_ns_auc_above_baseline  std_ns_auc_above_baseline  mean_arousal_integral  mean_turn_rate_tail  mean_forward_rate_tail  n
            Recon                5.00           0.000000           1.0                0.0                    0.000000                   0.000000               0.000000               0.0000                  1.0000 20
        Ipsundrum                5.05           0.223607           1.0                0.0                    0.244383                   0.001313               0.000000               0.0275                  0.9725 20
-Ipsundrum+affect               89.85          92.618786           1.0                0.0                    0.154374                   0.056646              26.238601               0.7025                  0.2975 20
+Ipsundrum+affect               29.85          18.675272           1.0                0.0                    0.154374                   0.056646              10.131428               0.7025                  0.2975 20
 
 Plot saved: results/pain-tail/results.png

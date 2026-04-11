@@ -1,0 +1,34 @@
+======================================================================
+PAIN-TAIL CAUSAL LESION (Extended Window: 150 steps)
+======================================================================
+
+RESULTS:
+
+Half-Life (steps):
+condition                         lesion   sham
+model                                          
+recon                                NaN    NaN
+humphrey                             NaN    NaN
+humphrey_barrett                   150.0  150.0
+humphrey_barrett_modulation_only   150.0  150.0
+humphrey_barrett_readout_only      150.0  150.0
+
+AUC (integrated Ns):
+condition                            lesion       sham
+model                                                 
+recon                                   NaN        NaN
+humphrey                                NaN        NaN
+humphrey_barrett                  71.518915  99.146707
+humphrey_barrett_modulation_only  71.518915  99.146707
+humphrey_barrett_readout_only     71.381041  91.024145
+
+Difference (Sham - Lesion):
+model
+recon                                     NaN
+humphrey                                  NaN
+humphrey_barrett                    27.627791
+humphrey_barrett_modulation_only    27.627791
+humphrey_barrett_readout_only       19.643104
+dtype: float64
+
+OK: Lesion causes causal drop in persistence (AUC)

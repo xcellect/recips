@@ -1,0 +1,35 @@
+\begin{thebibliography}{}
+
+\bibitem[Bach and Herger, 2015]{BachHerger2015ReCoN}
+Bach, J. and Herger, P. (2015).
+\newblock Request confirmation networks for neuro-symbolic script execution.
+\newblock In {\em Proceedings of the Workshop on Cognitive Computation:
+  Integrating Neural and Symbolic Approaches (CoCo@{NIPS} 2015)}, volume 1583
+  of {\em CEUR Workshop Proceedings}.
+
+\bibitem[Barrett, 2017]{Barrett2017HowEmotions}
+Barrett, L.~F. (2017).
+\newblock {\em How Emotions Are Made: The Secret Life of the Brain}.
+\newblock Houghton Mifflin Harcourt.
+
+\bibitem[Butlin et~al., 2025]{ButlinEtAl2025Indicators}
+Butlin, P., Long, R., Bayne, T., Bengio, Y., Birch, J., Chalmers, D., Constant,
+  A., Deane, G., Elmoznino, E., Fleming, S.~M., Ji, X., Kanai, R., Klein, C.,
+  Lindsay, G., Michel, M., Mudrik, L., Peters, M. A.~K., Schwitzgebel, E.,
+  Simon, J., and VanRullen, R. (2025).
+\newblock Identifying indicators of consciousness in {AI} systems.
+\newblock {\em Trends in Cognitive Sciences}.
+\newblock Online ahead of print.
+
+\bibitem[Humphrey, 2023]{Humphrey2023Sentience}
+Humphrey, N. (2023).
+\newblock {\em Sentience: The Invention of Consciousness}.
+\newblock The MIT Press.
+
+\bibitem[Sanyal, 2026]{Sanyal2026ReCoNIpsundrum}
+Sanyal, A. (2026).
+\newblock Recon-ipsundrum: An inspectable recurrent persistence loop agent with
+  affect-coupled control and mechanism-linked consciousness indicator assays.
+\newblock Companion paper and code release.
+
+\end{thebibliography}

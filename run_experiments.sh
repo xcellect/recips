@@ -34,7 +34,8 @@ if [[ -z "${RECON_STRICT+x}" ]]; then
   export RECON_STRICT=1
 fi
 RECON_MODE="${RECON_MODE:-strict}"
-case "${RECON_STRICT,,}" in
+RECON_STRICT_NORMALIZED="$(printf '%s' "${RECON_STRICT}" | tr '[:upper:]' '[:lower:]')"
+case "${RECON_STRICT_NORMALIZED}" in
   1|true|yes|on)
     RECON_MODE="strict"
     ;;

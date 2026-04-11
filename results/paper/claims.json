@@ -1,11 +1,11 @@
 {
   "fam_post_scenic_entry_recon_scenic": {
-    "value": 0.4600000000000001,
+    "value": 0.27999999999999997,
     "ci": [
-      0.33,
-      0.5900000000000001
+      0.12000000000000002,
+      0.44000000000000006
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -13,12 +13,12 @@
     }
   },
   "fam_post_scenic_entry_humphrey_scenic": {
-    "value": 0.4600000000000001,
+    "value": 0.27999999999999997,
     "ci": [
-      0.33,
-      0.5900000000000001
+      0.12000000000000002,
+      0.44000000000000006
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -26,12 +26,12 @@
     }
   },
   "fam_post_scenic_entry_hb_scenic": {
-    "value": 0.9444444444444444,
+    "value": 1.0,
     "ci": [
-      0.8333333333333334,
+      1.0,
       1.0
     ],
-    "n": 18,
+    "n": 4,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -39,12 +39,12 @@
     }
   },
   "fam_post_scenic_entry_recon_dull": {
-    "value": 0.53,
+    "value": 0.36000000000000004,
     "ci": [
-      0.41974999999999996,
-      0.65
+      0.16,
+      0.56
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -52,12 +52,12 @@
     }
   },
   "fam_post_scenic_entry_humphrey_dull": {
-    "value": 0.53,
+    "value": 0.36000000000000004,
     "ci": [
-      0.41974999999999996,
-      0.65
+      0.16,
+      0.56
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -65,12 +65,12 @@
     }
   },
   "fam_post_scenic_entry_hb_dull": {
-    "value": 0.9555555555555555,
+    "value": 1.0,
     "ci": [
-      0.8666666666666667,
+      1.0,
       1.0
     ],
-    "n": 18,
+    "n": 4,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -78,12 +78,12 @@
     }
   },
   "fam_delta_scenic_entry_recon": {
-    "value": 0.06999999999999999,
+    "value": 0.07999999999999999,
     "ci": [
-      -0.01999999999999999,
-      0.16
+      -0.08000000000000002,
+      0.27999999999999997
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -92,12 +92,12 @@
     }
   },
   "fam_delta_scenic_entry_humphrey": {
-    "value": 0.06999999999999999,
+    "value": 0.07999999999999999,
     "ci": [
-      -0.01999999999999999,
-      0.16
+      -0.08000000000000002,
+      0.27999999999999997
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -106,12 +106,12 @@
     }
   },
   "fam_delta_scenic_entry_hb": {
-    "value": 0.011111111111111112,
+    "value": 0.0,
     "ci": [
       0.0,
-      0.03333333333333334
+      0.0
     ],
-    "n": 18,
+    "n": 4,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -120,9 +120,9 @@
     }
   },
   "fam_median_delta_novelty_hb_scenic": {
-    "value": -0.4262659525005299,
+    "value": -0.4277251982743032,
     "ci": null,
-    "n": 18,
+    "n": 4,
     "type": "scalar",
     "digits": 2,
     "meta": {
@@ -130,12 +130,12 @@
     }
   },
   "fam_valence_scenic_hb": {
-    "value": 0.7361185317446743,
+    "value": 0.7473187007700745,
     "ci": [
-      0.7113460545293707,
-      0.7653838608643894
+      0.7108545434056126,
+      0.7837828581345363
     ],
-    "n": 18,
+    "n": 4,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -143,12 +143,12 @@
     }
   },
   "fam_valence_dull_hb": {
-    "value": 0.5778059973053598,
+    "value": NaN,
     "ci": [
-      0.5778059973053598,
-      0.5778059973053598
+      NaN,
+      NaN
     ],
-    "n": 1,
+    "n": 0,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -157,12 +157,12 @@
     }
   },
   "fam_arousal_scenic_hb": {
-    "value": 0.11502490799611895,
+    "value": 0.10202461737017754,
     "ci": [
-      0.10478364663028494,
-      0.126138599751239
+      0.08756440643277195,
+      0.11648482830758311
     ],
-    "n": 18,
+    "n": 4,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -170,12 +170,12 @@
     }
   },
   "fam_arousal_dull_hb": {
-    "value": 0.13507157997690977,
+    "value": NaN,
     "ci": [
-      0.13507157997690977,
-      0.13507157997690977
+      NaN,
+      NaN
     ],
-    "n": 1,
+    "n": 0,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -184,12 +184,12 @@
     }
   },
   "fam_probe_valence_scenic_hb": {
-    "value": 0.906232787477439,
+    "value": 0.9231653123223564,
     "ci": [
-      0.9003282456613179,
-      0.9124847093885423
+      0.9127655370502832,
+      0.9338883485351182
     ],
-    "n": 18,
+    "n": 4,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -198,12 +198,12 @@
     }
   },
   "fam_probe_valence_dull_hb": {
-    "value": 0.8756622851711967,
+    "value": 0.8760172682521414,
     "ci": [
-      0.875553394726467,
-      0.8757898439965184
+      0.875812888460156,
+      0.8762241534074713
     ],
-    "n": 18,
+    "n": 4,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -212,12 +212,12 @@
     }
   },
   "fam_probe_arousal_scenic_hb": {
-    "value": 0.2405482214658642,
+    "value": 0.19758100821343721,
     "ci": [
-      0.22462718442240104,
-      0.25552019063499026
+      0.1697951844926524,
+      0.2244198352693123
     ],
-    "n": 18,
+    "n": 4,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -226,12 +226,12 @@
     }
   },
   "fam_probe_arousal_dull_hb": {
-    "value": 0.31773201372262627,
+    "value": 0.317353944504554,
     "ci": [
-      0.31759176429303526,
-      0.3178460163700364
+      0.3170662388527083,
+      0.3176088995354773
     ],
-    "n": 18,
+    "n": 4,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -240,9 +240,9 @@
     }
   },
   "fam_n_seeds": {
-    "value": 20.0,
+    "value": 5.0,
     "ci": null,
-    "n": 20,
+    "n": 5,
     "type": "scalar",
     "digits": 0,
     "meta": {
@@ -260,12 +260,12 @@
     }
   },
   "play_unique_viewpoints_recon": {
-    "value": 136.3,
+    "value": 133.0,
     "ci": [
-      128.15,
-      144.35
+      116.4,
+      148.0
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 0,
     "meta": {
@@ -273,12 +273,12 @@
     }
   },
   "play_unique_viewpoints_humphrey": {
-    "value": 139.7,
+    "value": 142.0,
     "ci": [
-      132.8,
-      146.55
+      128.8,
+      152.6
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 0,
     "meta": {
@@ -286,12 +286,12 @@
     }
   },
   "play_unique_viewpoints_hb": {
-    "value": 138.0,
+    "value": 146.2,
     "ci": [
-      123.9475,
-      149.95125
+      131.0,
+      161.4
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 0,
     "meta": {
@@ -300,8 +300,8 @@
   },
   "play_unique_viewpoints_range": {
     "value": [
-      136.3,
-      139.7
+      133.0,
+      146.2
     ],
     "ci": null,
     "n": null,
@@ -312,12 +312,12 @@
     }
   },
   "play_neutral_entropy_recon": {
-    "value": 4.807983807776219,
+    "value": 4.808875840094453,
     "ci": [
-      4.773899120561805,
-      4.844781166546059
+      4.7361026352831175,
+      4.88388487117155
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -326,12 +326,12 @@
     }
   },
   "play_neutral_entropy_humphrey": {
-    "value": 4.808886565733705,
+    "value": 4.792439196696614,
     "ci": [
-      4.763734222739277,
-      4.849735462189331
+      4.649040291366387,
+      4.887444201715895
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -340,12 +340,12 @@
     }
   },
   "play_neutral_entropy_hb": {
-    "value": 4.5669641218708215,
+    "value": 4.719979684066791,
     "ci": [
-      4.408395943810511,
-      4.693955090478216
+      4.60255476717288,
+      4.8472378163790735
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -355,8 +355,8 @@
   },
   "play_neutral_entropy_range": {
     "value": [
-      4.5669641218708215,
-      4.808886565733705
+      4.719979684066791,
+      4.808875840094453
     ],
     "ci": null,
     "n": null,
@@ -389,12 +389,12 @@
     }
   },
   "play_scan_events_recon": {
-    "value": 0.95,
+    "value": 1.4,
     "ci": [
-      0.55,
-      1.35
+      0.6,
+      2.2
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 1,
     "meta": {
@@ -402,12 +402,12 @@
     }
   },
   "play_scan_events_humphrey": {
-    "value": 1.1,
+    "value": 1.6,
     "ci": [
-      0.75,
-      1.45
+      0.6,
+      2.4
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 1,
     "meta": {
@@ -415,12 +415,12 @@
     }
   },
   "play_scan_events_hb": {
-    "value": 31.35,
+    "value": 27.4,
     "ci": [
-      25.75,
-      38.15124999999999
+      23.8,
+      30.6
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 1,
     "meta": {
@@ -428,12 +428,12 @@
     }
   },
   "play_cycle_score_hb": {
-    "value": 7.6,
+    "value": 4.0,
     "ci": [
-      1.2,
-      16.70124999999999
+      0.0,
+      12.0
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 1,
     "meta": {
@@ -441,55 +441,55 @@
     }
   },
   "play_action_entropy_hb_curiosity": {
-    "value": 1.2884677597841427,
+    "value": 1.257361503681976,
     "ci": [
-      1.2489694524937083,
-      1.3284298168567379
+      1.1997744496729763,
+      1.3155838880719506
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
-      "source": "results/exploratory-play/exploratory_play_clarified_paper.csv"
+      "source": "results/exploratory-play/exploratory_play_clarified_quick.csv"
     }
   },
   "play_action_entropy_random": {
-    "value": 1.9881223752971144,
+    "value": 1.9923000902224763,
     "ci": [
-      1.9840710443902214,
-      1.9921036685769875
+      1.9855658522261426,
+      1.997841210887821
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
-      "source": "results/exploratory-play/exploratory_play_clarified_paper.csv"
+      "source": "results/exploratory-play/exploratory_play_clarified_quick.csv"
     }
   },
   "play_dwell_p90_hb_curiosity": {
-    "value": 2.725,
+    "value": 2.8,
     "ci": [
-      2.5,
-      2.925
+      2.4,
+      3.0
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 1,
     "meta": {
-      "source": "results/exploratory-play/exploratory_play_clarified_paper.csv"
+      "source": "results/exploratory-play/exploratory_play_clarified_quick.csv"
     }
   },
   "play_dwell_p90_random": {
-    "value": 8.975,
+    "value": 8.48,
     "ci": [
-      8.294874999999998,
-      9.774999999999997
+      8.0,
+      9.14
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
-      "source": "results/exploratory-play/exploratory_play_clarified_paper.csv"
+      "source": "results/exploratory-play/exploratory_play_clarified_quick.csv"
     }
   },
   "pain_ns_half_life_recon": {
@@ -558,10 +558,10 @@
     }
   },
   "pain_tail_duration_hb": {
-    "value": 89.85,
+    "value": 29.85,
     "ci": [
-      52.04875,
-      127.95749999999997
+      22.14875,
+      37.9
     ],
     "n": 20,
     "type": "mean_ci",
@@ -578,7 +578,7 @@
     "digits": 2,
     "meta": {
       "source": "results/pain-tail/episodes.csv",
-      "post_steps": 200
+      "post_steps": 50
     }
   },
   "pain_ns_half_life_saturation_humphrey": {
@@ -589,7 +589,7 @@
     "digits": 2,
     "meta": {
       "source": "results/pain-tail/episodes.csv",
-      "post_steps": 200
+      "post_steps": 50
     }
   },
   "pain_ns_half_life_saturation_hb": {
@@ -600,7 +600,7 @@
     "digits": 2,
     "meta": {
       "source": "results/pain-tail/episodes.csv",
-      "post_steps": 200
+      "post_steps": 50
     }
   },
   "lesion_auc_drop_recon": {
@@ -609,7 +609,7 @@
       0.0,
       0.0
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -617,12 +617,12 @@
     }
   },
   "lesion_auc_drop_humphrey": {
-    "value": 19.12421946841075,
+    "value": 19.124219468410757,
     "ci": [
-      19.12421946841075,
-      19.12421946841075
+      19.124219468410757,
+      19.124219468410757
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -630,12 +630,12 @@
     }
   },
   "lesion_auc_drop_hb": {
-    "value": 27.623455953827765,
+    "value": 27.627791153989996,
     "ci": [
-      27.60293798529816,
-      27.644177359584575
+      27.581303459879674,
+      27.6774436952359
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -648,7 +648,7 @@
       20.266207957352435,
       20.266207957352435
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 1,
     "meta": {
@@ -656,12 +656,12 @@
     }
   },
   "lesion_auc_drop_pct_hb": {
-    "value": 27.851279834574132,
+    "value": 27.86643958398353,
     "ci": [
-      27.784125913711065,
-      27.918990175587606
+      27.714197222208654,
+      28.030264327701694
     ],
-    "n": 20,
+    "n": 5,
     "type": "mean_ci",
     "digits": 1,
     "meta": {
@@ -704,9 +704,9 @@
     }
   },
   "goal_directed_seeds": {
-    "value": 20.0,
+    "value": 10.0,
     "ci": null,
-    "n": 20,
+    "n": 10,
     "type": "scalar",
     "digits": 0,
     "meta": {
@@ -714,8 +714,8 @@
         "results/goal-directed/corridor_episodes.csv",
         "results/goal-directed/gridworld_episodes.csv"
       ],
-      "corridor_n_unique_seeds": 20,
-      "gridworld_n_unique_seeds": 20
+      "corridor_n_unique_seeds": 10,
+      "gridworld_n_unique_seeds": 10
     }
   },
   "goal_directed_horizons": {
@@ -844,12 +844,12 @@
     }
   },
   "goal_corridor_h5_hazards_recon": {
-    "value": 3.05,
+    "value": 2.9,
     "ci": [
-      2.0,
-      4.25
+      1.5,
+      4.2
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -857,12 +857,12 @@
     }
   },
   "goal_corridor_h5_hazards_humphrey": {
-    "value": 2.9,
+    "value": 2.6,
     "ci": [
-      1.9,
-      4.05
+      1.5,
+      3.8
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -875,7 +875,7 @@
       0.0,
       0.0
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -883,12 +883,12 @@
     }
   },
   "goal_corridor_h5_time_recon": {
-    "value": 50.0,
+    "value": 48.0,
     "ci": [
-      37.35,
-      63.2
+      30.6,
+      65.4
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -896,12 +896,12 @@
     }
   },
   "goal_corridor_h5_time_humphrey": {
-    "value": 50.0,
+    "value": 48.0,
     "ci": [
-      37.35,
-      63.2
+      30.6,
+      65.4
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -909,12 +909,12 @@
     }
   },
   "goal_corridor_h5_time_hb": {
-    "value": 63.15,
+    "value": 63.4,
     "ci": [
-      53.947500000000005,
-      71.45
+      49.7,
+      75.5
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -922,12 +922,12 @@
     }
   },
   "goal_corridor_h5_success_recon": {
-    "value": 0.55,
+    "value": 0.6,
     "ci": [
       0.3,
-      0.75
+      0.9
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -935,12 +935,12 @@
     }
   },
   "goal_corridor_h5_success_humphrey": {
-    "value": 0.55,
+    "value": 0.6,
     "ci": [
       0.3,
-      0.75
+      0.9
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -948,12 +948,12 @@
     }
   },
   "goal_corridor_h5_success_hb": {
-    "value": 0.45,
+    "value": 0.4,
     "ci": [
-      0.25,
-      0.65
+      0.1,
+      0.7
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -961,12 +961,12 @@
     }
   },
   "goal_gridworld_h5_hazards_recon": {
-    "value": 14.3,
+    "value": 13.1,
     "ci": [
-      8.9,
-      20.051249999999992
+      6.2,
+      20.8
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -974,12 +974,12 @@
     }
   },
   "goal_gridworld_h5_hazards_humphrey": {
-    "value": 3.3,
+    "value": 3.1,
     "ci": [
-      1.35,
-      5.701249999999994
+      0.4,
+      7.4
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -987,12 +987,12 @@
     }
   },
   "goal_gridworld_h5_hazards_hb": {
-    "value": 0.15,
+    "value": 0.1,
     "ci": [
       0.0,
       0.3
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1000,12 +1000,12 @@
     }
   },
   "goal_gridworld_h5_time_recon": {
-    "value": 171.8,
+    "value": 129.1,
     "ci": [
-      131.2975,
-      211.10125
+      70.99,
+      189.31249999999994
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1013,12 +1013,12 @@
     }
   },
   "goal_gridworld_h5_time_humphrey": {
-    "value": 135.9,
+    "value": 96.3,
     "ci": [
-      94.95,
-      176.10125
+      57.097500000000004,
+      143.50499999999997
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1026,12 +1026,12 @@
     }
   },
   "goal_gridworld_h5_time_hb": {
-    "value": 17.75,
+    "value": 30.7,
     "ci": [
-      4.34875,
-      43.50124999999999
+      4.7,
+      81.0
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1039,12 +1039,12 @@
     }
   },
   "goal_gridworld_h5_success_recon": {
-    "value": 0.5,
+    "value": 0.7,
     "ci": [
-      0.3,
-      0.7
+      0.4,
+      1.0
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1052,12 +1052,12 @@
     }
   },
   "goal_gridworld_h5_success_humphrey": {
-    "value": 0.7,
+    "value": 0.9,
     "ci": [
-      0.5,
-      0.9
+      0.7,
+      1.0
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1065,12 +1065,12 @@
     }
   },
   "goal_gridworld_h5_success_hb": {
-    "value": 0.95,
+    "value": 0.9,
     "ci": [
-      0.85,
+      0.7,
       1.0
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1078,12 +1078,12 @@
     }
   },
   "goal_corridor_all_hazards_recon": {
-    "value": 3.05,
+    "value": 2.9,
     "ci": [
-      2.0,
-      4.25
+      1.5,
+      4.2
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1091,12 +1091,12 @@
     }
   },
   "goal_corridor_all_hazards_humphrey": {
-    "value": 2.9,
+    "value": 2.6,
     "ci": [
-      1.9,
-      4.05
+      1.5,
+      3.8
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1109,7 +1109,7 @@
       0.0,
       0.0
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1117,12 +1117,12 @@
     }
   },
   "goal_corridor_all_time_recon": {
-    "value": 50.0,
+    "value": 48.0,
     "ci": [
-      37.35,
-      63.2
+      30.6,
+      65.4
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1130,12 +1130,12 @@
     }
   },
   "goal_corridor_all_time_humphrey": {
-    "value": 49.725,
+    "value": 47.45,
     "ci": [
-      37.124375,
-      62.826874999999994
+      30.05,
+      64.85
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1143,12 +1143,12 @@
     }
   },
   "goal_corridor_all_time_hb": {
-    "value": 52.709999999999994,
+    "value": 49.73,
     "ci": [
-      47.16493750000001,
-      58.39556250000001
+      42.103874999999995,
+      57.555125000000004
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1156,12 +1156,12 @@
     }
   },
   "goal_corridor_all_success_recon": {
-    "value": 0.55,
+    "value": 0.6,
     "ci": [
       0.3,
-      0.75
+      0.9
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1169,12 +1169,12 @@
     }
   },
   "goal_corridor_all_success_humphrey": {
-    "value": 0.5775,
+    "value": 0.655,
     "ci": [
-      0.35,
-      0.7775000000000001
+      0.355,
+      0.9
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1182,12 +1182,12 @@
     }
   },
   "goal_corridor_all_success_hb": {
-    "value": 0.7274999999999999,
+    "value": 0.7550000000000001,
     "ci": [
-      0.6099374999999999,
-      0.8324999999999999
+      0.585,
+      0.8949999999999999
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1195,12 +1195,12 @@
     }
   },
   "goal_gridworld_all_hazards_recon": {
-    "value": 14.3,
+    "value": 13.1,
     "ci": [
-      8.9,
-      20.051249999999992
+      6.2,
+      20.8
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1208,12 +1208,12 @@
     }
   },
   "goal_gridworld_all_hazards_humphrey": {
-    "value": 2.4549999999999996,
+    "value": 2.0100000000000002,
     "ci": [
-      1.2650000000000001,
-      3.8506874999999963
+      0.45,
+      3.980249999999999
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1221,12 +1221,12 @@
     }
   },
   "goal_gridworld_all_hazards_hb": {
-    "value": 0.255,
+    "value": 0.185,
     "ci": [
-      0.1025,
-      0.4374999999999999
+      0.05,
+      0.385
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1234,12 +1234,12 @@
     }
   },
   "goal_gridworld_all_time_recon": {
-    "value": 171.8,
+    "value": 129.1,
     "ci": [
-      131.2975,
-      211.10125
+      70.99,
+      189.31249999999994
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1247,12 +1247,12 @@
     }
   },
   "goal_gridworld_all_time_humphrey": {
-    "value": 129.76749999999998,
+    "value": 95.99,
     "ci": [
-      90.62887500000001,
-      168.69624999999996
+      59.92374999999999,
+      141.30100000000002
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1260,12 +1260,12 @@
     }
   },
   "goal_gridworld_all_time_hb": {
-    "value": 9.537500000000001,
+    "value": 12.55,
     "ci": [
-      4.7475000000000005,
-      16.227749999999997
+      4.719875,
+      25.125125
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1273,12 +1273,12 @@
     }
   },
   "goal_gridworld_all_success_recon": {
-    "value": 0.5,
+    "value": 0.7,
     "ci": [
-      0.3,
-      0.7
+      0.4,
+      1.0
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1286,12 +1286,12 @@
     }
   },
   "goal_gridworld_all_success_humphrey": {
-    "value": 0.7224999999999999,
+    "value": 0.885,
     "ci": [
-      0.5298125,
-      0.8951249999999994
+      0.6849999999999999,
+      1.0
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1299,12 +1299,12 @@
     }
   },
   "goal_gridworld_all_success_hb": {
-    "value": 0.99,
+    "value": 0.985,
     "ci": [
-      0.9724999999999999,
+      0.9549999999999998,
       1.0
     ],
-    "n": 20,
+    "n": 10,
     "type": "mean_ci",
     "digits": 2,
     "meta": {
@@ -1312,9 +1312,9 @@
     }
   },
   "headline_seeds": {
-    "value": 20.0,
+    "value": 5.0,
     "ci": null,
-    "n": 20,
+    "n": 5,
     "type": "scalar",
     "digits": 0,
     "meta": {
@@ -1322,7 +1322,7 @@
     }
   },
   "pain_post_steps": {
-    "value": 200.0,
+    "value": 50.0,
     "ci": null,
     "n": null,
     "type": "scalar",

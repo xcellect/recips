@@ -1,0 +1,30 @@
+============================================================
+PAIN-TAIL ASSAY
+============================================================
+Running pain-tail: model=humphrey_barrett, seed=0
+Running pain-tail: model=humphrey_barrett, seed=1
+Running pain-tail: model=humphrey_barrett, seed=2
+Running pain-tail: model=humphrey_barrett, seed=3
+Running pain-tail: model=humphrey_barrett, seed=4
+Running pain-tail: model=humphrey_barrett_readout_only, seed=0
+Running pain-tail: model=humphrey_barrett_readout_only, seed=1
+Running pain-tail: model=humphrey_barrett_readout_only, seed=2
+Running pain-tail: model=humphrey_barrett_readout_only, seed=3
+Running pain-tail: model=humphrey_barrett_readout_only, seed=4
+Running pain-tail: model=humphrey_barrett_modulation_only, seed=0
+Running pain-tail: model=humphrey_barrett_modulation_only, seed=1
+Running pain-tail: model=humphrey_barrett_modulation_only, seed=2
+Running pain-tail: model=humphrey_barrett_modulation_only, seed=3
+Running pain-tail: model=humphrey_barrett_modulation_only, seed=4
+
+============================================================
+SUMMARY
+============================================================
+                           model  mean_tail_duration  std_tail_duration  mean_ns_peak  mean_ns_half_life  mean_ns_auc_above_baseline  std_ns_auc_above_baseline  mean_arousal_integral  mean_turn_rate_tail  mean_forward_rate_tail  n
+                Ipsundrum+affect                32.8          16.843396           1.0                0.0                    0.192389                   0.044169              10.015082                 0.85                    0.15  5
+Ipsundrum+affect_modulation_only                32.6          16.622274           1.0                0.0                    0.192389                   0.044169              10.015082                 0.88                    0.12  5
+   Ipsundrum+affect_readout_only                29.4          20.354361           1.0                0.0                    0.229061                   0.010990               8.442353                 0.70                    0.30  5
+                           Recon                 NaN                NaN           NaN                NaN                         NaN                        NaN                    NaN                  NaN                     NaN  0
+                       Ipsundrum                 NaN                NaN           NaN                NaN                         NaN                        NaN                    NaN                  NaN                     NaN  0
+
+Plot saved: results/ablations/pain-tail/results.png

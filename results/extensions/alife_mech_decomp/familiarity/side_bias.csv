@@ -1,4 +1,0 @@
-model,scenic_rate_left,scenic_rate_right,n_left,n_right
-Ipsundrum+affect,0.7894736842105263,1.0,19,25
-Ipsundrum+affect_readout_only,0.9545454545454546,0.96,22,25
-Ipsundrum+affect_modulation_only,0.9166666666666666,0.8,24,25
