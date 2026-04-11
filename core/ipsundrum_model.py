@@ -266,8 +266,13 @@ class Builder:
 
         net.set_sensor_value = set_sensor_value  # type: ignore[assignment]
 
-        def update_sensor(I_ext: float, rng: Optional[np.random.Generator] = None) -> None:
+        def update_sensor(
+            I_ext: float,
+            rng: Optional[np.random.Generator] = None,
+            obs_components: Optional[tuple[float, float, float, float]] = None,
+        ) -> None:
             _ = rng
+            _ = obs_components
             I_drive = float(I_ext)
             if not bool(self.affect.enabled):
                 # Stage-B / non-affect: negative I does not confer positive value.
@@ -465,8 +470,13 @@ class Builder:
             if "Na" in net.nodes:
                 net.set_sensor_value("Na", aro)
 
-        def update_sensor(I_ext: float, rng: Optional[np.random.Generator] = None) -> None:
+        def update_sensor(
+            I_ext: float,
+            rng: Optional[np.random.Generator] = None,
+            obs_components: Optional[tuple[float, float, float, float]] = None,
+        ) -> None:
             rg = rng or np.random.default_rng(0)
+            _ = obs_components
 
             # Single source of truth for ipsundrum dynamics
             next_state = ipsundrum_step(state, float(I_ext), params, aff, rng=rg)

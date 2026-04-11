@@ -61,13 +61,76 @@ Running pain-tail: model=humphrey_barrett, seed=16
 Running pain-tail: model=humphrey_barrett, seed=17
 Running pain-tail: model=humphrey_barrett, seed=18
 Running pain-tail: model=humphrey_barrett, seed=19
+Running pain-tail: model=perspective, seed=0
+Running pain-tail: model=perspective, seed=1
+Running pain-tail: model=perspective, seed=2
+Running pain-tail: model=perspective, seed=3
+Running pain-tail: model=perspective, seed=4
+Running pain-tail: model=perspective, seed=5
+Running pain-tail: model=perspective, seed=6
+Running pain-tail: model=perspective, seed=7
+Running pain-tail: model=perspective, seed=8
+Running pain-tail: model=perspective, seed=9
+Running pain-tail: model=perspective, seed=10
+Running pain-tail: model=perspective, seed=11
+Running pain-tail: model=perspective, seed=12
+Running pain-tail: model=perspective, seed=13
+Running pain-tail: model=perspective, seed=14
+Running pain-tail: model=perspective, seed=15
+Running pain-tail: model=perspective, seed=16
+Running pain-tail: model=perspective, seed=17
+Running pain-tail: model=perspective, seed=18
+Running pain-tail: model=perspective, seed=19
+Running pain-tail: model=perspective_plastic, seed=0
+Running pain-tail: model=perspective_plastic, seed=1
+Running pain-tail: model=perspective_plastic, seed=2
+Running pain-tail: model=perspective_plastic, seed=3
+Running pain-tail: model=perspective_plastic, seed=4
+Running pain-tail: model=perspective_plastic, seed=5
+Running pain-tail: model=perspective_plastic, seed=6
+Running pain-tail: model=perspective_plastic, seed=7
+Running pain-tail: model=perspective_plastic, seed=8
+Running pain-tail: model=perspective_plastic, seed=9
+Running pain-tail: model=perspective_plastic, seed=10
+Running pain-tail: model=perspective_plastic, seed=11
+Running pain-tail: model=perspective_plastic, seed=12
+Running pain-tail: model=perspective_plastic, seed=13
+Running pain-tail: model=perspective_plastic, seed=14
+Running pain-tail: model=perspective_plastic, seed=15
+Running pain-tail: model=perspective_plastic, seed=16
+Running pain-tail: model=perspective_plastic, seed=17
+Running pain-tail: model=perspective_plastic, seed=18
+Running pain-tail: model=perspective_plastic, seed=19
+Running pain-tail: model=gw_lite, seed=0
+Running pain-tail: model=gw_lite, seed=1
+Running pain-tail: model=gw_lite, seed=2
+Running pain-tail: model=gw_lite, seed=3
+Running pain-tail: model=gw_lite, seed=4
+Running pain-tail: model=gw_lite, seed=5
+Running pain-tail: model=gw_lite, seed=6
+Running pain-tail: model=gw_lite, seed=7
+Running pain-tail: model=gw_lite, seed=8
+Running pain-tail: model=gw_lite, seed=9
+Running pain-tail: model=gw_lite, seed=10
+Running pain-tail: model=gw_lite, seed=11
+Running pain-tail: model=gw_lite, seed=12
+Running pain-tail: model=gw_lite, seed=13
+Running pain-tail: model=gw_lite, seed=14
+Running pain-tail: model=gw_lite, seed=15
+Running pain-tail: model=gw_lite, seed=16
+Running pain-tail: model=gw_lite, seed=17
+Running pain-tail: model=gw_lite, seed=18
+Running pain-tail: model=gw_lite, seed=19
 
 ============================================================
 SUMMARY
 ============================================================
-           model  mean_tail_duration  std_tail_duration  mean_ns_peak  mean_ns_half_life  mean_ns_auc_above_baseline  std_ns_auc_above_baseline  mean_arousal_integral  mean_turn_rate_tail  mean_forward_rate_tail  n
-           Recon                5.00           0.000000           1.0                0.0                    0.000000                   0.000000               0.000000               0.0000                  1.0000 20
-       Ipsundrum                5.05           0.223607           1.0                0.0                    0.244383                   0.001313               0.000000               0.0275                  0.9725 20
-Ipsundrum+affect               89.85          92.618786           1.0                0.0                    0.154374                   0.056646              26.238601               0.7025                  0.2975 20
+              model  mean_tail_duration  std_tail_duration  mean_ns_peak  mean_ns_half_life  mean_ns_auc_above_baseline  std_ns_auc_above_baseline  mean_arousal_integral  mean_turn_rate_tail  mean_forward_rate_tail  n
+              Recon                5.00           0.000000      1.000000               0.00                    0.000000                   0.000000               0.000000               0.0000                  1.0000 20
+          Ipsundrum                5.05           0.223607      1.000000               0.00                    0.244383                   0.001313               0.000000               0.0275                  0.9725 20
+   Ipsundrum+affect               29.85          18.675272      1.000000               0.00                    0.154374                   0.056646              10.131428               0.7025                  0.2975 20
+        Perspective               17.05          18.616560      0.615085               0.00                    0.008600                   0.001006               6.679738               0.3275                  0.6725 20
+Perspective+plastic               17.25          18.792146      0.615085               0.00                    0.070508                   0.014576               6.724948               0.3275                  0.6725 20
+            GW-lite               16.45          18.832992      0.531713               5.25                    0.122547                   0.057131               6.407415               0.2975                  0.7025 20
 
 Plot saved: results/pain-tail/results.png

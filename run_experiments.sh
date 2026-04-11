@@ -11,18 +11,21 @@ fi
 SEEDS_HEADLINE=5
 GOAL_DIRECTED_SEEDS=10
 QUALIAPHILIA_SEEDS=5
+ASSAY_ARCH_SEEDS=4
+ASSAY_ENV_SEEDS=4
 PAIN_TAIL_SEEDS="${PAIN_TAIL_SEEDS:-20}"
 PAIN_POST_STEPS=50
 if [[ "${PROFILE}" == "paper" ]]; then
   SEEDS_HEADLINE=20
   GOAL_DIRECTED_SEEDS=20
   QUALIAPHILIA_SEEDS=20
+  ASSAY_ENV_SEEDS=12
   PAIN_POST_STEPS=200
 fi
 EXPLORATORY_STEPS=200
 FAMILIARITY_POST_REPEATS=5
 LESION_POST_WINDOW=150
-export PROFILE SEEDS_HEADLINE GOAL_DIRECTED_SEEDS QUALIAPHILIA_SEEDS PAIN_TAIL_SEEDS PAIN_POST_STEPS EXPLORATORY_STEPS FAMILIARITY_POST_REPEATS LESION_POST_WINDOW
+export PROFILE SEEDS_HEADLINE GOAL_DIRECTED_SEEDS QUALIAPHILIA_SEEDS ASSAY_ARCH_SEEDS ASSAY_ENV_SEEDS PAIN_TAIL_SEEDS PAIN_POST_STEPS EXPLORATORY_STEPS FAMILIARITY_POST_REPEATS LESION_POST_WINDOW
 
 echo "======================================================================"
 echo "COMPLETE EVALUATION SUITE"
@@ -49,15 +52,28 @@ echo ""
 # Clean and create directory structure
 echo "Setting up directory structure..."
 rm -rf results logs
-mkdir -p results/{exploratory-play,familiarity,lesion,pain-tail,qualiaphilia,goal-directed,publication-figures,publication-figures/debug,ablations,paper}
+mkdir -p results/{exploratory-play,familiarity,lesion,pain-tail,qualiaphilia,goal-directed,hysteresis-probe,context-fork,multimodal-conflict,publication-figures,publication-figures/debug,ablations,paper}
 mkdir -p logs
+
+# New assay suite
+echo ""
+echo "======================================================================"
+echo "NEW ASSAYS: Hysteresis / Context Fork / Multimodal Conflict"
+echo "======================================================================"
+python3 -m experiments.hysteresis_probe_assay --arch-seeds "${ASSAY_ARCH_SEEDS}" --env-seeds "${ASSAY_ENV_SEEDS}" --outdir results/hysteresis-probe 2>&1 | tee logs/hysteresis.log
+python3 -m experiments.context_fork_assay --arch-seeds "${ASSAY_ARCH_SEEDS}" --env-seeds "${ASSAY_ENV_SEEDS}" --outdir results/context-fork 2>&1 | tee logs/context_fork.log
+python3 -m experiments.multimodal_conflict_assay --arch-seeds "${ASSAY_ARCH_SEEDS}" --env-seeds "${ASSAY_ENV_SEEDS}" --outdir results/multimodal-conflict 2>&1 | tee logs/multimodal_conflict.log
+python3 -m experiments.latent_viz results/hysteresis-probe/trace.csv --outdir results/hysteresis-probe --tag hysteresis 2>&1 | tee logs/hysteresis_latent_viz.log
+python3 -m experiments.latent_viz results/context-fork/trace.csv --outdir results/context-fork --tag context_fork 2>&1 | tee logs/context_fork_latent_viz.log
+python3 -m experiments.latent_viz results/multimodal-conflict/trace.csv --outdir results/multimodal-conflict --tag multimodal_conflict 2>&1 | tee logs/multimodal_conflict_latent_viz.log
+echo "✓ Completed new assays. Logs: logs/hysteresis.log, logs/context_fork.log, logs/multimodal_conflict.log"
 
 # Test 1: Goal-Directed Performance
 echo ""
 echo "======================================================================"
 echo "TEST 1/8: Goal-Directed Performance (Corridor + Gridworld)"
 echo "======================================================================"
-python3 -m experiments.goal_directed_sweeps --seeds "${GOAL_DIRECTED_SEEDS}" --horizons "$(seq -s, 1 20)" --outdir results/goal-directed 2>&1 | tee logs/goal_directed.log
+python3 -m experiments.goal_directed_sweeps --models recon,humphrey,humphrey_barrett --seeds "${GOAL_DIRECTED_SEEDS}" --horizons "$(seq -s, 1 20)" --outdir results/goal-directed 2>&1 | tee logs/goal_directed.log
 echo "✓ Completed. Log: logs/goal_directed.log"
 
 # Test 2: Pain-Tail (Baseline)
@@ -226,6 +242,14 @@ echo ""
 echo "Goal-Directed Performance:"
 echo "  - results/goal-directed/corridor_*.csv, gridworld_*.csv"
 echo ""
+echo "New Assays:"
+echo "  - results/hysteresis-probe/episodes.csv, summary.csv, hysteresis_probe.png"
+echo "  - results/hysteresis-probe/trace.csv, hysteresis_trajectories.png"
+echo "  - results/context-fork/episodes.csv, summary.csv, context_fork.png"
+echo "  - results/context-fork/trace.csv, context_fork_trajectories.png"
+echo "  - results/multimodal-conflict/episodes.csv, summary.csv, multimodal_conflict.png"
+echo "  - results/multimodal-conflict/trace.csv, multimodal_conflict_selector_weights.png"
+echo ""
 echo "Advanced Consciousness Tests:"
 echo "  - results/exploratory-play/final_viewpoints.csv"
 echo "  - results/familiarity/episodes_improved.csv"
@@ -259,6 +283,12 @@ echo "  - results/ablations/exploratory-play/exploratory_play_clarified_ablation
 echo "  - results/ablations/exploratory-play/summary_ablation_${PROFILE}.csv"
 echo ""
 echo "Logs:"
+echo "  - logs/hysteresis.log"
+echo "  - logs/hysteresis_latent_viz.log"
+echo "  - logs/context_fork.log"
+echo "  - logs/context_fork_latent_viz.log"
+echo "  - logs/multimodal_conflict.log"
+echo "  - logs/multimodal_conflict_latent_viz.log"
 echo "  - logs/goal_directed.log"
 echo "  - logs/pain_tail.log (baseline)"
 echo "  - logs/qualiaphilia.log (baseline)"

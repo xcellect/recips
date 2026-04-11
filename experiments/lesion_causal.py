@@ -8,6 +8,26 @@ import experiments.corridor_exp as cw
 from experiments.evaluation_harness import EvalAgent, MODEL_ORDER, order_models
 from utils.model_naming import MODEL_DISPLAY_ORDER, canonical_model_display, canonical_model_id
 
+
+def _apply_model_specific_lesion(agent, model: str) -> None:
+    if not hasattr(agent.net, '_ipsundrum_state'):
+        return
+    st = agent.net._ipsundrum_state
+    model_id = canonical_model_id(model)
+    if model_id in ("recon", "humphrey", "humphrey_barrett"):
+        st["lesion_integrator"] = True
+        st["lesion_feedback"] = True
+    elif model_id == "perspective":
+        st["lesion_perspective"] = True
+        st["lesion_feedback"] = True
+    elif model_id == "perspective_plastic":
+        st["lesion_perspective"] = True
+        st["lesion_plasticity"] = True
+        st["lesion_feedback"] = True
+    elif model_id == "gw_lite":
+        st["lesion_selector"] = True
+        st["lesion_workspace"] = True
+
 @dataclass
 class LesionResult:
     model: str
@@ -55,8 +75,9 @@ def run_trial(model, seed, lesion=True, lesion_t=3, T=200, post_window=150):
     agent = EvalAgent(env, model=model, seed=seed, start=(1, env.goal_x), heading=2, eps=0.0)
     
     if hasattr(agent.net, '_update_ipsundrum_sensor'):
-        I, *_ = cw.compute_I_affect(env, agent.y, agent.x, agent.heading)
-        agent.net._update_ipsundrum_sensor(float(I), rng=agent.rng)
+        obs = cw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+        I, I_touch, I_smell, I_vision = obs
+        agent.net._update_ipsundrum_sensor(float(I), rng=agent.rng, obs_components=(I, I_touch, I_smell, I_vision))
         agent.net.step()
     
     ns_trace = []
@@ -74,13 +95,12 @@ def run_trial(model, seed, lesion=True, lesion_t=3, T=200, post_window=150):
         ns_trace.append(ns_val)
         
         if t == lesion_t and lesion:
-            if hasattr(agent.net, '_ipsundrum_state'):
-                agent.net._ipsundrum_state["lesion_integrator"] = True
-                agent.net._ipsundrum_state["lesion_feedback"] = True
+            _apply_model_specific_lesion(agent, model)
         
-        I, *_ = cw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+        obs = cw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+        I, I_touch, I_smell, I_vision = obs
         if hasattr(agent.net, '_update_ipsundrum_sensor'):
-            agent.net._update_ipsundrum_sensor(float(I), rng=agent.rng)
+            agent.net._update_ipsundrum_sensor(float(I), rng=agent.rng, obs_components=(I, I_touch, I_smell, I_vision))
         else:
             agent.net.set_sensor_value('Ns', float(np.clip(0.5 + 0.5*I, 0.0, 1.0)))
         agent.net.step()
@@ -181,7 +201,7 @@ if __name__ == "__main__":
     if args.models.strip():
         model_list = tuple(canonical_model_id(m) for m in args.models.split(",") if m.strip())
     else:
-        model_list = tuple(m for m in MODEL_ORDER if m in ["recon", "humphrey", "humphrey_barrett"])
+        model_list = tuple(MODEL_ORDER)
 
     run_lesion_causal(
         models=model_list,

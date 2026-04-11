@@ -8,10 +8,17 @@ from core.driver.active_perception import (
     PolicyContext,
     score_internal as score_internal,
 )
+from core.driver.perspective_forward import predict_one_step_perspective as _predict_one_step_perspective
+from core.driver.workspace_forward import predict_one_step_workspace as _predict_one_step_workspace
 from core.driver.env_adapters import gridworld_adapter
 from core.driver.ipsundrum_forward import predict_one_step as _predict_one_step
 from core.driver.recon_forward import predict_one_step_recon as _predict_one_step_recon
 from core.driver.sensory import compute_I_affect as _compute_I_affect
+from core.driver.perspective_dynamics import perspective_step
+from core.driver.workspace_dynamics import workspace_step
+from core.model_factory import build_attached_stage_d_network
+from core.perspective_model import initial_perspective_state, make_perspective_params, perspective_builder
+from core.workspace_model import initial_workspace_state, make_workspace_params, workspace_builder
 from typing import Optional
 from utils.model_naming import canonical_model_id
 
@@ -41,8 +48,13 @@ def select_forward_model(*, model=None, agent=None):
     name = model
     if name is None and agent is not None:
         name = getattr(agent, "mode", None) or getattr(agent, "model", None)
-    if canonical_model_id(str(name)) == "recon":
+    model_id = canonical_model_id(str(name))
+    if model_id == "recon":
         return _predict_one_step_recon
+    if model_id in ("perspective", "perspective_plastic"):
+        return _predict_one_step_perspective
+    if model_id == "gw_lite":
+        return _predict_one_step_workspace
     return _predict_one_step
 
 
@@ -158,6 +170,8 @@ class Agent:
         )
 
 
+        mode = canonical_model_id(mode)
+
         if mode == "recon":
             b = Builder(params=loop, affect=AffectParams(enabled=False))
             net, _ = b.stage_B()
@@ -181,6 +195,39 @@ class Agent:
             )
             b = Builder(params=loop, affect=aff)
             net, _ = b.stage_D(efference_threshold=0.05)
+        elif mode == "perspective":
+            aff = AffectParams(
+                enabled=True, valence_scale=3.0,
+                k_homeo=0.10, k_pe=0.50,
+                demand_motor=0.20, demand_stim=0.30,
+                modulate_g=True, k_g_arousal=0.8, k_g_unpleasant=0.8,
+                modulate_precision=True, precision_base=1.0, k_precision_arousal=0.5,
+            )
+            params = make_perspective_params(arch_seed=seed)
+            b = perspective_builder(params, aff, plastic=False)
+            net = build_attached_stage_d_network(params=params, affect=aff, initial_state=initial_perspective_state(params, plastic=False), step_fn=perspective_step, efference_threshold=0.05)
+        elif mode == "perspective_plastic":
+            aff = AffectParams(
+                enabled=True, valence_scale=3.0,
+                k_homeo=0.10, k_pe=0.50,
+                demand_motor=0.20, demand_stim=0.30,
+                modulate_g=True, k_g_arousal=0.8, k_g_unpleasant=0.8,
+                modulate_precision=True, precision_base=1.0, k_precision_arousal=0.5,
+            )
+            params = make_perspective_params(arch_seed=seed)
+            b = perspective_builder(params, aff, plastic=True)
+            net = build_attached_stage_d_network(params=params, affect=aff, initial_state=initial_perspective_state(params, plastic=True), step_fn=perspective_step, efference_threshold=0.05)
+        elif mode == "gw_lite":
+            aff = AffectParams(
+                enabled=True, valence_scale=3.0,
+                k_homeo=0.10, k_pe=0.50,
+                demand_motor=0.20, demand_stim=0.30,
+                modulate_g=True, k_g_arousal=0.8, k_g_unpleasant=0.8,
+                modulate_precision=True, precision_base=1.0, k_precision_arousal=0.5,
+            )
+            params = make_workspace_params(arch_seed=seed)
+            b = workspace_builder(params, aff)
+            net = build_attached_stage_d_network(params=params, affect=aff, initial_state=initial_workspace_state(params), step_fn=workspace_step, efference_threshold=0.05)
         else:
             raise ValueError(mode)
 
@@ -215,7 +262,7 @@ class Agent:
 
         # --- update physiology ---
         if hasattr(self.net, "_update_ipsundrum_sensor"):
-            self.net._update_ipsundrum_sensor(I_total, rng=self.rng)  # type: ignore[attr-defined]
+            self.net._update_ipsundrum_sensor(I_total, rng=self.rng, obs_components=(I_total, I_touch, I_smell, I_vision))  # type: ignore[attr-defined]
         else:
             # stage_B baseline: map signed to [0,1]
             self.net.set_sensor_value("Ns", float(np.clip(0.5 + 0.5*I_total, 0.0, 1.0)))

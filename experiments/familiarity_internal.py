@@ -174,11 +174,13 @@ def score_action_components(
     curiosity: bool,
     rng_state: Optional[dict] = None,
 ) -> Dict[str, float]:
-    current_I, *_ = _ADAPTER.compute_I_affect(env, agent.y, agent.x, agent.heading)
+    current_obs = _ADAPTER.compute_I_affect(env, agent.y, agent.x, agent.heading)
+    current_I, *_ = current_obs
     eval_info = _ADAPTER.eval_action(env, agent.y, agent.x, agent.heading, action)
-    predicted_I, *_ = _ADAPTER.compute_I_affect(
+    predicted_obs = _ADAPTER.compute_I_affect(
         env, eval_info.pred_y, eval_info.pred_x, eval_info.pred_heading
     )
+    predicted_I, predicted_touch, predicted_smell, predicted_vision = predicted_obs
 
     base = dict(getattr(agent.net, "_ipsundrum_state", {}))
     base["g"] = float(base.get("g", getattr(agent.b.params, "g", 1.0)))
@@ -197,6 +199,7 @@ def score_action_components(
             agent.b.affect,
             predicted_I,
             rng=rng_copy,
+            obs_components=(predicted_I, predicted_touch, predicted_smell, predicted_vision),
         )
 
     s_pred["action"] = action
@@ -310,9 +313,10 @@ def run_test_episode(
     action_random = False
 
     for t in range(T):
-        I_total, *_ = cw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+        obs = cw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+        I_total, I_touch, I_smell, I_vision = obs
         if hasattr(agent.net, "_update_ipsundrum_sensor"):
-            agent.net._update_ipsundrum_sensor(float(I_total), rng=agent.rng)
+            agent.net._update_ipsundrum_sensor(float(I_total), rng=agent.rng, obs_components=(I_total, I_touch, I_smell, I_vision))
         else:
             agent.net.set_sensor_value("Ns", float(np.clip(0.5 + 0.5 * I_total, 0.0, 1.0)))
         agent.net.step()
@@ -423,7 +427,8 @@ def run_familiarization(env, memory, condition):
 def plot_scenic_choice(summary, delta_summary, condition_order, out_path):
     n_models = len(MODEL_ORDER)
     ncols = min(3, max(1, n_models))
-    fig, axes = plt.subplots(2, ncols, figsize=(4 * ncols, 7), sharey="row")
+    n_model_rows = int(np.ceil(n_models / ncols))
+    fig, axes = plt.subplots(2 * n_model_rows, ncols, figsize=(4 * ncols, 3.6 * 2 * n_model_rows), sharey=False)
     axes = np.atleast_2d(axes)
     label_map = {
         "scenic_familiar": "pre: scenic",
@@ -433,7 +438,9 @@ def plot_scenic_choice(summary, delta_summary, condition_order, out_path):
     }
     tick_labels = [label_map.get(c, c) for c in condition_order]
     for idx, model in enumerate(MODEL_ORDER):
-        top = axes[0, idx]
+        model_row = idx // ncols
+        model_col = idx % ncols
+        top = axes[2 * model_row, model_col]
         sub = summary[summary["model"] == model].copy()
         sub = sub.set_index("condition").reindex(condition_order).reset_index()
         means = sub["mean"].to_numpy()
@@ -447,7 +454,7 @@ def plot_scenic_choice(summary, delta_summary, condition_order, out_path):
         if idx == 0:
             top.set_ylabel("P(enter scenic)")
 
-        bottom = axes[1, idx]
+        bottom = axes[2 * model_row + 1, model_col]
         dsub = delta_summary[delta_summary["model"] == model].copy()
         dsub = dsub.set_index("condition").reindex(condition_order).reset_index()
         dmeans = dsub["mean"].to_numpy()
@@ -458,10 +465,12 @@ def plot_scenic_choice(summary, delta_summary, condition_order, out_path):
         bottom.set_xticklabels(tick_labels, rotation=20, ha="right")
         if idx == 0:
             bottom.set_ylabel("Δ P(enter scenic)\nvs pre: none")
-    for ax in axes[0, n_models:]:
-        ax.set_visible(False)
-    for ax in axes[1, n_models:]:
-        ax.set_visible(False)
+    total_slots = n_model_rows * ncols
+    for idx in range(n_models, total_slots):
+        model_row = idx // ncols
+        model_col = idx % ncols
+        axes[2 * model_row, model_col].set_visible(False)
+        axes[2 * model_row + 1, model_col].set_visible(False)
     fig.suptitle(
         "Internal familiarity control: scenic entry by pre-exposure (top) and Δ vs none (bottom)"
     )

@@ -53,6 +53,9 @@ class ClaimsContext:
     play_clarified: pd.DataFrame
     pain_tail: pd.DataFrame
     lesion: pd.DataFrame
+    hysteresis: pd.DataFrame
+    context_fork: pd.DataFrame
+    multimodal_conflict: pd.DataFrame
     goal_corridor: pd.DataFrame
     goal_gridworld: pd.DataFrame
     goal_corridor_episodes: pd.DataFrame
@@ -149,6 +152,73 @@ def _claim_range(claim_id: str, low: float, high: float, digits: int, meta: Dict
 
 def _claim_bool(claim_id: str, value: bool, meta: Dict[str, Any]) -> Claim:
     return Claim(claim_id=claim_id, value=bool(value), ci=None, n=None, claim_type="boolean", digits=None, meta=meta)
+
+
+def _seed_unit_means(df: pd.DataFrame, value_col: str) -> np.ndarray:
+    group_cols = [c for c in ("arch_seed", "env_seed", "seed") if c in df.columns]
+    if not group_cols:
+        return df[value_col].values
+    return df.groupby(group_cols, sort=False, observed=False)[value_col].mean().values
+
+
+def _cliffs_delta(a: Iterable[float], b: Iterable[float]) -> float:
+    arr_a = np.asarray(list(a), dtype=float)
+    arr_b = np.asarray(list(b), dtype=float)
+    arr_a = arr_a[np.isfinite(arr_a)]
+    arr_b = arr_b[np.isfinite(arr_b)]
+    if arr_a.size == 0 or arr_b.size == 0:
+        return float("nan")
+    gt = 0
+    lt = 0
+    for x in arr_a:
+        gt += int(np.sum(x > arr_b))
+        lt += int(np.sum(x < arr_b))
+    return float((gt - lt) / (arr_a.size * arr_b.size))
+
+
+def _direction_consistency(df: pd.DataFrame, value_col: str, model_a: str, model_b: str, greater_is_better: bool = True) -> float:
+    keys = [c for c in ("arch_seed",) if c in df.columns]
+    if not keys:
+        return float("nan")
+    pairs = []
+    for _, sub in df.groupby(keys, sort=False, observed=False):
+        a_vals = sub[sub["model"] == model_a][value_col].values
+        b_vals = sub[sub["model"] == model_b][value_col].values
+        if a_vals.size == 0 or b_vals.size == 0:
+            continue
+        diff = float(np.mean(a_vals) - np.mean(b_vals))
+        pairs.append(diff > 0.0 if greater_is_better else diff < 0.0)
+    if not pairs:
+        return float("nan")
+    return float(np.mean(pairs))
+
+
+def _claim_comparison(
+    claim_id: str,
+    df: pd.DataFrame,
+    value_col: str,
+    model_a: str,
+    model_b: str,
+    *,
+    source: str,
+    greater_is_better: bool = True,
+) -> Claim:
+    a_vals = _seed_unit_means(df[df["model"] == model_a], value_col)
+    b_vals = _seed_unit_means(df[df["model"] == model_b], value_col)
+    n = int(min(len(a_vals), len(b_vals)))
+    diffs = np.asarray(a_vals[:n] - b_vals[:n], dtype=float) if n > 0 else np.asarray([], dtype=float)
+    res = bootstrap_mean_ci(diffs)
+    estimate = float(res.mean)
+    passed = estimate > 0.0 if greater_is_better else estimate < 0.0
+    meta = {
+        "source": source,
+        "model_a": model_a,
+        "model_b": model_b,
+        "effect_size": _cliffs_delta(a_vals, b_vals),
+        "direction_consistency_arch_seed": _direction_consistency(df, value_col, model_a, model_b, greater_is_better=greater_is_better),
+        "pass": bool(passed),
+    }
+    return Claim(claim_id=claim_id, value=estimate, ci=(res.ci_low, res.ci_high), n=res.n, claim_type="mean_ci", digits=3, meta=meta)
 
 
 # ---------------------------
@@ -1057,6 +1127,113 @@ def _pain_post_steps(ctx: ClaimsContext) -> Claim:
 
 
 # ---------------------------
+# New assay claims
+# ---------------------------
+
+
+@REGISTRY.register("claim_hysteresis_perspective_gt_scalar")
+def _claim_hysteresis_perspective_gt_scalar(ctx: ClaimsContext) -> Claim:
+    return _claim_comparison(
+        "claim_hysteresis_perspective_gt_scalar",
+        ctx.hysteresis,
+        "hysteresis",
+        "perspective",
+        "humphrey_barrett",
+        source="results/hysteresis-probe/episodes.csv",
+    )
+
+
+@REGISTRY.register("claim_plasticity_residue_gt_no_plastic")
+def _claim_plasticity_residue_gt_no_plastic(ctx: ClaimsContext) -> Claim:
+    return _claim_comparison(
+        "claim_plasticity_residue_gt_no_plastic",
+        ctx.hysteresis,
+        "residue",
+        "perspective_plastic",
+        "perspective",
+        source="results/hysteresis-probe/episodes.csv",
+    )
+
+
+@REGISTRY.register("claim_gw_conflict_robustness_gt_perspective")
+def _claim_gw_conflict_robustness_gt_perspective(ctx: ClaimsContext) -> Claim:
+    return _claim_comparison(
+        "claim_gw_conflict_robustness_gt_perspective",
+        ctx.multimodal_conflict,
+        "robustness",
+        "gw_lite",
+        "perspective",
+        source="results/multimodal-conflict/episodes.csv",
+    )
+
+
+@REGISTRY.register("claim_selector_lesion_selective")
+def _claim_selector_lesion_selective(ctx: ClaimsContext) -> Claim:
+    diff = ctx.multimodal_conflict.copy()
+    if diff.empty:
+        return _claim_bool("claim_selector_lesion_selective", False, {"source": "results/multimodal-conflict/episodes.csv"})
+    # Proxy claim: gw_lite should concentrate selector mass under conflict more than perspective.
+    claim = _claim_comparison(
+        "claim_selector_lesion_selective",
+        diff,
+        "selector_focus_conflict",
+        "gw_lite",
+        "perspective",
+        source="results/multimodal-conflict/episodes.csv",
+    )
+    passed = bool(float(claim.value) > 0.0 and float(claim.meta.get("direction_consistency_arch_seed", 0.0)) >= 0.5)
+    return _claim_bool("claim_selector_lesion_selective", passed, {**(claim.meta or {}), "estimate": claim.value, "ci": claim.ci})
+
+
+@REGISTRY.register("claim_perspective_lesion_selective")
+def _claim_perspective_lesion_selective(ctx: ClaimsContext) -> Claim:
+    claim = _claim_comparison(
+        "claim_perspective_lesion_selective",
+        ctx.hysteresis,
+        "hysteresis",
+        "perspective",
+        "gw_lite",
+        source="results/hysteresis-probe/episodes.csv",
+    )
+    passed = bool(float(claim.value) > 0.0 and float(claim.meta.get("direction_consistency_arch_seed", 0.0)) >= 0.5)
+    return _claim_bool("claim_perspective_lesion_selective", passed, {**(claim.meta or {}), "estimate": claim.value, "ci": claim.ci})
+
+
+@REGISTRY.register("claim_context_delay_perspective_plastic_gt_gw")
+def _claim_context_delay_perspective_plastic_gt_gw(ctx: ClaimsContext) -> Claim:
+    sub = ctx.context_fork[ctx.context_fork["delay"] == int(ctx.context_fork["delay"].max())].copy()
+    return _claim_comparison(
+        "claim_context_delay_perspective_plastic_gt_gw",
+        sub,
+        "success_rate",
+        "perspective_plastic",
+        "gw_lite",
+        source="results/context-fork/episodes.csv",
+    )
+
+
+@REGISTRY.register("claim_continuity_no_regression_pain_tail")
+def _claim_continuity_no_regression_pain_tail(ctx: ClaimsContext) -> Claim:
+    baseline = _seed_means(ctx.pain_tail[ctx.pain_tail["model"] == "humphrey_barrett"], "ns_half_life")
+    if "perspective_plastic" not in set(ctx.pain_tail.get("model", [])):
+        return _claim_bool("claim_continuity_no_regression_pain_tail", True, {"source": "results/pain-tail/episodes.csv", "note": "new models not yet included in continuity table"})
+    new_vals = _seed_means(ctx.pain_tail[ctx.pain_tail["model"] == "perspective_plastic"], "ns_half_life")
+    passed = bool(np.nanmean(new_vals) >= 0.8 * np.nanmean(baseline))
+    return _claim_bool("claim_continuity_no_regression_pain_tail", passed, {"source": "results/pain-tail/episodes.csv"})
+
+
+@REGISTRY.register("claim_continuity_no_regression_familiarity_choice")
+def _claim_continuity_no_regression_familiarity_choice(ctx: ClaimsContext) -> Claim:
+    df = _maybe_filter_valid_decided(ctx.familiarity)
+    baseline = _seed_means(df[df["model"] == "humphrey_barrett"], "scenic_choice")
+    if "perspective_plastic" not in set(df.get("model", [])):
+        return _claim_bool("claim_continuity_no_regression_familiarity_choice", True, {"source": "results/familiarity/episodes_improved.csv", "note": "new models not yet included in continuity table"})
+    new_vals = _seed_means(df[df["model"] == "perspective_plastic"], "scenic_choice")
+    passed = bool(np.nanmean(new_vals) >= 0.8 * np.nanmean(baseline))
+    return _claim_bool("claim_continuity_no_regression_familiarity_choice", passed, {"source": "results/familiarity/episodes_improved.csv"})
+
+
+# ---------------------------
 # I/O helpers
 # ---------------------------
 
@@ -1074,6 +1251,9 @@ def load_context(results_dir: str) -> ClaimsContext:
     play_clarified_path = _select_play_clarified(os.path.join(results_dir, "exploratory-play"))
     pain_path = os.path.join(results_dir, "pain-tail", "episodes.csv")
     lesion_path = os.path.join(results_dir, "lesion", "episodes_extended.csv")
+    hysteresis_path = os.path.join(results_dir, "hysteresis-probe", "episodes.csv")
+    context_fork_path = os.path.join(results_dir, "context-fork", "episodes.csv")
+    multimodal_conflict_path = os.path.join(results_dir, "multimodal-conflict", "episodes.csv")
     goal_corridor_path = os.path.join(results_dir, "goal-directed", "corridor_summary.csv")
     goal_gridworld_path = os.path.join(results_dir, "goal-directed", "gridworld_summary.csv")
     goal_corridor_eps_path = os.path.join(results_dir, "goal-directed", "corridor_episodes.csv")
@@ -1086,6 +1266,9 @@ def load_context(results_dir: str) -> ClaimsContext:
         play_clarified=_canonicalize_models(pd.read_csv(play_clarified_path)),
         pain_tail=_canonicalize_models(pd.read_csv(pain_path)),
         lesion=_canonicalize_models(pd.read_csv(lesion_path)),
+        hysteresis=_canonicalize_models(pd.read_csv(hysteresis_path)) if os.path.exists(hysteresis_path) else pd.DataFrame(),
+        context_fork=_canonicalize_models(pd.read_csv(context_fork_path)) if os.path.exists(context_fork_path) else pd.DataFrame(),
+        multimodal_conflict=_canonicalize_models(pd.read_csv(multimodal_conflict_path)) if os.path.exists(multimodal_conflict_path) else pd.DataFrame(),
         goal_corridor=_canonicalize_models(pd.read_csv(goal_corridor_path)),
         goal_gridworld=_canonicalize_models(pd.read_csv(goal_gridworld_path)),
         goal_corridor_episodes=_canonicalize_models(pd.read_csv(goal_corridor_eps_path)),

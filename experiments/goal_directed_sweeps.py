@@ -6,16 +6,20 @@ import os
 import experiments.evaluation_harness as eh
 import pandas as pd
 import matplotlib.pyplot as plt
-from utils.model_naming import MODEL_DISPLAY_ORDER
+from utils.model_naming import MODEL_DISPLAY_ORDER, canonical_model_id
 
 
 def run_goal_directed_sweeps(
     seeds=tuple(range(10)),
     horizons=(1, 2, 3, 5, 10, 20),
     outdir: str = "results/goal-directed",
+    models=None,
 ):
     # Run both sweeps with reasonable parameters
-    models = list(eh.MODEL_ORDER)
+    if models is None:
+        models = list(eh.MODEL_ORDER)
+    else:
+        models = [canonical_model_id(m) for m in models]
     print("="*60)
     print("RUNNING GRIDWORLD SWEEP")
     print("="*60)
@@ -119,7 +123,9 @@ if __name__ == "__main__":
     parser.add_argument("--seeds", type=int, default=10, help="Number of seeds")
     parser.add_argument("--outdir", type=str, default="results/goal-directed", help="Output directory")
     parser.add_argument("--horizons", type=str, default="1,2,3,5,10,20", help="Comma-separated horizons")
+    parser.add_argument("--models", type=str, default="", help="Comma-separated model list (optional)")
     args = parser.parse_args()
 
     horizons = tuple(int(h.strip()) for h in args.horizons.split(",") if h.strip())
-    run_goal_directed_sweeps(seeds=tuple(range(args.seeds)), horizons=horizons, outdir=args.outdir)
+    model_list = [m.strip() for m in args.models.split(",") if m.strip()] if args.models.strip() else None
+    run_goal_directed_sweeps(seeds=tuple(range(args.seeds)), horizons=horizons, outdir=args.outdir, models=model_list)

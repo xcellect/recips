@@ -223,13 +223,14 @@ def run_qualiaphilia_trial(
     
     for t in range(T):
         # Sensory input
-        I_total, I_touch, *_ = cw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+        obs = cw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+        I_total, I_touch, I_smell, I_vision = obs
         if I_touch > 0.5:
             hazard_contacts += 1
         
         # Physiology update
         if hasattr(agent.net, '_update_ipsundrum_sensor'):
-            agent.net._update_ipsundrum_sensor(float(I_total), rng=agent.rng)
+            agent.net._update_ipsundrum_sensor(float(I_total), rng=agent.rng, obs_components=(I_total, I_touch, I_smell, I_vision))
         else:
             agent.net.set_sensor_value('Ns', float(np.clip(0.5 + 0.5*I_total, 0.0, 1.0)))
         

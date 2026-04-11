@@ -21,7 +21,7 @@ apply_times_style()
 import experiments.gridworld_exp as gw
 from experiments.evaluation_harness import EvalAgent, build_model_network, MODEL_ORDER, order_models
 from core.recon_core import ScriptState
-from utils.model_naming import MODEL_DISPLAY_ORDER, canonical_model_display
+from utils.model_naming import MODEL_DISPLAY_ORDER, canonical_model_display, canonical_model_id
 
 
 @dataclass
@@ -120,11 +120,12 @@ def run_pain_tail_trial(
     agent.y, agent.x = hazard_y, hazard_x
     
     # Compute sensory input and update physiology
-    I_hazard, I_touch, *_ = gw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+    hazard_obs = gw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+    I_hazard, I_touch, I_smell_hazard, I_vision_hazard = hazard_obs
     assert I_touch > 0.5, "Should be on hazard"
     
     if hasattr(agent.net, '_update_ipsundrum_sensor'):
-        agent.net._update_ipsundrum_sensor(float(I_hazard), rng=agent.rng)
+        agent.net._update_ipsundrum_sensor(float(I_hazard), rng=agent.rng, obs_components=(I_hazard, I_touch, I_smell_hazard, I_vision_hazard))
     else:
         agent.net.set_sensor_value('Ns', float(np.clip(0.5 + 0.5*I_hazard, 0.0, 1.0)))
     
@@ -143,12 +144,20 @@ def run_pain_tail_trial(
     # This approximates the equilibrium Ns for the "safe" context without carrying over the
     # hazard contact itself.
     agent.y, agent.x = safe_y, safe_x
-    I_safe_baseline, *_ = gw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+    safe_obs_baseline = gw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+    I_safe_baseline, I_touch_baseline, I_smell_baseline, I_vision_baseline = safe_obs_baseline
     forward_model = gw.select_forward_model(model=model)
     rg = np.random.default_rng(seed + 1337)
     s_base = copy.deepcopy(pre_state)
     for _ in range(20):
-        s_base = forward_model(s_base, agent.b.params, agent.b.affect, float(I_safe_baseline), rng=rg)
+        s_base = forward_model(
+            s_base,
+            agent.b.params,
+            agent.b.affect,
+            float(I_safe_baseline),
+            rng=rg,
+            obs_components=(I_safe_baseline, I_touch_baseline, I_smell_baseline, I_vision_baseline),
+        )
     ns_baseline = float(s_base.get("Ns", 0.5))
     
     # --- REMOVE STIMULUS: teleport back to safe cell ---
@@ -163,12 +172,13 @@ def run_pain_tail_trial(
     
     for t in range(post_stimulus_steps):
         # Sensory input (now safe, agent stationary)
-        I_safe, I_touch, *_ = gw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+        safe_obs = gw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+        I_safe, I_touch, I_smell, I_vision = safe_obs
         assert I_touch < 0.1, f"Should be safe at step {t}"
         
         # Physiology update
         if hasattr(agent.net, '_update_ipsundrum_sensor'):
-            agent.net._update_ipsundrum_sensor(float(I_safe), rng=agent.rng)
+            agent.net._update_ipsundrum_sensor(float(I_safe), rng=agent.rng, obs_components=(I_safe, I_touch, I_smell, I_vision))
         else:
             agent.net.set_sensor_value('Ns', float(np.clip(0.5 + 0.5*I_safe, 0.0, 1.0)))
         
@@ -339,14 +349,20 @@ if __name__ == "__main__":
     parser.add_argument("--seeds", type=int, default=10, help="Number of seeds")
     parser.add_argument("--post_steps", type=int, default=50, help="Post-stimulus steps")
     parser.add_argument("--outdir", type=str, default="results/pain-tail", help="Output directory")
+    parser.add_argument("--models", type=str, default="", help="Comma-separated model list (optional)")
     args = parser.parse_args()
 
     print("="*60)
     print("PAIN-TAIL ASSAY")
     print("="*60)
     
+    if args.models.strip():
+        model_list = tuple(canonical_model_id(m) for m in args.models.split(",") if m.strip())
+    else:
+        model_list = tuple(MODEL_ORDER)
+
     df, summary = run_pain_tail_sweep(
-        models=tuple(MODEL_ORDER),
+        models=model_list,
         seeds=tuple(range(args.seeds)),
         post_stimulus_steps=args.post_steps,
     )

@@ -1,10 +1,10 @@
-"""Build dissociation table (checkmarks/crosses) from claims."""
+"""Build dissociation table from assay-backed claims."""
 from __future__ import annotations
 
 import argparse
 import json
 import os
-from typing import Dict, Tuple
+from typing import Dict, List
 
 
 def _load_claims(path: str) -> Dict[str, dict]:
@@ -12,110 +12,64 @@ def _load_claims(path: str) -> Dict[str, dict]:
         return json.load(f)
 
 
-def _claim_mean_ci(claims: Dict[str, dict], key: str) -> Tuple[float, float, float]:
-    entry = claims[key]
-    mean = float(entry["value"])
-    ci = entry.get("ci") or [float("nan"), float("nan")]
-    return mean, float(ci[0]), float(ci[1])
+def _claim_bool(claims: Dict[str, dict], key: str) -> bool:
+    entry = claims.get(key, {})
+    return bool(entry.get("value", False))
 
 
-def _ci_excludes_zero(ci_low: float, ci_high: float) -> bool:
-    return ci_low > 0.0 or ci_high < 0.0
+def _claim_positive(claims: Dict[str, dict], key: str) -> bool:
+    entry = claims.get(key, {})
+    try:
+        return float(entry.get("value", 0.0)) > 0.0
+    except Exception:
+        return False
 
 
 def build_table(claims: Dict[str, dict]) -> Dict[str, Dict[str, bool]]:
-    # thresholds
-    delta_threshold = 0.05
-    scan_threshold = 1.0
-    tail_threshold = 5.0
-
-    models = ["recon", "humphrey", "humphrey_barrett"]
-
-    # persistence in Ns
-    recon_half, _, _ = _claim_mean_ci(claims, "pain_ns_half_life_recon")
-    persistence = {}
-    for model in models:
-        if model == "recon":
-            persistence[model] = False
-            continue
-        lesion_key = f"lesion_auc_drop_{'hb' if model == 'humphrey_barrett' else model}"
-        if lesion_key not in claims:
-            lesion_key = f"lesion_auc_drop_{model}"
-        mean, ci_low, ci_high = _claim_mean_ci(claims, lesion_key)
-        half_mean, _, _ = _claim_mean_ci(claims, f"pain_ns_half_life_{'hb' if model == 'humphrey_barrett' else model}")
-        persistence[model] = _ci_excludes_zero(ci_low, ci_high) or (half_mean - recon_half >= tail_threshold)
-
-    # valence-stable scenic preference
-    valence_stable = {}
-    for model in models:
-        key = f"fam_delta_scenic_entry_{'hb' if model == 'humphrey_barrett' else model}"
-        mean, ci_low, ci_high = _claim_mean_ci(claims, key)
-        valence_stable[model] = (abs(mean) <= delta_threshold) and (ci_low >= -delta_threshold) and (ci_high <= delta_threshold)
-
-    # structured scanning
-    scan_means = {}
-    scan_cis = {}
-    for model in models:
-        key = f"play_scan_events_{'hb' if model == 'humphrey_barrett' else model}"
-        mean, ci_low, ci_high = _claim_mean_ci(claims, key)
-        scan_means[model] = mean
-        scan_cis[model] = (ci_low, ci_high)
-    structured = {}
-    for model in models:
-        others = [m for m in models if m != model]
-        max_other_mean = max(scan_means[m] for m in others)
-        max_other_high = max(scan_cis[m][1] for m in others)
-        ci_low = scan_cis[model][0]
-        structured[model] = (scan_means[model] >= max_other_mean + scan_threshold) and (ci_low > max_other_high)
-
-    # lingering planned caution
-    tail_means = {}
-    tail_cis = {}
-    for model in models:
-        key = f"pain_tail_duration_{'hb' if model == 'humphrey_barrett' else model}"
-        mean, ci_low, ci_high = _claim_mean_ci(claims, key)
-        tail_means[model] = mean
-        tail_cis[model] = (ci_low, ci_high)
-    caution = {}
-    for model in models:
-        others = [m for m in models if m != model]
-        max_other_mean = max(tail_means[m] for m in others)
-        max_other_high = max(tail_cis[m][1] for m in others)
-        ci_low = tail_cis[model][0]
-        caution[model] = (tail_means[model] >= max_other_mean + tail_threshold) and (ci_low > max_other_high)
-
-    return {
-        "persistence": persistence,
-        "valence_stable": valence_stable,
-        "structured_scan": structured,
-        "lingering_caution": caution,
+    models = ["perspective", "perspective_plastic", "gw_lite", "humphrey_barrett", "humphrey", "recon"]
+    table = {
+        "hysteresis": {m: False for m in models},
+        "contextual_memory": {m: False for m in models},
+        "conflict_robustness": {m: False for m in models},
+        "plastic_residue": {m: False for m in models},
+        "selective_lesions": {m: False for m in models},
     }
+    table["hysteresis"]["perspective"] = _claim_positive(claims, "claim_hysteresis_perspective_gt_scalar")
+    table["hysteresis"]["perspective_plastic"] = _claim_positive(claims, "claim_hysteresis_perspective_gt_scalar")
+    table["contextual_memory"]["perspective"] = _claim_positive(claims, "claim_hysteresis_perspective_gt_scalar")
+    table["contextual_memory"]["perspective_plastic"] = _claim_positive(claims, "claim_context_delay_perspective_plastic_gt_gw")
+    table["conflict_robustness"]["gw_lite"] = _claim_positive(claims, "claim_gw_conflict_robustness_gt_perspective")
+    table["plastic_residue"]["perspective_plastic"] = _claim_positive(claims, "claim_plasticity_residue_gt_no_plastic")
+    table["selective_lesions"]["perspective"] = _claim_bool(claims, "claim_perspective_lesion_selective")
+    table["selective_lesions"]["gw_lite"] = _claim_bool(claims, "claim_selector_lesion_selective")
+    return table
 
 
 def render_table(table: Dict[str, Dict[str, bool]]) -> str:
-    models = ["recon", "humphrey", "humphrey_barrett"]
-    headers = ["Recon", "Ipsundrum", "Ipsundrum+affect"]
+    models: List[str] = ["perspective", "perspective_plastic", "gw_lite", "humphrey_barrett", "humphrey", "recon"]
+    headers = ["Perspective", "Perspective+plastic", "GW-lite", "Ipsundrum+affect", "Ipsundrum", "Recon"]
     row_labels = {
-        "persistence": "Persistence in $N^s$ (lesion / pain-tail half-life)",
-        "valence_stable": "Valence-stable scenic preference (familiarity-controlled)",
-        "structured_scan": "Structured local scanning (play scan events)",
-        "lingering_caution": "Lingering planned caution (pain-tail tail duration)",
+        "hysteresis": "Hysteresis under cue ramp",
+        "contextual_memory": "Delay-tolerant contextual fork memory",
+        "conflict_robustness": "Robustness under multimodal conflict",
+        "plastic_residue": "Plastic residue after return",
+        "selective_lesions": "Selective lesion signature",
     }
+
     def mark(val: bool) -> str:
         return "\\ensuremath{\\checkmark}" if val else "\\ensuremath{\\times}"
 
+    row_end = "\\\\"
     lines = [
-        "\\begin{tabular}{p{0.33\\linewidth}ccc}",
+        "\\begin{tabular}{p{0.32\\linewidth}cccccc}",
         "\\toprule",
-        f"Signature (assay) & {headers[0]} & {headers[1]} & {headers[2]} \\\\",
+        "Signature & " + " & ".join(headers) + " " + row_end,
         "\\midrule",
     ]
-    for key in ("persistence", "valence_stable", "structured_scan", "lingering_caution"):
+    for key in ("hysteresis", "contextual_memory", "conflict_robustness", "plastic_residue", "selective_lesions"):
         row = [row_labels[key]] + [mark(table[key][m]) for m in models]
-        lines.append("{} & {} & {} & {} \\\\")
-        lines[-1] = lines[-1].format(*row)
-    lines.append("\\bottomrule")
-    lines.append("\\end{tabular}")
+        lines.append("{} & {} & {} & {} & {} & {} & {} ".format(*row) + row_end)
+    lines.extend(["\\bottomrule", "\\end{tabular}"])
     return "\n".join(lines)
 
 

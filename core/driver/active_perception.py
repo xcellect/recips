@@ -229,9 +229,10 @@ def choose_action_feelings(
     ctx.rng.shuffle(action_order)
     for a in action_order:
         eval_info = adapter.eval_action(ctx.env, ctx.y, ctx.x, ctx.heading, a)
-        predicted_I, touch_pred, *_ = adapter.compute_I_affect(
+        pred_obs = adapter.compute_I_affect(
             ctx.env, eval_info.pred_y, eval_info.pred_x, eval_info.pred_heading
         )
+        predicted_I, touch_pred, *_ = pred_obs
         sensory_change = abs(predicted_I - current_I)
 
         s_pred = dict(base)
@@ -242,6 +243,7 @@ def choose_action_feelings(
                 aff,
                 predicted_I,
                 rng=ctx.rng,
+                obs_components=pred_obs,
             )
 
         s_pred["action"] = a

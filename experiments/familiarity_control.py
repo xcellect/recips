@@ -219,9 +219,10 @@ def run_choice_episode(
             choice_entry, decided_entry, env, agent.y, agent.x
         )
 
-        I_total, *_ = cw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+        obs = cw.compute_I_affect(env, agent.y, agent.x, agent.heading)
+        I_total, I_touch, I_smell, I_vision = obs
         if hasattr(agent.net, "_update_ipsundrum_sensor"):
-            agent.net._update_ipsundrum_sensor(float(I_total), rng=agent.rng)
+            agent.net._update_ipsundrum_sensor(float(I_total), rng=agent.rng, obs_components=(I_total, I_touch, I_smell, I_vision))
         else:
             agent.net.set_sensor_value("Ns", float(np.clip(0.5 + 0.5 * I_total, 0.0, 1.0)))
         agent.net.step()
@@ -245,19 +246,28 @@ def run_choice_episode(
                 eval_right = cw._CORRIDOR_ADAPTER.eval_action(
                     env, agent.y, agent.x, agent.heading, "turn_right"
                 )
-                I_left, *_ = cw.compute_I_affect(env, eval_left.pred_y, eval_left.pred_x, eval_left.pred_heading)
-                I_right, *_ = cw.compute_I_affect(env, eval_right.pred_y, eval_right.pred_x, eval_right.pred_heading)
+                left_obs = cw.compute_I_affect(env, eval_left.pred_y, eval_left.pred_x, eval_left.pred_heading)
+                right_obs = cw.compute_I_affect(env, eval_right.pred_y, eval_right.pred_x, eval_right.pred_heading)
+                I_left, I_left_touch, I_left_smell, I_left_vision = left_obs
+                I_right, I_right_touch, I_right_smell, I_right_vision = right_obs
 
-                def rollout(pred_I: float) -> dict:
+                def rollout(pred_I: float, pred_obs) -> dict:
                     rg = np.random.default_rng()
                     rg.bit_generator.state = copy.deepcopy(rng_state)
                     s_pred = dict(base_state)
                     for _ in range(probe_horizon):
-                        s_pred = forward_model(s_pred, agent.b.params, agent.b.affect, float(pred_I), rng=rg)
+                        s_pred = forward_model(
+                            s_pred,
+                            agent.b.params,
+                            agent.b.affect,
+                            float(pred_I),
+                            rng=rg,
+                            obs_components=pred_obs,
+                        )
                     return s_pred
 
-                s_left = rollout(float(I_left))
-                s_right = rollout(float(I_right))
+                s_left = rollout(float(I_left), (I_left, I_left_touch, I_left_smell, I_left_vision))
+                s_right = rollout(float(I_right), (I_right, I_right_touch, I_right_smell, I_right_vision))
 
                 val_left = float(s_left.get("valence", np.nan))
                 aro_left = float(s_left.get("arousal", np.nan))

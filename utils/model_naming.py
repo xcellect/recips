@@ -20,28 +20,43 @@ from typing import Iterable, List
 MODEL_ID_RECON = "recon"
 MODEL_ID_IPSUNDRUM = "humphrey"
 MODEL_ID_IPSUNDRUM_AFFECT = "humphrey_barrett"
+MODEL_ID_PERSPECTIVE = "perspective"
+MODEL_ID_PERSPECTIVE_PLASTIC = "perspective_plastic"
+MODEL_ID_GW_LITE = "gw_lite"
 
 MODEL_ID_ORDER: List[str] = [
     MODEL_ID_RECON,
     MODEL_ID_IPSUNDRUM,
     MODEL_ID_IPSUNDRUM_AFFECT,
+    MODEL_ID_PERSPECTIVE,
+    MODEL_ID_PERSPECTIVE_PLASTIC,
+    MODEL_ID_GW_LITE,
 ]
 
 # Standardized display names for all saved results (csv/plots/tables)
 MODEL_NAME_RECON = "Recon"
 MODEL_NAME_IPSUNDRUM = "Ipsundrum"
 MODEL_NAME_IPSUNDRUM_AFFECT = "Ipsundrum+affect"
+MODEL_NAME_PERSPECTIVE = "Perspective"
+MODEL_NAME_PERSPECTIVE_PLASTIC = "Perspective+plastic"
+MODEL_NAME_GW_LITE = "GW-lite"
 
 MODEL_DISPLAY_ORDER: List[str] = [
     MODEL_NAME_RECON,
     MODEL_NAME_IPSUNDRUM,
     MODEL_NAME_IPSUNDRUM_AFFECT,
+    MODEL_NAME_PERSPECTIVE,
+    MODEL_NAME_PERSPECTIVE_PLASTIC,
+    MODEL_NAME_GW_LITE,
 ]
 
 _DISPLAY_BY_ID = {
     MODEL_ID_RECON: MODEL_NAME_RECON,
     MODEL_ID_IPSUNDRUM: MODEL_NAME_IPSUNDRUM,
     MODEL_ID_IPSUNDRUM_AFFECT: MODEL_NAME_IPSUNDRUM_AFFECT,
+    MODEL_ID_PERSPECTIVE: MODEL_NAME_PERSPECTIVE,
+    MODEL_ID_PERSPECTIVE_PLASTIC: MODEL_NAME_PERSPECTIVE_PLASTIC,
+    MODEL_ID_GW_LITE: MODEL_NAME_GW_LITE,
 }
 
 
@@ -79,6 +94,15 @@ def canonical_model_id(name: str) -> str:
         "ipsundrum_plus_affect",
     ):
         return MODEL_ID_IPSUNDRUM_AFFECT
+
+    if key in ("perspective", "slow_perspective_latent"):
+        return MODEL_ID_PERSPECTIVE
+
+    if key in ("perspective_plastic", "perspectiveplastic", "perspective_plasticity"):
+        return MODEL_ID_PERSPECTIVE_PLASTIC
+
+    if key in ("gw_lite", "gwlite", "workspace", "workspace_lite"):
+        return MODEL_ID_GW_LITE
 
     # Support ablation variants expressed with the standardized prefix.
     if key.startswith("ipsundrum_affect_"):

@@ -41,6 +41,11 @@ import experiments.gridworld_exp as gw
 import experiments.corridor_exp as cw
 
 from core.ipsundrum_model import Builder, LoopParams, AffectParams
+from core.driver.perspective_dynamics import perspective_step
+from core.driver.workspace_dynamics import workspace_step
+from core.model_factory import build_attached_stage_d_network, flatten_latent_state
+from core.perspective_model import initial_perspective_state, make_perspective_params, perspective_builder
+from core.workspace_model import initial_workspace_state, make_workspace_params, workspace_builder
 from utils.model_naming import (
     MODEL_ID_ORDER,
     MODEL_DISPLAY_ORDER,
@@ -109,6 +114,8 @@ class EvalAgent:
     def read_state(self) -> Dict[str, float]:
         st = getattr(self.net, "_ipsundrum_state", {})
         out = dict(st) if isinstance(st, dict) else {}
+        if isinstance(st, dict):
+            out.update(flatten_latent_state(st))
         # visible sensors (if present)
         for k in ("Ns", "Ne", "Nv", "Na", "Ni"):
             if k in getattr(self.net, "nodes", {}):
@@ -155,7 +162,7 @@ def default_affect_params(enabled: bool) -> AffectParams:
         k_precision_arousal=0.5,
     )
 
-def build_model_network(model: str, efference_threshold: float = 0.05) -> Tuple[Builder, Any]:
+def build_model_network(model: str, efference_threshold: float = 0.05, arch_seed: int = 0) -> Tuple[Any, Any]:
     """
     Supported model strings:
       - "recon"              : Stage B (no ipsundrum loop)
@@ -205,6 +212,42 @@ def build_model_network(model: str, efference_threshold: float = 0.05) -> Tuple[
             "w_bb_err": 0.0,
         }
         net, _ = b.stage_D(efference_threshold=efference_threshold)
+
+    elif model == "perspective":
+        aff = default_affect_params(True)
+        params = make_perspective_params(arch_seed=arch_seed)
+        b = perspective_builder(params, aff, plastic=False)
+        net = build_attached_stage_d_network(
+            params=params,
+            affect=aff,
+            initial_state=initial_perspective_state(params, plastic=False),
+            step_fn=perspective_step,
+            efference_threshold=efference_threshold,
+        )
+
+    elif model == "perspective_plastic":
+        aff = default_affect_params(True)
+        params = make_perspective_params(arch_seed=arch_seed)
+        b = perspective_builder(params, aff, plastic=True)
+        net = build_attached_stage_d_network(
+            params=params,
+            affect=aff,
+            initial_state=initial_perspective_state(params, plastic=True),
+            step_fn=perspective_step,
+            efference_threshold=efference_threshold,
+        )
+
+    elif model == "gw_lite":
+        aff = default_affect_params(True)
+        params = make_workspace_params(arch_seed=arch_seed)
+        b = workspace_builder(params, aff)
+        net = build_attached_stage_d_network(
+            params=params,
+            affect=aff,
+            initial_state=initial_workspace_state(params),
+            step_fn=workspace_step,
+            efference_threshold=efference_threshold,
+        )
 
     else:
         raise ValueError(f"Unknown model variant: {model}")
@@ -326,7 +369,7 @@ def rollout_episode(
 
         # --- physiology update ---
         if hasattr(agent.net, "_update_ipsundrum_sensor"):
-            agent.net._update_ipsundrum_sensor(float(I_total), rng=agent.rng)  # type: ignore[attr-defined]
+            agent.net._update_ipsundrum_sensor(float(I_total), rng=agent.rng, obs_components=(I_total, I_touch, I_smell, I_vision))  # type: ignore[attr-defined]
         else:
             # Stage B: map signed evidence to [0,1]
             agent.net.set_sensor_value("Ns", float(np.clip(0.5 + 0.5 * I_total, 0.0, 1.0)))
