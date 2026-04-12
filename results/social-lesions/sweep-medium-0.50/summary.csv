@@ -1,0 +1,9 @@
+seed,condition,env_name,metabolic_load,lesion_mode,help_rate_when_partner_distressed,partner_recovery_rate,mutual_viability,rescue_latency,self_cost_of_help,episode_joint_longevity,partner_final_energy,partner_peak_energy,self_final_energy,joint_homeostatic_margin
+0,social_affective_direct,SocialCorridorWorld,medium,none,0.0,0.0,0.0376984126984127,18.0,0.20000000000000018,8.0,0.0,0.165,0.6099999999999995,0.48690476190476173
+1,social_affective_direct,SocialCorridorWorld,medium,none,0.0,0.0,0.0376984126984127,18.0,0.20000000000000018,8.0,0.0,0.165,0.6099999999999995,0.48690476190476173
+2,social_affective_direct,SocialCorridorWorld,medium,none,0.0,0.0,0.0376984126984127,18.0,0.20000000000000018,8.0,0.0,0.165,0.6099999999999995,0.48690476190476173
+3,social_affective_direct,SocialCorridorWorld,medium,none,0.0,0.0,0.0376984126984127,18.0,0.20000000000000018,8.0,0.0,0.165,0.6099999999999995,0.48690476190476173
+4,social_affective_direct,SocialCorridorWorld,medium,none,0.0,0.0,0.0376984126984127,18.0,0.20000000000000018,8.0,0.0,0.165,0.6099999999999995,0.48690476190476173
+5,social_affective_direct,SocialCorridorWorld,medium,none,0.0,0.0,0.0376984126984127,18.0,0.20000000000000018,8.0,0.0,0.165,0.6099999999999995,0.48690476190476173
+6,social_affective_direct,SocialCorridorWorld,medium,none,0.0,0.0,0.0376984126984127,18.0,0.20000000000000018,8.0,0.0,0.165,0.6099999999999995,0.48690476190476173
+7,social_affective_direct,SocialCorridorWorld,medium,none,0.0,0.0,0.0376984126984127,18.0,0.20000000000000018,8.0,0.0,0.165,0.6099999999999995,0.48690476190476173

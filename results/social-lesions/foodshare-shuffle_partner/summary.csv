@@ -1,0 +1,17 @@
+seed,condition,env_name,lesion_mode,help_rate_when_partner_distressed,partner_recovery_rate,mutual_viability,rescue_latency,self_cost_of_help,episode_joint_longevity,partner_final_energy,partner_peak_energy,self_final_energy,joint_homeostatic_margin
+0,social_affective_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+1,social_affective_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+2,social_affective_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+3,social_affective_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+4,social_affective_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+5,social_affective_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+6,social_affective_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+7,social_affective_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+0,social_full_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+1,social_full_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+2,social_full_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+3,social_full_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+4,social_full_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+5,social_full_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+6,social_full_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
+7,social_full_direct,FoodShareToy,shuffle_partner,0.0,0.0,1.0,1.0,0.0,1.0,0.19,0.19,0.79,0.27142857142857146
