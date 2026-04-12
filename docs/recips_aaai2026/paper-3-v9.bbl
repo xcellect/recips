@@ -1,0 +1,220 @@
+\begin{thebibliography}{33}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Ahn et~al.(2022)Ahn, Brohan, Brown, Chebotar, Cortes, Finn, Hausman,
+  Ichter, Irpan et~al.}]{AhnEtAl2022SayCan}
+Ahn, M.; Brohan, A.; Brown, N.; Chebotar, Y.; Cortes, O.; Finn, C.; Hausman,
+  K.; Ichter, B.; Irpan, A.; et~al. 2022.
+\newblock Do as I Can, Not as I Say: Grounding Language in Robotic Affordances.
+\newblock arXiv:2204.01691.
+
+\bibitem[{Bach(2009)}]{Bach2009PSI}
+Bach, J. 2009.
+\newblock \emph{Principles of Synthetic Intelligence: {PSI}: An Architecture of
+  Motivated Cognition}.
+\newblock Oxford University Press.
+
+\bibitem[{Bach and Herger(2015)}]{BachHerger2015ReCoN}
+Bach, J.; and Herger, P. 2015.
+\newblock Request Confirmation Networks for Neuro-Symbolic Script Execution.
+\newblock In \emph{Proceedings of the Workshop on Cognitive Computation:
+  Integrating Neural and Symbolic Approaches (CoCo@{NIPS} 2015)}, volume 1583
+  of \emph{CEUR Workshop Proceedings}.
+
+\bibitem[{Banino et~al.(2018)Banino, Barry, Uria, Blundell, Lillicrap,
+  Mirowski, Pritzel, Chadwick, Degris et~al.}]{BaninoEtAl2018VectorBasedNav}
+Banino, A.; Barry, C.; Uria, B.; Blundell, C.; Lillicrap, T.; Mirowski, P.;
+  Pritzel, A.; Chadwick, M.~J.; Degris, T.; et~al. 2018.
+\newblock Vector-Based Navigation Using Grid-Like Representations in Artificial
+  Agents.
+\newblock \emph{Nature}, 557(7705): 429--433.
+
+\bibitem[{Barrett(2017)}]{Barrett2017HowEmotions}
+Barrett, L.~F. 2017.
+\newblock \emph{How Emotions Are Made: The Secret Life of the Brain}.
+\newblock Houghton Mifflin Harcourt.
+
+\bibitem[{Behrens et~al.(2018)Behrens, Muller, Whittington, Mark, Baram,
+  Stachenfeld, and Kurth-Nelson}]{BehrensEtAl2018CognitiveMap}
+Behrens, T. E.~J.; Muller, T.~H.; Whittington, J. C.~R.; Mark, S.; Baram,
+  A.~B.; Stachenfeld, K.~L.; and Kurth-Nelson, Z. 2018.
+\newblock What Is a Cognitive Map? Organizing Knowledge for Flexible Behavior.
+\newblock \emph{Neuron}, 100(2): 490--509.
+
+\bibitem[{Brohan et~al.(2023)Brohan, Brown, Carbajal, Chebotar, Chen,
+  Choromanski, Ding, Driess, Dubey, Finn et~al.}]{BrohanEtAl2023RT2}
+Brohan, A.; Brown, N.; Carbajal, J.; Chebotar, Y.; Chen, X.; Choromanski, K.;
+  Ding, T.; Driess, D.; Dubey, A.; Finn, C.; et~al. 2023.
+\newblock {RT-2}: Vision-Language-Action Models Transfer Web Knowledge to
+  Robotic Control.
+\newblock arXiv:2307.15818.
+
+\bibitem[{Butlin et~al.(2025)Butlin, Long, Bayne, Bengio, Birch, Chalmers,
+  Constant, Deane, Elmoznino, Fleming, Ji, Kanai, Klein, Lindsay, Michel,
+  Mudrik, Peters, Schwitzgebel, Simon, and
+  VanRullen}]{ButlinEtAl2025Indicators}
+Butlin, P.; Long, R.; Bayne, T.; Bengio, Y.; Birch, J.; Chalmers, D.; Constant,
+  A.; Deane, G.; Elmoznino, E.; Fleming, S.~M.; Ji, X.; Kanai, R.; Klein, C.;
+  Lindsay, G.; Michel, M.; Mudrik, L.; Peters, M. A.~K.; Schwitzgebel, E.;
+  Simon, J.; and VanRullen, R. 2025.
+\newblock Identifying Indicators of Consciousness in {AI} Systems.
+\newblock \emph{Trends in Cognitive Sciences}.
+\newblock Online ahead of print.
+
+\bibitem[{Chang(2022)}]{Chang2022Realism}
+Chang, H. 2022.
+\newblock \emph{Realism for Realistic People: A New Pragmatist Philosophy of
+  Science}.
+\newblock Cambridge University Press.
+
+\bibitem[{Chirimuuta(2024)}]{Chirimuuta2024BrainAbstracted}
+Chirimuuta, M. 2024.
+\newblock \emph{The Brain Abstracted: Simplification in the History and
+  Philosophy of Neuroscience}.
+\newblock The MIT Press.
+
+\bibitem[{Cleeremans(2011)}]{Cleeremans2011RadicalPlasticity}
+Cleeremans, A. 2011.
+\newblock The Radical Plasticity Thesis: How the Brain Learns to Be Conscious.
+\newblock \emph{Frontiers in Psychology}, 2: 86.
+
+\bibitem[{Constantinescu, O'Reilly, and
+  Behrens(2016)}]{ConstantinescuEtAl2016Gridlike}
+Constantinescu, A.~O.; O'Reilly, J.~X.; and Behrens, T. E.~J. 2016.
+\newblock Organizing Conceptual Knowledge in Humans with a Gridlike Code.
+\newblock \emph{Science}, 352(6292): 1464--1468.
+
+\bibitem[{Driess et~al.(2023)Driess, Xia, Sajjadi, Lynch, Chowdhery, Ichter,
+  Wahid, Tompson, Vuong, Yu et~al.}]{DriessEtAl2023PaLME}
+Driess, D.; Xia, F.; Sajjadi, M. S.~M.; Lynch, C.; Chowdhery, A.; Ichter, B.;
+  Wahid, A.; Tompson, J.; Vuong, Q.; Yu, T.; et~al. 2023.
+\newblock {PaLM-E}: An Embodied Multimodal Language Model.
+\newblock arXiv:2303.03378.
+
+\bibitem[{Friston(2010)}]{Friston2010FreeEnergy}
+Friston, K. 2010.
+\newblock The Free-Energy Principle: A Unified Brain Theory?
+\newblock \emph{Nature Reviews Neuroscience}, 11(2): 127--138.
+
+\bibitem[{Hafting et~al.(2005)Hafting, Fyhn, Molden, Moser, and
+  Moser}]{HaftingEtAl2005Microstructure}
+Hafting, T.; Fyhn, M.; Molden, S.; Moser, M.-B.; and Moser, E.~I. 2005.
+\newblock Microstructure of a Spatial Map in the Entorhinal Cortex.
+\newblock \emph{Nature}, 436(7052): 801--806.
+
+\bibitem[{Harnad(1990)}]{Harnad1990SymbolGrounding}
+Harnad, S. 1990.
+\newblock The Symbol Grounding Problem.
+\newblock \emph{Physica D: Nonlinear Phenomena}, 42(1--3): 335--346.
+
+\bibitem[{Hu et~al.(2021)Hu, Shen, Wallis, Allen-Zhu, Li, Wang, Wang, and
+  Chen}]{HuEtAl2021LoRA}
+Hu, E.~J.; Shen, Y.; Wallis, P.; Allen-Zhu, Z.; Li, Y.; Wang, S.; Wang, L.; and
+  Chen, W. 2021.
+\newblock {LoRA}: Low-Rank Adaptation of Large Language Models.
+\newblock arXiv:2106.09685.
+
+\bibitem[{Humphrey(2023)}]{Humphrey2023Sentience}
+Humphrey, N. 2023.
+\newblock \emph{Sentience: The Invention of Consciousness}.
+\newblock The MIT Press.
+
+\bibitem[{Ladda, Lebon, and Lotze(2021)}]{LaddaEtAl2021MotorImageryReview}
+Ladda, A.~M.; Lebon, F.; and Lotze, M. 2021.
+\newblock Using Motor Imagery Practice for Improving Motor Performance -- A
+  Review.
+\newblock \emph{Brain and Cognition}, 150: 105705.
+
+\bibitem[{Lamme(2006)}]{Lamme2006NeuralStance}
+Lamme, V. A.~F. 2006.
+\newblock Towards a True Neural Stance on Consciousness.
+\newblock \emph{Trends in Cognitive Sciences}, 10(11): 494--501.
+
+\bibitem[{Lau and Rosenthal(2011)}]{LauRosenthal2011EmpiricalHOT}
+Lau, H.; and Rosenthal, D. 2011.
+\newblock Empirical Support for Higher-Order Theories of Conscious Awareness.
+\newblock \emph{Trends in Cognitive Sciences}, 15(8): 365--373.
+
+\bibitem[{O'Keefe and Dostrovsky(1971)}]{OkeefeDostrovsky1971SpatialMap}
+O'Keefe, J.; and Dostrovsky, J. 1971.
+\newblock The Hippocampus as a Spatial Map: Preliminary Evidence from Unit
+  Activity in the Freely-Moving Rat.
+\newblock \emph{Brain Research}, 34(1): 171--175.
+
+\bibitem[{O'Regan and No{\"e}(2001)}]{OReganNoe2001Sensorimotor}
+O'Regan, J.~K.; and No{\"e}, A. 2001.
+\newblock A Sensorimotor Account of Vision and Visual Consciousness.
+\newblock \emph{Behavioral and Brain Sciences}, 24(5): 939--973.
+
+\bibitem[{Ouyang et~al.(2022)Ouyang, Wu, Jiang, Almeida, Wainwright, Mishkin,
+  Zhang, Agarwal, Slama, Ray, Schulman, Hilton, Kelton, Miller, Simens, Askell,
+  Welinder, Christiano, Leike, and Lowe}]{OuyangEtAl2022InstructGPT}
+Ouyang, L.; Wu, J.; Jiang, X.; Almeida, D.; Wainwright, C.~L.; Mishkin, P.;
+  Zhang, C.; Agarwal, S.; Slama, K.; Ray, A.; Schulman, J.; Hilton, J.; Kelton,
+  F.; Miller, L.; Simens, M.; Askell, A.; Welinder, P.; Christiano, P.; Leike,
+  J.; and Lowe, R. 2022.
+\newblock Training Language Models to Follow Instructions with Human Feedback.
+\newblock In \emph{Advances in Neural Information Processing Systems}.
+\newblock {NeurIPS} 2022.
+
+\bibitem[{Pavlov(1927)}]{Pavlov1927ConditionedReflexes}
+Pavlov, I.~P. 1927.
+\newblock \emph{Conditioned Reflexes: An Investigation of the Physiological
+  Activity of the Cerebral Cortex}.
+\newblock Oxford University Press.
+\newblock Translated and edited by G. V. Anrep.
+
+\bibitem[{Schulman(2025)}]{Schulman2025LoRAWithoutRegret}
+Schulman, J. 2025.
+\newblock {LoRA} Without Regret.
+\newblock Connectionism (Thinking Machines Lab).
+
+\bibitem[{Schuster et~al.(2011)Schuster, Hilfiker, Amft, Scheidhauer, Andrews,
+  Butler, Kischka, and Ettlin}]{SchusterEtAl2011BestPracticeMI}
+Schuster, C.; Hilfiker, R.; Amft, O.; Scheidhauer, A.; Andrews, B.; Butler, J.;
+  Kischka, U.; and Ettlin, T. 2011.
+\newblock Best Practice for Motor Imagery: A Systematic Literature Review on
+  Motor Imagery Training Elements in Five Different Disciplines.
+\newblock \emph{BMC Medicine}, 9: 75.
+
+\bibitem[{Shao et~al.(2024)Shao, Wang, Zhu, Xu, Song, Bi, Zhang, Zhang, Li, Wu,
+  and Guo}]{ShaoEtAl2024DeepSeekMath}
+Shao, Z.; Wang, P.; Zhu, Q.; Xu, R.; Song, J.; Bi, X.; Zhang, H.; Zhang, M.;
+  Li, Y.~K.; Wu, Y.; and Guo, D. 2024.
+\newblock {DeepSeekMath}: Pushing the Limits of Mathematical Reasoning in Open
+  Language Models.
+\newblock arXiv:2402.03300.
+
+\bibitem[{Sherrington(1906)}]{Sherrington1906Integrative}
+Sherrington, C.~S. 1906.
+\newblock \emph{The Integrative Action of the Nervous System}.
+\newblock Yale University Press.
+
+\bibitem[{Varela(1999)}]{Varela1999SpeciousPresent}
+Varela, F.~J. 1999.
+\newblock The Specious Present: A Neurophenomenology of Time Consciousness.
+\newblock In Petitot, J.; Varela, F.~J.; Pachoud, B.; and Roy, J.-M., eds.,
+  \emph{Naturalizing Phenomenology: Issues in Contemporary Phenomenology and
+  Cognitive Science}, 266--314. Stanford University Press.
+
+\bibitem[{Whittington et~al.(2020)Whittington, Muller, Mark, Chen, Barry,
+  Burgess, and Behrens}]{WhittingtonEtAl2020TEM}
+Whittington, J. C.~R.; Muller, T.~H.; Mark, S.; Chen, G.; Barry, C.; Burgess,
+  N.; and Behrens, T. E.~J. 2020.
+\newblock The Tolman-Eichenbaum Machine: Unifying Space and Relational Memory
+  through Generalization in the Hippocampal Formation.
+\newblock \emph{Cell}, 183(5): 1249--1263.e23.
+
+\bibitem[{Whittington, Warren, and
+  Behrens(2022)}]{WhittingtonEtAl2022RelatingTransformers}
+Whittington, J. C.~R.; Warren, J.; and Behrens, T. E.~J. 2022.
+\newblock Relating Transformers to Models and Neural Representations of the
+  Hippocampal Formation.
+\newblock arXiv:2112.04035.
+
+\bibitem[{Wolpert, Ghahramani, and Jordan(1995)}]{WolpertEtAl1995InternalModel}
+Wolpert, D.~M.; Ghahramani, Z.; and Jordan, M.~I. 1995.
+\newblock An Internal Model for Sensorimotor Integration.
+\newblock \emph{Science}, 269(5232): 1880--1882.
+
+\end{thebibliography}
