@@ -1,5 +1,11 @@
 \begin{thebibliography}{}
 
+\bibitem[Auvray et~al., 2009]{AuvrayLenayStewart2009PerceptualCrossing}
+Auvray, M., Lenay, C., and Stewart, J. (2009).
+\newblock Perceptual interactions in a minimalist virtual environment.
+\newblock {\em New Ideas in Psychology}, 27(1):32--47.
+\newblock DOI: 10.1016/j.newideapsych.2007.12.002.
+
 \bibitem[Bach and Herger, 2015]{BachHerger2015ReCoN}
 Bach, J. and Herger, P. (2015).
 \newblock Request confirmation networks for neuro-symbolic script execution.
@@ -32,6 +38,13 @@ Dennett, D.~C. (1994).
 \newblock Artificial life as philosophy.
 \newblock {\em Artificial Life}, 1(3):291--292.
 \newblock DOI: 10.1162/artl.1994.1.3.291.
+
+\bibitem[Froese et~al., 2014]{FroeseIizukaIkegami2014EmbodiedSocialInteraction}
+Froese, T., Iizuka, H., and Ikegami, T. (2014).
+\newblock Embodied social interaction constitutes social cognition in pairs of
+  humans: A minimalist virtual reality experiment.
+\newblock {\em Scientific Reports}, 4:3672.
+\newblock DOI: 10.1038/srep03672.
 
 \bibitem[Humphrey, 2023]{Humphrey2023Sentience}
 Humphrey, N. (2023).

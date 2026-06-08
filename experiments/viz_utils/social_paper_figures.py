@@ -85,7 +85,7 @@ def create_social_summary_figure(
     ax_a.axhline(0.0, color="#1f77b4", linewidth=1.1, alpha=0.85)
     ax_a.axvline(switch_point, color="#1f77b4", linestyle="--", linewidth=1.2, alpha=0.95)
     ax_a.annotate(
-        rf"$\lambda^* = {switch_point:.2f}$",
+        rf"$\lambda^\star = {switch_point:.2f}$",
         xy=(switch_point, 0.02),
         xytext=(0.74, 0.86),
         textcoords="axes fraction",
@@ -112,12 +112,12 @@ def create_social_summary_figure(
     x = np.arange(len(corridor))
     width = 0.24
     ax_b.bar(x - width, corridor["help_rate_when_partner_distressed_mean"], width=width, label="help", color="#1f77b4")
-    ax_b.bar(x, corridor["partner_recovery_rate_mean"], width=width, label="recovery", color="#ff7f0e")
+    ax_b.bar(x, corridor["partner_recovery_rate_mean"], width=width, label="rescue", color="#ff7f0e")
     ax_b.bar(x + width, corridor["mutual_viability_mean"], width=width, label="viability", color="#2ca02c")
     ax_b.set_xticks(x)
     ax_b.set_xticklabels(labels)
     ax_b.set_ylim(0.0, 1.03)
-    ax_b.set_ylabel("mean value")
+    ax_b.set_ylabel("condition value")
     ax_b.set_title("B. Corridor outcomes by condition")
     # Stack entries vertically (one after another), inside the axes.
     ax_b.legend(loc="upper left", ncol=1, frameon=False)
@@ -147,7 +147,7 @@ def create_social_summary_figure(
     ax_c.set_xticklabels(["sham", "coupling off", "shuffle"])
     ax_c.set_ylim(0.0, 1.05)
     ax_c.set_ylabel("help rate")
-    ax_c.set_title("C. Causal lesions abolish helping")
+    ax_c.set_title("C. Coupling lesions abolish helping")
     ax_c.legend(loc="upper right", frameon=False)
 
     # Panel D: coupling sweep by load
@@ -188,12 +188,12 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--out-pdf",
-        default="../alife_social_paper/figures/fig_summary.pdf",
+        default="docs/recips_social_alife2026/fig_summary.pdf",
         help="Output PDF path for the summary figure.",
     )
     parser.add_argument(
         "--out-png",
-        default="../alife_social_paper/figures/fig_summary.png",
+        default="docs/recips_social_alife2026/fig_summary.png",
         help="Optional PNG output path (set empty string to disable).",
     )
     return parser.parse_args()

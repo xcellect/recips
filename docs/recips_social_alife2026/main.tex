@@ -38,18 +38,18 @@ aishik@xcellect.com
 \maketitle
 
 \begin{abstract}
-Artificial agents can be made to ``help'' for many reasons, including explicit social reward, hard-coded prosocial bonuses, or direct access to another agent's internal state. Those possibilities make minimal prosocial behavior hard to interpret. Building on ReCoN-Ipsundrum, an inspectable recurrent controller with affect-coupled regulation, I add an explicit homeostat and a social coupling channel while keeping planning strictly self-directed: the agent scores only its own predicted internal state, and no partner-welfare reward term is introduced. The study should therefore be read as a minimal mechanistic replication-and-decomposition of the observation-versus-coupling distinction in a hand-specified recurrent controller. I then compare four matched conditions in two toy worlds. In a one-step \emph{FoodShareToy}, an exact solver finds a sharp switch from \textsc{Eat} to \textsc{Pass} at $\lambda^{\ast}\approx 0.91$ for the default state. In the experimental runs, \texttt{social\_none} and \texttt{social\_cognitive\_direct} never help, whereas \texttt{social\_affective\_direct} and \texttt{social\_full\_direct} always do. In a multi-step \emph{SocialCorridorWorld}, the same dissociation reappears: coupling flips help rate from $0$ to $1$, partner recovery from $0$ to $1$, and rescue latency from $18$ to $9$ steps, while raising mutual viability from $0.15$ to $0.33$. Sham lesions preserve helping, but coupling-off and shuffled-partner lesions abolish it in both tasks. A coupling sweep reveals a feasibility boundary shaped by coupling and metabolic load: under low load, helping appears for $\lambda \ge 0.25$, whereas under medium and high loads no tested coupling value rescues the partner within horizon. The result is a narrow but useful claim for artificial life: in this minimal architecture, mere partner-state access is not enough; helping appears when another's need is routed into self-regulation.
+Artificial agents can be made to ``help'' through explicit social rewards, hard-coded prosocial bonuses, or direct access to another agent's state. I isolate a narrower route: homeostatic coupling. Building on ReCoN-Ipsundrum, I add a scalar homeostat and a social coupling channel while keeping action selection self-directed: the planner scores only the actor's predicted internal state, with no partner-welfare reward. In a one-step \emph{FoodShareToy}, an exact solver finds a switch from \textsc{Eat} to \textsc{Pass} at lambda-star approximately 0.91 ($\lambda^\star \approx 0.91$) for the default state. In a multi-step \emph{SocialCorridorWorld}, partner-state access without coupling leaves behavior unchanged, whereas coupled agents fetch, carry, and pass food to the partner. Sham lesions preserve helping; coupling-off and shuffled-partner lesions abolish it. A coupling/load sweep shows that coupling creates a low-load helping regime but does not guarantee rescue under higher metabolic load. This is not a claim about empathy, altruism, consciousness, or moral status. It is a minimal ALife demonstration that, in this controller, partner-state access is behaviorally inert unless partner distress is routed into self-regulation.
 \end{abstract}
 
-Submission type: \textbf{Full Paper}\\
-Data/Code available at: \href{https://github.com/xcellect/recips}{github.com/xcellect/recips}
-\blfootnote{Preprint. Under review at ALIFE 2026.}
+\noindent\textbf{Data/Code:} \href{https://github.com/xcellect/recips}{github.com/xcellect/recips}
 
 \section{Introduction}
 
 Artificial life is especially good at turning philosophical distinctions into executable ones. Braitenberg's vehicles showed how minimal mechanisms tempt us into psychological description \citep{Braitenberg1984Vehicles}. Dennett described ALife as a form of ``prosthetic imagination'' for philosophy \citep{Dennett1994ArtificialLifeAsPhilosophy}. Pattee argued that such models matter only if we stay clear about what exactly their synthetic regularities are evidence for \citep{Pattee1995Epistemology}. Those methodological concerns become particularly sharp when an agent appears to do something socially significant, such as helping another agent at a cost to itself.
 
 In synthetic systems, ``prosociality'' is easy to trivialize. An agent may help because its reward function already contains another agent's welfare, because its action space directly privileges a helping move, or because the task is so underspecified that social interpretation outruns mechanism. Recent work by \citet{YoshidaMan2025HomeostaticCoupling} sharpened this problem by contrasting cognitive access to a partner's need with affective homeostatic coupling in learned multi-agent systems. Their central result is strong: prosocial behavior appears when the distress of another agent affects one's own regulation, not when that distress is merely observed.
+
+This question is adjacent to, but distinct from, perceptual-crossing models of minimal social interaction \citep{AuvrayLenayStewart2009PerceptualCrossing,FroeseIizukaIkegami2014EmbodiedSocialInteraction}. Perceptual-crossing studies ask how reciprocal sensorimotor contingencies can support social encounter or agency detection under highly reduced interaction. The present work fixes a more asymmetric sharing-and-rescue setting and asks a regulatory-routing question: once partner state is available, does it influence action as mere access or by entering the actor's own homeostatic dynamics?
 
 Here I ask whether the same dissociation can be recovered in a much smaller and more inspectable setting. The aim is not to claim a new empirical discovery about prosociality, but to recover and decompose that distinction in a smaller executable object whose state updates, rollouts, and lesions can all be inspected directly. I extend \citet{Sanyal2026ReCoNIpsundrum}, which introduced a recurrent ReCoN-based controller with an ipsundrum-style persistence loop and optional affect-coupled regulation. The extension keeps the same broad control logic but adds an explicit scalar homeostat and a social coupling pathway. The key design constraint is theoretical rather than performance-driven: the planner remains self-directed. It scores only the agent's own predicted internal state after rollout. No external reward bonus for partner welfare is added, and no direct ``help partner'' term is introduced.
 
@@ -76,28 +76,84 @@ E^{\mathrm{model}}_{t+1} &= \mathrm{clip}\big(E^{\mathrm{model}}_t + k_{pe}\,\ma
 \label{eq:homeostat}
 \end{equation}
 }
-Here $s$ is the homeostatic setpoint, $\lambda$ is affective coupling strength, and $\hat E^{\mathrm{other}}$ is the partner-energy estimate. Valence and arousal are then computed from coupled distress and prediction error, and fed back into the existing recurrent loop just as in the parent architecture.
-
-The crucial architectural constraint is that the policy remains self-directed. Candidate actions are evaluated by finite-horizon internal rollout, and the score contains only the agent's own predicted valence, arousal, recurrent salience $N^s$, and body-budget error. In the social tasks used in this work, those score weights are fixed at $w_{\mathrm{valence}}=2.0$, $w_{\mathrm{arousal}}=-1.2$, $w_{N^s}=-0.8$, and $w_{\mathrm{bb\_err}}=-0.4$, with no separate progress, scenic-value, or novelty bonus. There is no separate social reward. Partner state can matter only by changing the actor's own coupled distress before scoring.
+Valence and arousal are then computed from coupled distress and prediction error, and fed back into the existing recurrent loop just as in the parent architecture.
 
 \begin{table}[t]
 \centering
 \small
-\begin{tabular}{@{}lll@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.30\linewidth}>{\raggedright\arraybackslash}p{0.62\linewidth}@{}}
 \toprule
-Condition & Partner access & Coupling \\
+Symbol & Meaning \\
 \midrule
-\texttt{none} & no & $\lambda=0$ \\
-\texttt{cognitive} & direct & $\lambda=0$ \\
-\texttt{affective} & direct to homeostat & $\lambda>0$ \\
-\texttt{full} & direct + coupled & $\lambda>0$ \\
+$E^{\mathrm{true}}_t$ & actual resource state \\
+$E^{\mathrm{model}}_t$ & actor's internal resource estimate \\
+$E^{\mathrm{pred}}_t$ & predicted resource state after homeostatic control \\
+$s$ & homeostatic setpoint \\
+$c_b$ & basal metabolic cost \\
+$c_m a_t$ & movement cost; $a_t=1$ for movement actions \\
+$c_h h_t$ & hazard cost; $h_t=1$ on hazard contact \\
+$g_e e_t$ & resource gain from self-eating \\
+$g_p p_t$ & resource gain from receiving or passing food \\
+$d^{\mathrm{self}}_t$ & actor distress, the shortfall from setpoint \\
+$d^{\mathrm{other}}_t$ & estimated partner distress \\
+$d^{\mathrm{cpl}}_t$ & coupled distress used by the actor \\
+$\lambda$ & affective coupling strength \\
+$\hat E^{\mathrm{other}}_t$ & partner-energy estimate used by the actor \\
+$k_h,k_{pe}$ & homeostatic-control and prediction-error update gains \\
+$\mathrm{PE}_t$ & resource prediction error \\
+$V_t,A_t$ & valence and arousal proxies \\
+$N_{s,t}$ & recurrent salience/persistence variable \\
+$B_t$ & nonnegative body-budget error, implemented as coupled distress \\
 \bottomrule
 \end{tabular}
-\caption{Matched social conditions. The base recurrent-affective controller, action space, and planner are held fixed across conditions.}
-\label{tab:conditions}
+\caption{Notation for the social homeostat and self-directed scorer.}
+\label{tab:notation}
 \end{table}
 
-Table~\ref{tab:conditions} defines the four direct-state conditions used in this work. In the current implementation, the same affect-capable base controller is reused throughout, and the cognitive condition should be read primarily as a control for partner-state access rather than as a richer social-inference model. Because $\lambda=0$ removes the only route by which partner state can alter the self-directed score in this direct-state setup, the negative result below should be read as an architectural routing result rather than as a general theorem about social cognition. Scenic-value and novelty terms are disabled in the social tasks, and partner death does not terminate the actor's episode, preventing hidden incentives through task termination.
+% Reviewer-driven clarity: the key distinction is objective-level partner welfare vs upstream homeostatic routing.
+The crucial architectural constraint is that the policy remains self-directed. Candidate action sequences are evaluated by finite-horizon internal rollout and scored only through the actor's predicted internal variables:
+\begin{equation}
+\begin{aligned}
+J_{\mathrm{self}}(a_{0:H-1})
+&=
+\sum_{\tau=1}^{H}
+\left[
+w_V V_\tau
++ w_A A_\tau \right.\\
+&\qquad\left.
++ w_N N_{s,\tau}
++ w_B B_\tau
+\right].
+\end{aligned}
+\label{eq:selfscore}
+\end{equation}
+In the social tasks, the fixed weights are $w_V=2.0$, $w_A=-1.2$, $w_N=-0.8$, and $w_B=-0.4$, with no separate progress, scenic-value, or novelty bonus.
+This differs from adding a partner-welfare objective such as
+\begin{equation}
+J_{\mathrm{welfare}} =
+J_{\mathrm{self}} + \beta U_{\mathrm{partner}} .
+\label{eq:welfare}
+\end{equation}
+No term of this form is used. Partner state enters only upstream, through $d^{\mathrm{cpl}}_t=d^{\mathrm{self}}_t+\lambda d^{\mathrm{other}}_t$, after which valence, arousal, recurrent salience, and body-budget error are computed by the ordinary self-regulatory machinery. Thus the additive partner term is inside the homeostatic state update, not a separate partner-welfare term in the action objective.
+
+\begin{table*}[t]
+\centering
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Condition & Partner-state access & Route into self-regulation \\
+\midrule
+\texttt{social\_none} & no & no, $\lambda=0$ \\
+\texttt{social\_cognitive\_direct} & yes & no, $\lambda=0$ \\
+\texttt{social\_affective\_direct} & no separate channel & yes, $\lambda>0$ \\
+\texttt{social\_full\_direct} & yes & yes, $\lambda>0$ \\
+\bottomrule
+\end{tabular}
+\caption{Routing matrix for the direct-state experiments. These rows are not four rich social-cognitive models; they separate partner-state access from regulatory routing while keeping the controller, planner, and action space fixed.}
+\label{tab:conditions}
+\end{table*}
+
+Table~\ref{tab:conditions} defines the four direct-state conditions. The cognitive-direct row is an access-control condition: partner state is available but has no route into the self-directed score. The affective-direct row tests the opposite intervention: partner distress is coupled into homeostatic error. Because the current direct-state implementation gives the full condition no additional information beyond the coupled channel, the design is expected to collapse into two behavioral pairs. That collapse is diagnostic rather than disappointing. Scenic-value and novelty terms are disabled in the social tasks, and partner death does not terminate the actor's episode, preventing hidden incentives through task termination.
 
 \subsection{Tasks, lesions, and metrics}
 
@@ -111,16 +167,35 @@ I use two deliberately small environments.
 
 \paragraph{Coupling sweep.} In the corridor task I sweep $\lambda \in \{0,0.25,0.5,0.75,1.0\}$ under low, medium, and high metabolic load. Load changes basal and movement costs as well as food gains, so the sweep tests ecological dependence rather than a single free parameter in isolation.
 
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.28\linewidth}>{\raggedright\arraybackslash}p{0.64\linewidth}@{}}
+\toprule
+Metric & Definition \\
+\midrule
+Help rate & fraction of paper-profile episodes with an effective \textsc{Pass} while the partner is distressed \\
+Partner rescue/recovery & fraction of episodes in which partner energy rises above its initial value after distress \\
+Mutual viability & one-step alive indicator in \emph{FoodShareToy}; in the corridor, $T^{-1}\sum_t \max(0,\min(E^{\mathrm{self}}_t,E^{\mathrm{partner}}_t)/s)$ \\
+Rescue latency & first transfer timestep after partner-distress onset; horizon value if no transfer occurs \\
+Self-cost of help & actor energy loss relative to its episode initial energy, using the minimum actor energy reached in the episode \\
+Final energy & terminal $E^{\mathrm{true}}$ for actor and partner \\
+\bottomrule
+\end{tabular}
+\caption{Readouts used in the food-sharing and corridor tasks. Partner rescue/recovery means a transfer-induced rise above the partner's initial energy, not restoration to the setpoint.}
+\label{tab:metrics}
+\end{table}
+
 % Wide summary figure is declared before Results so it can land at the top of the first Results page.
 
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=0.98\textwidth]{fig_summary.pdf}
-\caption{Mechanism-linked summary of the social extension. \textbf{A:} exact one-step switch in \emph{FoodShareToy}, computed using the same forward model and self-directed scorer as the policy. \textbf{B:} corridor outcomes by condition. Mere partner-state access without coupling leaves behavior unchanged, whereas coupling flips helping and partner recovery from $0$ to $1$. \textbf{C:} sham lesions preserve helping, while coupling-off and shuffled-partner lesions abolish it in both tasks. \textbf{D:} coupling sweep across metabolic loads, showing a load-dependent feasibility boundary: under low load, helping appears for $\lambda \ge 0.25$; under medium and high load, no tested coupling value rescues the partner within horizon.}
+\caption{Mechanism-linked summary of the social extension. \textbf{A:} exact one-step switch in \emph{FoodShareToy}, computed using the same forward model and self-directed scorer as the policy. \textbf{B:} deterministic corridor outcomes by routing condition. Partner-state access without coupling leaves behavior unchanged, whereas coupling flips helping and partner rescue/recovery from $0$ to $1$. \textbf{C:} sham lesions preserve helping, while coupling-off and shuffled-partner lesions abolish it in both tasks. \textbf{D:} coupling sweep across metabolic loads; filled markers indicate runs with helping. Under low load, helping appears for $\lambda \ge 0.25$; under medium and high load, no tested coupling value rescues the partner within horizon.}
 \label{fig:summary}
 \end{figure*}
 
-\paragraph{Readouts.} The headline metrics are help rate when the partner is distressed, partner recovery rate, mutual viability, rescue latency, self-cost of help, and final energy. Each experimental condition is rerun over $64$ nominal seeds as a reproducibility check. Under the validated setup, however, the trajectories are deterministic, so those reruns are not used for stochastic estimation. I therefore report exact condition-level values and use the seed-expanded runs only to confirm invariance.
+\paragraph{Deterministic reruns.} The validated tasks are deterministic. I nevertheless reran each paper-profile condition under $64$ nominal seed settings to check that no hidden stochastic dependence remained. Trajectories were invariant, so the reported values are exact condition-level outcomes rather than statistical estimates.
 
 
 
@@ -138,17 +213,35 @@ I use two deliberately small environments.
 
 \subsection{Mere partner-state access does not flip the food-sharing choice}
 
-Figure~\ref{fig:summary}A shows the exact one-step transition in \emph{FoodShareToy}. For the default state, the action preference switches from \textsc{Eat} to \textsc{Pass} at $\lambda^{\ast}\approx 0.91$. Below that threshold the possessor maximizes its own immediate regulation by eating; above it, the partner's distress is weighted strongly enough to change the actor's own internal score.
+Figure~\ref{fig:summary}A shows the exact one-step transition in \emph{FoodShareToy}. For the default state, the action preference switches from \textsc{Eat} to \textsc{Pass} at $\lambda^\star \approx 0.91$. Below that threshold the possessor maximizes its own immediate regulation by eating; above it, the partner's distress is weighted strongly enough to change the actor's own internal score.
 
 
-The empirical runs match the solver exactly. Across all $64$ nominal seed reruns used as reproducibility checks, \texttt{social\_none} and \texttt{social\_cognitive\_direct} choose \textsc{Eat}, so help rate and partner recovery are both $0$. In the same reruns, \texttt{social\_affective\_direct} and \texttt{social\_full\_direct} choose \textsc{Pass}, so help rate and partner recovery are both $1$. The energetic tradeoff is real. Without coupling, the possessor ends at $0.79$ while the partner remains at $0.19$. With coupling, the possessor ends lower at $0.54$ and the partner rises to $0.44$. Thus, in this architecture, direct partner-state access without regulatory routing is not sufficient, and coupling is not cost-free.
+The empirical runs match the solver exactly. Across all $64$ nominal seed settings used as invariance checks, \texttt{social\_none} and \texttt{social\_cognitive\_direct} choose \textsc{Eat}, so help rate and partner rescue/recovery are both $0$. In the same checks, \texttt{social\_affective\_direct} and \texttt{social\_full\_direct} choose \textsc{Pass}, so help rate and partner rescue/recovery are both $1$.
+
+\begin{table*}[t]
+\centering
+\small
+\begin{tabular}{@{}lrrrrrrl@{}}
+\toprule
+Case & $\lambda$ & $w_V\Delta V$ & $w_A\Delta A$ & $w_N\Delta N_s$ & $w_B\Delta B$ & $\Delta J$ & Choice \\
+\midrule
+uncoupled default & 0.00 & $-0.500$ & $0.150$ & $0.000$ & $-0.050$ & $-0.400$ & \textsc{Eat} \\
+coupled paper profile & 0.95 & $-0.100$ & $0.208$ & $0.000$ & $-0.031$ & $0.077$ & \textsc{Pass} \\
+coupling-off lesion & off & $-0.500$ & $0.150$ & $0.000$ & $-0.050$ & $-0.400$ & \textsc{Eat} \\
+\bottomrule
+\end{tabular}
+\caption{Score decomposition for \textsc{Pass} minus \textsc{Eat} in the default \emph{FoodShareToy} state. Entries are weighted contributions to the self-directed score. The coupled row uses the tested paper-profile setting $\lambda=0.95$, not the exact switch threshold.}
+\label{tab:scoredecomp}
+\end{table*}
+
+Table~\ref{tab:scoredecomp} shows why the choice flips. Partner distress changes the actor's own predicted valence, arousal, and body-budget trajectory under the ordinary self-directed scorer; no partner-utility term is added at action selection. The energetic tradeoff is real. Without coupling, the possessor ends at $0.79$ while the partner remains at $0.19$. With coupling, the possessor ends lower at $0.54$ and the partner rises to $0.44$. Thus, in this architecture, direct partner-state access without regulatory routing is not sufficient, and coupling is not cost-free.
 
 \subsection{The same routing dissociation reappears in multi-step rescue}
 
 The corridor task turns the same logic into a sequential planning problem. Figure~\ref{fig:visuals} shows representative trajectories. In the self-only baseline, the possessor goes left, collects food, then eats it and idles while the partner decays. In the coupled condition, the possessor goes left, collects food, carries it across the corridor, and passes it to the partner at $t=9$.
 
 
-The summary metrics are equally sharp (Figure~\ref{fig:summary}B). \texttt{social\_none} and \texttt{social\_cognitive\_direct} never help. Their help rate is $0$, partner recovery is $0$, rescue latency saturates at the horizon ($18$ steps), and mutual viability is $0.15$. By contrast, \texttt{social\_affective\_direct} and \texttt{social\_full\_direct} help in every run, recover the partner in every run, cut rescue latency to $9$ steps, and raise mutual viability to $0.3286$. The self-cost is visible here too: the actor's final energy falls from $0.745$ without helping to $0.605$ with helping, while partner final energy rises from $0.02$ to $0.27$.
+The summary metrics are equally sharp (Figure~\ref{fig:summary}B). \texttt{social\_none} and \texttt{social\_cognitive\_direct} never help. Their help rate is $0$, partner rescue/recovery is $0$, rescue latency saturates at the horizon ($18$ steps), and mutual viability is $0.15$. By contrast, \texttt{social\_affective\_direct} and \texttt{social\_full\_direct} help in every run, rescue the partner in every run, cut rescue latency to $9$ steps, and raise mutual viability to $0.3286$. The self-cost is visible here too: the actor's final energy falls from $0.745$ without helping to $0.605$ with helping, while partner final energy rises from $0.02$ to $0.27$.
 
 Two pairwise equalities are noteworthy. First, \texttt{social\_none} and \texttt{social\_cognitive\_direct} are behaviorally identical. Merely observing the partner does not alter the actor's control problem. Second, \texttt{social\_affective\_direct} and \texttt{social\_full\_direct} are also identical in the shipped direct-state setup. The added cognitive channel carries no extra information beyond what the coupling pathway already receives. In that sense, the four-condition design is best read here as a matched routing manipulation with an explicit access-control condition, not as a richer theory map of social inference. That equality is useful rather than disappointing: it isolates the effective mechanism even more cleanly.
 
@@ -162,25 +255,29 @@ This matters because the planner and action space do not change across lesion mo
 
 The coupling sweep in Figure~\ref{fig:summary}D shows that social coupling is not a universal monotone ``more is better'' parameter. Instead, it reveals a load-dependent feasibility boundary. Under low metabolic load, helping appears as soon as $\lambda=0.25$ and remains present up to $\lambda=1.0$. But the viability curve is not monotone across that range, and the actor's self-cost increases sharply at the largest tested coupling. Under medium and high metabolic load, no tested $\lambda$ rescues the partner within the current horizon: help rate remains $0$ throughout, and mutual viability stays near $0.038$ and $0.024$, respectively.
 
-This pattern also explains why the exact one-step threshold in \emph{FoodShareToy} (\(\lambda^{\ast}\approx 0.91\) for the default distressed-partner state) differs from the corridor sweep, where helping already appears at \(\lambda \ge 0.25\) under low load. The former is a state-specific threshold in a one-step analytic task; the latter reflects a different task geometry, horizon, and metabolic regime. So the lesson is not that affective coupling guarantees prosociality. The lesson is more conditional and more interesting. Coupling can reorganize the policy toward helping, but whether that reorganization succeeds depends on ecological parameters such as metabolic demand and available time.
+This pattern also explains why the exact one-step threshold in \emph{FoodShareToy} (\(\lambda^\star \approx 0.91\) for the default distressed-partner state) differs from the corridor sweep, where helping already appears at \(\lambda \ge 0.25\) under low load. The former is a state-specific threshold in a one-step analytic task; the latter reflects a different task geometry, horizon, and metabolic regime. So the lesson is not that affective coupling guarantees prosociality. The lesson is more conditional and more interesting. Coupling can reorganize the policy toward helping, but whether that reorganization succeeds depends on ecological parameters such as metabolic demand and available time.
 
 
 
 \section{Discussion}
 
-The central result is simple: in this controller, another agent's need changes behavior only when it changes the actor's own regulation. Direct representation of partner state is not enough. That distinction matters philosophically because it separates two interpretations that are often blurred in synthetic social behavior: \emph{knowing} that another is in need versus \emph{being dynamically affected} by that need. The strongest reading of the negative result is architectural. In the current direct-state setup, $\lambda=0$ removes the only path by which partner information can influence the self-directed score. This work therefore does not show that observation can never support helping in richer systems; it shows that mere access without regulatory routing is inert in this controller.
+The central result is simple: in this controller, another agent's need changes behavior only when it changes the actor's own regulatory state. Direct representation of partner state is not enough. That distinction matters philosophically because it separates two interpretations that are often blurred in synthetic social behavior: access to another's need and regulatory integration of that need. The strongest reading of the negative result is architectural. In the current direct-state setup, $\lambda=0$ removes the only path by which partner information can influence the self-directed score. This work therefore does not show that observation can never support helping in richer systems; it shows that mere access without regulatory routing is inert in this controller.
 
-This work also clarifies what this extension adds relative to prior work. Compared with \citet{YoshidaMan2025HomeostaticCoupling}, the present system is best read as a minimal mechanistic replication-and-decomposition rather than as a new empirical discovery about prosociality. It is much smaller, hand-specified, and non-learning. It therefore sacrifices adaptive breadth. But it gains exact solvability in the one-step task, transparent rollout inspection, and direct causal lesions in a single recurrent controller. Compared with \citet{Sanyal2026ReCoNIpsundrum}, it turns the earlier recurrent-affective architecture from a single-agent persistence model into a minimal social control model.
+The relation to \citet{YoshidaMan2025HomeostaticCoupling} is deliberately asymmetric. Their model demonstrates the observation-versus-coupling distinction in richer learned multi-agent systems. The present model does not try to match that adaptive breadth. Instead, it makes the same distinction inspectable in a smaller hand-specified controller. The tradeoff is useful: the current system admits an exact one-step solver, matched routing controls, transparent rollout inspection, and causal lesions that sever only the coupling channel. Thus the contribution is not a stronger behavioral benchmark, but a minimal executable decomposition of the same architectural hypothesis. Compared with \citet{Sanyal2026ReCoNIpsundrum}, it turns the earlier recurrent-affective architecture from a single-agent persistence model into a minimal social control model.
 
 The claim should still be kept narrow. This is not evidence for empathy in the human sense, and it is not a consciousness claim. That restraint matters both conceptually and methodologically \citep{ButlinEtAl2025Indicators}. The social extension shows a specific architectural fact: a self-directed controller can nevertheless help when another agent's distress has become part of its own homeostatic error. This is not just a relabeled social reward bonus: the partner's state does not add a separate welfare term to the objective, but perturbs endogenous homeostatic error before rollout, and lesions that sever that perturbation eliminate helping while leaving the rest of the planner unchanged. That is already enough to support a meaningful ALife result. This is also where the philosophical payoff lies. The simulation is not evidence that synthetic agents are empathic. It is an intervention device for separating two candidate explanations---representation and regulatory coupling---under matched conditions. In that sense, the tunable parameters, exact solver, and lesions are not merely engineering conveniences. They are the experimental handles that let an ALife model function as a piece of experimental philosophy: one can vary $\lambda$, load, horizon, or signal integrity and ask which social description survives mechanistic opening and perturbation.
 
-Several limitations follow directly from the engineering choices. First, the tasks are deterministic and involve passive partners, so the current work is about mechanism isolation rather than adaptive interaction. Second, the direct-state conditions make the ``full'' and ``affective'' variants coincide, which is informative here but leaves richer social inference for future work. Third, the current sweep does not exhibit a clean inverted-U optimum across all loads; instead it shows one low-load helping regime and failure regions under medium and high load. Finally, there is no learning, autobiographical memory, or decoded-empathy component. Those would be natural next steps if the goal shifted from mechanism isolation to developmental sociality.
+Several limitations follow directly from the engineering choices. First, the tasks are deterministic and involve passive partners, so the current work is about mechanism isolation rather than adaptive interaction. Second, the direct-state conditions make the ``full'' and ``affective'' variants coincide, which is informative here but leaves richer social inference for future work. Third, the current sweep does not exhibit a clean inverted-U optimum across all loads; instead it shows one low-load helping regime and failure regions under medium and high load. Finally, there is no learning, autobiographical memory, or partner-model decoder. Those would be natural next steps if the goal shifted from mechanism isolation to developmental sociality.
 
 Still, those limits are also what make the result usable. The architecture is small enough that the causal story stays legible. The exact solver, the trajectory evidence in Figure~\ref{fig:visuals}, the corridor sequence planner, and the lesion suite all tell the same story. In ALife terms, that is a strength: the model is minimal enough to serve as an experimental object rather than merely as a demonstration.
 
 \section{Conclusion}
 
 This work implemented a multi-agent homeostatic extension of an inspectable recurrent controller and used it to test a sharp architectural question: is prosocial behavior produced by observing another's need, or by coupling that need into self-regulation? Across an exact one-step task, a multi-step rescue task, and two lesion manipulations, the answer was consistent for this architecture. Mere partner-state access without regulatory routing did not produce helping. Coupling did. For artificial life, the broader lesson is methodological. Socially interpretable behavior becomes more informative when the mechanism is simple enough to open, lesion, and compare under matched conditions.
+
+\section*{Acknowledgements}
+
+The author thanks the ALIFE 2026 reviewers for constructive comments. The author used generative-AI tools, including OpenAI GPT/Codex systems, for code-generation assistance, analysis-script support, and editorial suggestions. The author reviewed, ran, validated, and takes responsibility for all code, experiments, figures, and manuscript claims.
 
 {\small\bibliographystyle{apalike}
 \bibliography{refs}}

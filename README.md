@@ -95,6 +95,7 @@ python3 -c 'from experiments.social_foodshare import run_foodshare_experiment; r
 python3 -c 'from experiments.social_corridor import run_corridor_experiment; run_corridor_experiment(profile="paper", outdir="results/social-corridor-paper", metabolic_load="low")'
 python3 -c 'from experiments.social_lesion_assay import run_social_lesion_assay; run_social_lesion_assay(profile="paper", outdir="results/social-lesions-paper")'
 python3 -c 'from analysis.social_claims import build_social_artifacts; build_social_artifacts(foodshare_summary_csv="results/social-foodshare-paper/summary.csv", corridor_summary_csv="results/social-corridor-paper/summary.csv", lesion_summary_csv="results/social-lesions-paper/summary.csv", coupling_sweep_csv="results/social-lesions-paper/coupling_sweep.csv", outdir="results/social-paper-paper")'
+python3 -c 'from analysis.social_exact_solver import foodshare_score_decomposition_table; foodshare_score_decomposition_table().to_csv("results/social-paper-paper/score_decomposition.csv", index=False)'
 ```
 
 Those commands generate the manuscript-level social artifacts:
@@ -106,12 +107,13 @@ Those commands generate the manuscript-level social artifacts:
 - `results/social-paper-paper/lesion_summary.csv`
 - `results/social-paper-paper/coupling_sweep.csv`
 - `results/social-paper-paper/claims.json`
+- `results/social-paper-paper/score_decomposition.csv`
 
 The corresponding manuscript figures can then be regenerated with:
 
 ```bash
-python3 -m experiments.viz_utils.social_paper_figures --social-paper-dir results/social-paper-paper --out-pdf docs/recips_social_alife2026/figures/fig_summary.pdf --out-png docs/recips_social_alife2026/figures/fig_summary.png
-python3 -m experiments.viz_utils.social_visuals_figure --out-pdf docs/recips_social_alife2026/figures/fig_visuals.pdf --out-png docs/recips_social_alife2026/figures/fig_visuals.png
+python3 -m experiments.viz_utils.social_paper_figures --social-paper-dir results/social-paper-paper --out-pdf docs/recips_social_alife2026/fig_summary.pdf --out-png docs/recips_social_alife2026/fig_summary.png
+python3 -m experiments.viz_utils.social_visuals_figure --out-pdf docs/recips_social_alife2026/fig_visuals.pdf --out-png docs/recips_social_alife2026/fig_visuals.png
 ```
 
 For ALIFE-specific regression checks, run:
