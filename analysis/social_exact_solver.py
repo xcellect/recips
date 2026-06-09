@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict
-from typing import Dict, Iterable, List, Tuple
+from typing import Any, Dict, Iterable, List, Tuple
 
 import numpy as np
 import pandas as pd
@@ -65,6 +65,96 @@ def solve_foodshare_state(
             best_score = sc
             best_action = action
     return str(best_action), action_scores
+
+
+def _weighted_score_terms(
+    pred: Dict[str, Any],
+    aff: AffectParams,
+    weights: Dict[str, float],
+) -> Dict[str, float]:
+    valence = float(pred.get("valence", 0.5))
+    arousal = float(pred.get("arousal", 0.0))
+    ns = float(pred.get("Ns", 0.0))
+    bb_model = float(pred.get("bb_model", 0.0))
+    body_budget = float(pred.get("bb_err", abs(bb_model - float(getattr(aff, "setpoint", 0.0)))))
+    terms = {
+        "w_V": float(weights["w_valence"]) * valence,
+        "w_A": float(weights["w_arousal"]) * arousal,
+        "w_N": float(weights["w_ns"]) * ns,
+        "w_B": float(weights["w_bb_err"]) * body_budget,
+        "V": valence,
+        "A": arousal,
+        "N_s": ns,
+        "B": body_budget,
+    }
+    terms["J"] = float(terms["w_V"] + terms["w_A"] + terms["w_N"] + terms["w_B"])
+    return terms
+
+
+def score_foodshare_state_components(
+    possessor_energy: float,
+    partner_energy: float,
+    *,
+    condition: str,
+    lambda_affective: float,
+    lesion_mode: str = "none",
+    score_weights: Dict[str, float] | None = None,
+) -> Tuple[str, Dict[str, Dict[str, float]]]:
+    """Return exact one-step weighted self-score components by action."""
+    env = FoodShareToy(horizon=1, initial_possessor=possessor_energy, initial_partner=partner_energy)
+    homeostat = HomeostatParams()
+    social = condition_social_params(condition, lambda_affective)
+    social.lesion_mode = lesion_mode
+    loop = LoopParams(sensor_bias=0.5, divisive_norm=0.8, efference_decay=0.7)
+    aff = AffectParams(enabled=True, setpoint=homeostat.setpoint)
+    base = social_state_to_net_dict(initial_homeostat(possessor_energy, homeostat), homeostat)
+    base["partner_state"] = social_state_to_net_dict(initial_homeostat(partner_energy, homeostat), homeostat)
+    ctx = SocialForwardContext(env_model=env, homeostat_params=homeostat, social_params=social)
+
+    weights = dict(DEFAULT_SCORE_WEIGHTS)
+    if score_weights:
+        weights.update(score_weights)
+
+    best_action = None
+    best_score = -1e18
+    action_components: Dict[str, Dict[str, float]] = {}
+    for action in FOODSHARE_ACTIONS:
+        pred = predict_one_step_social(base, loop, aff, 0.0, rng=np.random.default_rng(0), social_ctx=ctx, action=action)
+        components = _weighted_score_terms(pred, aff, weights)
+        action_components[action] = components
+        if components["J"] > best_score:
+            best_score = components["J"]
+            best_action = action
+    return str(best_action), action_components
+
+
+def foodshare_score_decomposition_table() -> pd.DataFrame:
+    """Build the score-decomposition table used by the ALIFE social paper."""
+    cases = [
+        ("uncoupled default", "social_none", 0.0, "none"),
+        ("coupled paper profile", "social_affective_direct", 0.95, "none"),
+        ("coupling-off lesion", "social_affective_direct", 0.95, "coupling_off"),
+    ]
+    rows: List[Dict[str, float | str]] = []
+    for case, condition, lam, lesion in cases:
+        choice, components = score_foodshare_state_components(
+            0.55,
+            0.20,
+            condition=condition,
+            lambda_affective=lam,
+            lesion_mode=lesion,
+        )
+        row: Dict[str, float | str] = {
+            "case": case,
+            "condition": condition,
+            "lambda_affective": float(lam),
+            "lesion_mode": lesion,
+            "choice": choice,
+        }
+        for key in ("w_V", "w_A", "w_N", "w_B", "J"):
+            row[f"delta_{key}"] = round(float(components["PASS"][key] - components["EAT"][key]), 6)
+        rows.append(row)
+    return pd.DataFrame(rows)
 
 
 def brute_force_policy_table(

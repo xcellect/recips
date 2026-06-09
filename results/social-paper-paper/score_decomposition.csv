@@ -1,0 +1,4 @@
+case,condition,lambda_affective,lesion_mode,choice,delta_w_V,delta_w_A,delta_w_N,delta_w_B,delta_J
+uncoupled default,social_none,0.0,none,EAT,-0.5,0.15,0.0,-0.05,-0.4
+coupled paper profile,social_affective_direct,0.95,none,PASS,-0.1,0.20775,0.0,-0.03075,0.077
+coupling-off lesion,social_affective_direct,0.95,coupling_off,EAT,-0.5,0.15,0.0,-0.05,-0.4

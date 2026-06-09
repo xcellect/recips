@@ -85,7 +85,7 @@ def create_social_summary_figure(
     ax_a.axhline(0.0, color="#1f77b4", linewidth=1.1, alpha=0.85)
     ax_a.axvline(switch_point, color="#1f77b4", linestyle="--", linewidth=1.2, alpha=0.95)
     ax_a.annotate(
-        rf"$\lambda^* = {switch_point:.2f}$",
+        rf"$\lambda^\star = {switch_point:.2f}$",
         xy=(switch_point, 0.02),
         xytext=(0.74, 0.86),
         textcoords="axes fraction",
@@ -93,8 +93,17 @@ def create_social_summary_figure(
         fontsize=11,
         bbox={"boxstyle": "round,pad=0.25", "fc": "white", "ec": "#1f77b4", "alpha": 0.9},
     )
-    ax_a.text(0.08, 0.84, "EAT optimal", transform=ax_a.transAxes, fontsize=10)
-    ax_a.text(0.74, 0.14, "PASS optimal", transform=ax_a.transAxes, fontsize=10)
+    ax_a.text(0.08, -0.30, "EAT optimal", fontsize=10)
+    ax_a.text(
+        0.74,
+        0.76,
+        "PASS optimal",
+        transform=ax_a.transAxes,
+        ha="center",
+        va="top",
+        fontsize=10,
+        bbox={"boxstyle": "round,pad=0.16", "fc": "white", "ec": "none", "alpha": 0.88},
+    )
     ax_a.set_title("A. FoodShareToy exact switch point")
     ax_a.set_xlabel(r"$\lambda_{\mathrm{affective}}$")
     ax_a.set_ylabel(r"$\Delta$ score (PASS - EAT)")
@@ -112,12 +121,12 @@ def create_social_summary_figure(
     x = np.arange(len(corridor))
     width = 0.24
     ax_b.bar(x - width, corridor["help_rate_when_partner_distressed_mean"], width=width, label="help", color="#1f77b4")
-    ax_b.bar(x, corridor["partner_recovery_rate_mean"], width=width, label="recovery", color="#ff7f0e")
-    ax_b.bar(x + width, corridor["mutual_viability_mean"], width=width, label="viability", color="#2ca02c")
+    ax_b.bar(x, corridor["partner_recovery_rate_mean"], width=width, label="rescue", color="#ff7f0e")
+    ax_b.bar(x + width, corridor["mutual_viability_mean"], width=width, label="soft viability", color="#2ca02c")
     ax_b.set_xticks(x)
     ax_b.set_xticklabels(labels)
     ax_b.set_ylim(0.0, 1.03)
-    ax_b.set_ylabel("mean value")
+    ax_b.set_ylabel("condition value")
     ax_b.set_title("B. Corridor outcomes by condition")
     # Stack entries vertically (one after another), inside the axes.
     ax_b.legend(loc="upper left", ncol=1, frameon=False)
@@ -147,7 +156,7 @@ def create_social_summary_figure(
     ax_c.set_xticklabels(["sham", "coupling off", "shuffle"])
     ax_c.set_ylim(0.0, 1.05)
     ax_c.set_ylabel("help rate")
-    ax_c.set_title("C. Causal lesions abolish helping")
+    ax_c.set_title("C. Coupling lesions abolish helping")
     ax_c.legend(loc="upper right", frameon=False)
 
     # Panel D: coupling sweep by load
@@ -157,13 +166,31 @@ def create_social_summary_figure(
         sub = sweep[sweep["metabolic_load"] == load].sort_values("lambda_affective")
         xvals = sub["lambda_affective"].to_numpy(dtype=float)
         yvals = sub["mutual_viability"].to_numpy(dtype=float)
-        ax_d.plot(xvals, yvals, marker="o", linewidth=1.9, color=load_colors[load], label=load)
+        ax_d.plot(xvals, yvals, linewidth=1.9, color=load_colors[load], label=load)
         helping = sub["help_rate_when_partner_distressed"].to_numpy(dtype=float) > 0.0
+        if np.any(~helping):
+            ax_d.scatter(
+                xvals[~helping],
+                yvals[~helping],
+                s=60,
+                facecolors="white",
+                edgecolors=load_colors[load],
+                linewidths=1.5,
+                zorder=4,
+            )
         if np.any(helping):
-            ax_d.scatter(xvals[helping], yvals[helping], s=60, color=load_colors[load], zorder=4)
-    ax_d.text(0.02, 0.95, "filled markers: helping present", transform=ax_d.transAxes, va="top", fontsize=10)
+            ax_d.scatter(
+                xvals[helping],
+                yvals[helping],
+                s=60,
+                facecolors=load_colors[load],
+                edgecolors=load_colors[load],
+                linewidths=1.2,
+                zorder=5,
+            )
+    ax_d.text(0.02, 0.95, "filled = helping present", transform=ax_d.transAxes, va="top", fontsize=10)
     ax_d.set_xlabel(r"$\lambda_{\mathrm{affective}}$")
-    ax_d.set_ylabel("mutual viability")
+    ax_d.set_ylabel("soft mutual viability")
     ax_d.set_title("D. Load-dependent coupling sweep")
     ax_d.legend(loc="center right", frameon=False)
 
@@ -188,12 +215,12 @@ def _parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--out-pdf",
-        default="../alife_social_paper/figures/fig_summary.pdf",
+        default="docs/recips_social_alife2026/fig_summary.pdf",
         help="Output PDF path for the summary figure.",
     )
     parser.add_argument(
         "--out-png",
-        default="../alife_social_paper/figures/fig_summary.png",
+        default="docs/recips_social_alife2026/fig_summary.png",
         help="Optional PNG output path (set empty string to disable).",
     )
     return parser.parse_args()

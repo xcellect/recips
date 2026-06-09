@@ -85,12 +85,12 @@ def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Build the social visuals figure for the ALife paper.")
     parser.add_argument(
         "--out-pdf",
-        default="../alife_social_paper/figures/fig_visuals.pdf",
+        default="docs/recips_social_alife2026/fig_visuals.pdf",
         help="Output PDF path for the visuals figure.",
     )
     parser.add_argument(
         "--out-png",
-        default="../alife_social_paper/figures/fig_visuals.png",
+        default="docs/recips_social_alife2026/fig_visuals.png",
         help="Optional PNG output path (set empty string to disable).",
     )
     return parser.parse_args()
