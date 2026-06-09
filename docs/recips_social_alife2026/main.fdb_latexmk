@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1781014165 "main.aux" "main.bbl" "main" 1781017432
+["bibtex main"] 1781014165 "main.aux" "main.bbl" "main" 1781020679
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/apalike.bst" 1292289607 24635 604dafcc79f521a11ea73e506e1fbd98 ""
-  "main.aux" 1781017432 9193 14fa47404f1eab60e30ae558a3be8349 "pdflatex"
+  "main.aux" 1781020679 9193 14fa47404f1eab60e30ae558a3be8349 "pdflatex"
   "refs.bib" 1781014156 4008 713858d882de081372aad37829ced73b ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1781017432 "/workspace/recips/docs/recips_social_alife2026/main.tex" "main.pdf" "main" 1781017432
+["pdflatex"] 1781020678 "/workspace/recips/docs/recips_social_alife2026/main.tex" "main.pdf" "main" 1781020679
   "/etc/texmf/web2c/texmf.cnf" 1780945136 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -136,14 +136,14 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1780945137 36924 0d49b21755741cfeb69caec967b1b39d ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1780945139 1405643 0b7ba4431c09b0b0a33bc2886484aad3 ""
-  "/workspace/recips/docs/recips_social_alife2026/main.tex" 1781017431 28764 5d0d27a135e5cbd800d5fefae84044f3 ""
+  "/workspace/recips/docs/recips_social_alife2026/main.tex" 1781020678 28772 63fd907348d3a04a26a8d50c4d82445f ""
   "alifeconf.sty" 1776778134 8747 11695cc43150de4d1ff41f7c2a4666aa ""
   "fig_summary.pdf" 1780976409 22296 2676c04744305f5eac55edc5fc175234 ""
   "fig_visuals.pdf" 1776778134 21792 f12f855f07ea3d87b2cba6148153b463 ""
-  "main.aux" 1781017432 9193 14fa47404f1eab60e30ae558a3be8349 "pdflatex"
+  "main.aux" 1781020679 9193 14fa47404f1eab60e30ae558a3be8349 "pdflatex"
   "main.bbl" 1781014165 3408 bbe9362193aaa532b430493a33a23541 "bibtex main"
-  "main.out" 1781017432 2503 e93f707d6ba22f749a0e816b350f783f "pdflatex"
-  "main.tex" 1781017431 28764 5d0d27a135e5cbd800d5fefae84044f3 ""
+  "main.out" 1781020679 2503 e93f707d6ba22f749a0e816b350f783f "pdflatex"
+  "main.tex" 1781020678 28772 63fd907348d3a04a26a8d50c4d82445f ""
   (generated)
   "main.aux"
   "main.log"
