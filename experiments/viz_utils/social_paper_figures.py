@@ -94,7 +94,16 @@ def create_social_summary_figure(
         bbox={"boxstyle": "round,pad=0.25", "fc": "white", "ec": "#1f77b4", "alpha": 0.9},
     )
     ax_a.text(0.08, -0.30, "EAT optimal", fontsize=10)
-    ax_a.text(0.94, 0.08, "PASS optimal", ha="center", fontsize=10)
+    ax_a.text(
+        0.74,
+        0.76,
+        "PASS optimal",
+        transform=ax_a.transAxes,
+        ha="center",
+        va="top",
+        fontsize=10,
+        bbox={"boxstyle": "round,pad=0.16", "fc": "white", "ec": "none", "alpha": 0.88},
+    )
     ax_a.set_title("A. FoodShareToy exact switch point")
     ax_a.set_xlabel(r"$\lambda_{\mathrm{affective}}$")
     ax_a.set_ylabel(r"$\Delta$ score (PASS - EAT)")
