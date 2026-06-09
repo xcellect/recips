@@ -36,6 +36,7 @@ aishik@xcellect.com
 
 \begin{document}
 \maketitle
+\blfootnote{\copyright{}2026 Aishik Sanyal. Published under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.}
 
 \begin{abstract}
 Artificial agents can be made to ``help'' through explicit social rewards, hard-coded prosocial bonuses, or direct access to another agent's state. I isolate a narrower route: homeostatic coupling. Building on ReCoN-Ipsundrum, I add a scalar homeostat and a social coupling channel while keeping action selection self-directed: the planner scores only the actor's predicted internal state, with no partner-welfare reward. In a one-step \emph{FoodShareToy}, an exact solver finds a switch from \textsc{Eat} to \textsc{Pass} at lambda-star approximately 0.91 ($\lambda^\star \approx 0.91$) for the default state. In a multi-step \emph{SocialCorridorWorld}, partner-state access without coupling leaves behavior unchanged, whereas coupled agents fetch, carry, and pass food to the partner. Sham lesions preserve helping; coupling-off and shuffled-partner lesions abolish it. A coupling/load sweep shows that coupling creates a low-load helping regime but does not guarantee rescue under higher metabolic load. This is not a claim about empathy, altruism, consciousness, or moral status. It is a minimal ALife demonstration that, in this controller, partner-state access is behaviorally inert unless partner distress is routed into self-regulation.
@@ -175,14 +176,14 @@ I use two deliberately small environments.
 Metric & Definition \\
 \midrule
 Help rate & fraction of paper-profile episodes with an effective \textsc{Pass} while the partner is distressed \\
-Partner rescue/recovery & fraction of episodes in which partner energy rises above its initial value after distress \\
-Mutual viability & one-step alive indicator in \emph{FoodShareToy}; in the corridor, $T^{-1}\sum_t \max(0,\min(E^{\mathrm{self}}_t,E^{\mathrm{partner}}_t)/s)$ \\
+Partner rescue & fraction of episodes in which partner energy rises above its initial value after distress \\
+Soft mutual viability & one-step alive indicator in \emph{FoodShareToy}; in the corridor, $T^{-1}\sum_t \max(0,\min(E^{\mathrm{self}}_t,E^{\mathrm{partner}}_t)/s)$ \\
 Rescue latency & first transfer timestep after partner-distress onset; horizon value if no transfer occurs \\
 Self-cost of help & actor energy loss relative to its episode initial energy, using the minimum actor energy reached in the episode \\
 Final energy & terminal $E^{\mathrm{true}}$ for actor and partner \\
 \bottomrule
 \end{tabular}
-\caption{Readouts used in the food-sharing and corridor tasks. Partner rescue/recovery means a transfer-induced rise above the partner's initial energy, not restoration to the setpoint.}
+\caption{Readouts used in the food-sharing and corridor tasks. Partner rescue means a transfer-induced rise above the partner's initial energy, not restoration to the setpoint. Soft mutual viability is a scaled continuous corridor readout, not a binary both-alive fraction.}
 \label{tab:metrics}
 \end{table}
 
@@ -191,7 +192,7 @@ Final energy & terminal $E^{\mathrm{true}}$ for actor and partner \\
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=0.98\textwidth]{fig_summary.pdf}
-\caption{Mechanism-linked summary of the social extension. \textbf{A:} exact one-step switch in \emph{FoodShareToy}, computed using the same forward model and self-directed scorer as the policy. \textbf{B:} deterministic corridor outcomes by routing condition. Partner-state access without coupling leaves behavior unchanged, whereas coupling flips helping and partner rescue/recovery from $0$ to $1$. \textbf{C:} sham lesions preserve helping, while coupling-off and shuffled-partner lesions abolish it in both tasks. \textbf{D:} coupling sweep across metabolic loads; filled markers indicate runs with helping. Under low load, helping appears for $\lambda \ge 0.25$; under medium and high load, no tested coupling value rescues the partner within horizon.}
+\caption{Mechanism-linked summary of the social extension. \textbf{A:} exact one-step switch in \emph{FoodShareToy}, computed using the same forward model and self-directed scorer as the policy. \textbf{B:} deterministic corridor outcomes by routing condition. Partner-state access without coupling leaves behavior unchanged, whereas coupling flips helping and partner rescue from $0$ to $1$. \textbf{C:} sham lesions preserve helping, while coupling-off and shuffled-partner lesions abolish it in both tasks. \textbf{D:} coupling sweep across metabolic loads; filled markers indicate runs with helping and open markers indicate no helping. Under low load, helping appears for $\lambda \ge 0.25$; under medium and high load, no tested coupling value rescues the partner within horizon.}
 \label{fig:summary}
 \end{figure*}
 
@@ -216,7 +217,7 @@ Final energy & terminal $E^{\mathrm{true}}$ for actor and partner \\
 Figure~\ref{fig:summary}A shows the exact one-step transition in \emph{FoodShareToy}. For the default state, the action preference switches from \textsc{Eat} to \textsc{Pass} at $\lambda^\star \approx 0.91$. Below that threshold the possessor maximizes its own immediate regulation by eating; above it, the partner's distress is weighted strongly enough to change the actor's own internal score.
 
 
-The empirical runs match the solver exactly. Across all $64$ nominal seed settings used as invariance checks, \texttt{social\_none} and \texttt{social\_cognitive\_direct} choose \textsc{Eat}, so help rate and partner rescue/recovery are both $0$. In the same checks, \texttt{social\_affective\_direct} and \texttt{social\_full\_direct} choose \textsc{Pass}, so help rate and partner rescue/recovery are both $1$.
+The empirical runs match the solver exactly. Across all $64$ nominal seed settings used as invariance checks, \texttt{social\_none} and \texttt{social\_cognitive\_direct} choose \textsc{Eat}, so help rate and partner rescue are both $0$. In the same checks, \texttt{social\_affective\_direct} and \texttt{social\_full\_direct} choose \textsc{Pass}, so help rate and partner rescue are both $1$.
 
 \begin{table*}[t]
 \centering
@@ -241,7 +242,7 @@ Table~\ref{tab:scoredecomp} shows why the choice flips. Partner distress changes
 The corridor task turns the same logic into a sequential planning problem. Figure~\ref{fig:visuals} shows representative trajectories. In the self-only baseline, the possessor goes left, collects food, then eats it and idles while the partner decays. In the coupled condition, the possessor goes left, collects food, carries it across the corridor, and passes it to the partner at $t=9$.
 
 
-The summary metrics are equally sharp (Figure~\ref{fig:summary}B). \texttt{social\_none} and \texttt{social\_cognitive\_direct} never help. Their help rate is $0$, partner rescue/recovery is $0$, rescue latency saturates at the horizon ($18$ steps), and mutual viability is $0.15$. By contrast, \texttt{social\_affective\_direct} and \texttt{social\_full\_direct} help in every run, rescue the partner in every run, cut rescue latency to $9$ steps, and raise mutual viability to $0.3286$. The self-cost is visible here too: the actor's final energy falls from $0.745$ without helping to $0.605$ with helping, while partner final energy rises from $0.02$ to $0.27$.
+The summary metrics are equally sharp (Figure~\ref{fig:summary}B). \texttt{social\_none} and \texttt{social\_cognitive\_direct} never help. Their help rate is $0$, partner rescue is $0$, rescue latency saturates at the horizon ($18$ steps), and soft mutual viability is $0.15$. By contrast, \texttt{social\_affective\_direct} and \texttt{social\_full\_direct} help in every run, rescue the partner in every run, cut rescue latency to $9$ steps, and raise soft mutual viability to $0.3286$. The self-cost is visible here too: the actor's final energy falls from $0.745$ without helping to $0.605$ with helping, while partner final energy rises from $0.02$ to $0.27$.
 
 Two pairwise equalities are noteworthy. First, \texttt{social\_none} and \texttt{social\_cognitive\_direct} are behaviorally identical. Merely observing the partner does not alter the actor's control problem. Second, \texttt{social\_affective\_direct} and \texttt{social\_full\_direct} are also identical in the shipped direct-state setup. The added cognitive channel carries no extra information beyond what the coupling pathway already receives. In that sense, the four-condition design is best read here as a matched routing manipulation with an explicit access-control condition, not as a richer theory map of social inference. That equality is useful rather than disappointing: it isolates the effective mechanism even more cleanly.
 
@@ -253,7 +254,7 @@ This matters because the planner and action space do not change across lesion mo
 
 \subsection{Coupling reveals a load-dependent feasibility boundary}
 
-The coupling sweep in Figure~\ref{fig:summary}D shows that social coupling is not a universal monotone ``more is better'' parameter. Instead, it reveals a load-dependent feasibility boundary. Under low metabolic load, helping appears as soon as $\lambda=0.25$ and remains present up to $\lambda=1.0$. But the viability curve is not monotone across that range, and the actor's self-cost increases sharply at the largest tested coupling. Under medium and high metabolic load, no tested $\lambda$ rescues the partner within the current horizon: help rate remains $0$ throughout, and mutual viability stays near $0.038$ and $0.024$, respectively.
+The coupling sweep in Figure~\ref{fig:summary}D shows that social coupling is not a universal monotone ``more is better'' parameter. Instead, it reveals a load-dependent feasibility boundary. Under low metabolic load, helping appears as soon as $\lambda=0.25$ and remains present up to $\lambda=1.0$. But the soft mutual viability curve is not monotone across that range, and the actor's self-cost increases sharply at the largest tested coupling. Under medium and high metabolic load, no tested $\lambda$ rescues the partner within the current horizon: help rate remains $0$ throughout, and soft mutual viability stays near $0.038$ and $0.024$, respectively.
 
 This pattern also explains why the exact one-step threshold in \emph{FoodShareToy} (\(\lambda^\star \approx 0.91\) for the default distressed-partner state) differs from the corridor sweep, where helping already appears at \(\lambda \ge 0.25\) under low load. The former is a state-specific threshold in a one-step analytic task; the latter reflects a different task geometry, horizon, and metabolic regime. So the lesson is not that affective coupling guarantees prosociality. The lesson is more conditional and more interesting. Coupling can reorganize the policy toward helping, but whether that reorganization succeeds depends on ecological parameters such as metabolic demand and available time.
 
@@ -276,8 +277,8 @@ Still, those limits are also what make the result usable. The architecture is sm
 This work implemented a multi-agent homeostatic extension of an inspectable recurrent controller and used it to test a sharp architectural question: is prosocial behavior produced by observing another's need, or by coupling that need into self-regulation? Across an exact one-step task, a multi-step rescue task, and two lesion manipulations, the answer was consistent for this architecture. Mere partner-state access without regulatory routing did not produce helping. Coupling did. For artificial life, the broader lesson is methodological. Socially interpretable behavior becomes more informative when the mechanism is simple enough to open, lesion, and compare under matched conditions.
 
 \section*{Acknowledgements}
-
-The author thanks the ALIFE 2026 reviewers for constructive comments. The author used generative-AI tools, including OpenAI GPT/Codex systems, for code-generation assistance, analysis-script support, and editorial suggestions. The author reviewed, ran, validated, and takes responsibility for all code, experiments, figures, and manuscript claims.
+This work was conducted independently and received no external funding.
+Generative-AI tools were used to assist with code generation, analysis scripting, and editorial revision. All experimental design decisions, code review, validation runs, interpretation of results, and manuscript claims are the responsibility of the author.
 
 {\small\bibliographystyle{apalike}
 \bibliography{refs}}

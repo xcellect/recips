@@ -4,6 +4,7 @@ Source spec: `docs/post-acceptance-task-specs.md`
 Manuscript: `docs/recips_social_alife2026/main.tex`  
 Last local audit: 2026-06-08
 Implementation pass: 2026-06-08
+Gap-analysis audit: 2026-06-09
 
 ## Goal
 
@@ -24,6 +25,10 @@ The final manuscript should make this narrow claim hard to misread:
   `results/social-paper-paper/score_decomposition.csv`.
 - Verified with targeted social tests and a successful LaTeX build of
   `docs/recips_social_alife2026/main.pdf` (7 letter-sized pages).
+- Post-acceptance gap analysis on 2026-06-09 identified T16-T20 as remaining
+  before final camera-ready upload.
+- Implemented T16-T20 on 2026-06-09, regenerated Figure 1 assets, rebuilt the
+  7-page PDF, and visually inspected page 1 plus Figure 1.
 
 ## Non-Negotiables
 
@@ -528,6 +533,195 @@ Reviewer 4 and the meta-review.
   decomposition.
 - The line "Partner-state access is not the active ingredient; regulatory
   routing is" feels supported by Methods, Results, and Discussion.
+
+## Remaining Gap-Analysis Tasks
+
+### [x] T16 P0 - Add Required CC BY 4.0 Copyright Notice
+
+**Review driver:** ALIFE camera-ready proceedings instructions require the
+first-page copyright notice.
+
+**Targets**
+
+- `docs/recips_social_alife2026/main.tex`
+- `docs/recips_social_alife2026/main.pdf`
+
+**Current audit**
+
+- `docs/gaps-post-acceptance.md` reports that the current PDF does not show
+  the required first-page bottom-left notice.
+- This is camera-ready blocking.
+
+**Implementation notes**
+
+- Add the required first-page notice through the ALIFE template-supported
+  mechanism if available; otherwise add a template-compatible bottom-left page
+  notice without disturbing the title block.
+- The rendered notice must read exactly:
+  `©2026 Aishik Sanyal. Published under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.`
+- Do not put this only in acknowledgements, metadata, or a bibliography note.
+
+**Acceptance checks**
+
+- Compile `docs/recips_social_alife2026/main.tex` successfully.
+- Inspect page 1 of `docs/recips_social_alife2026/main.pdf` and confirm the
+  notice appears at the bottom left.
+- The notice text uses the real author name and the CC BY 4.0 license wording.
+
+### [x] T17 P1 - Fix Figure 1A Optimal-Region Labels
+
+**Review driver:** Figure 1A is the exact-solver anchor, and its region labels
+must match the sign of `Delta score (PASS - EAT)`.
+
+**Targets**
+
+- `experiments/viz_utils/social_paper_figures.py`
+- `docs/recips_social_alife2026/fig_summary.pdf`
+- `docs/recips_social_alife2026/fig_summary.png`
+
+**Current audit**
+
+- The current labels place `EAT optimal` in the upper region and
+  `PASS optimal` in the lower region.
+- Negative delta score means \textsc{Eat} is better; positive delta score means
+  \textsc{Pass} is better.
+
+**Implementation notes**
+
+- Move `EAT optimal` to the lower-left region below the zero line and before
+  the switch point.
+- Move `PASS optimal` to the upper-right region above the zero line and after
+  the switch point.
+- Keep the Panel A threshold label at `\lambda^\star \approx 0.91`.
+- Regenerate `fig_summary.pdf` and `fig_summary.png` in the paths included by
+  `main.tex`.
+
+**Acceptance checks**
+
+- Visual inspection of Figure 1A confirms the region labels match the y-axis
+  sign convention.
+- `latexmk -pdf main.tex` succeeds after figure regeneration.
+
+### [x] T18 P1 - Fix Or Remove Figure 1D Filled-Marker Encoding
+
+**Review driver:** The current Figure 1D caption/panel text may contradict the
+rendered marker appearance.
+
+**Targets**
+
+- `experiments/viz_utils/social_paper_figures.py`
+- `docs/recips_social_alife2026/main.tex`
+- `docs/recips_social_alife2026/fig_summary.pdf`
+- `docs/recips_social_alife2026/fig_summary.png`
+
+**Current audit**
+
+- The caption says filled markers indicate helping present.
+- The rendered medium/high-load markers appear filled even though the text says
+  no tested medium/high condition rescues the partner.
+
+**Implementation notes**
+
+- Default safe fix: remove the panel text and caption claim that filled markers
+  indicate helping.
+- Keep the substantive caption sentence:
+  `Under low load, helping appears for $\lambda \ge 0.25$; under medium and high load, no tested coupling value rescues the partner within horizon.`
+- Only keep the filled/open marker claim if the script actually renders open
+  markers for no-helping runs and filled markers for helping runs.
+- Regenerate `fig_summary.pdf` and `fig_summary.png`.
+
+**Acceptance checks**
+
+- Figure 1D no longer has a misleading marker-encoding claim, or the visual
+  encoding truly matches the claim.
+- The Figure 1 caption remains consistent with the Results text.
+
+### [x] T19 P2 - Standardize Partner Rescue Terminology
+
+**Review driver:** `Recovery` can imply restoration to setpoint, while the
+defined metric is a transfer-induced rise above initial energy.
+
+**Targets**
+
+- `docs/recips_social_alife2026/main.tex`
+- `experiments/viz_utils/social_paper_figures.py`
+- `docs/recips_social_alife2026/fig_summary.pdf`
+- `docs/recips_social_alife2026/fig_summary.png`
+
+**Current audit**
+
+- The manuscript uses `partner rescue/recovery` in Table 3, Figure 1 caption,
+  and Results prose.
+- Figure code uses the underlying `partner_recovery_rate_mean` column but can
+  display the user-facing label as `rescue`.
+
+**Implementation notes**
+
+- Use `partner rescue` as the user-facing term in prose, table labels,
+  captions, and figure legends.
+- Keep code/data column names unchanged unless a broader artifact migration is
+  explicitly requested.
+- Where needed, define partner rescue as partner energy rising above initial
+  energy after distress; do not imply restoration to setpoint.
+
+**Acceptance checks**
+
+- `rg -n "rescue/recovery|partner recovery|recovery" docs/recips_social_alife2026/main.tex experiments/viz_utils/social_paper_figures.py`
+  returns no user-facing stale terminology except unavoidable code column
+  names.
+- Table 3 still states that partner rescue is not restoration to the setpoint.
+
+### [x] T20 P2 - Rename Mutual Viability To Soft Mutual Viability
+
+**Review driver:** The corridor metric is a scaled continuous minimum-energy
+measure, not a binary both-alive fraction.
+
+**Targets**
+
+- `docs/recips_social_alife2026/main.tex`
+- `experiments/viz_utils/social_paper_figures.py`
+- `docs/recips_social_alife2026/fig_summary.pdf`
+- `docs/recips_social_alife2026/fig_summary.png`
+- Optional: `README.md`
+
+**Current audit**
+
+- Table 3 defines corridor mutual viability as
+  `T^{-1}\sum_t \max(0,\min(E^{self}_t,E^{partner}_t)/s)`.
+- The manuscript and Figure 1 labels still call this `mutual viability`, which
+  can sound binary.
+
+**Implementation notes**
+
+- Use `soft mutual viability` as the user-facing term for the scaled metric in
+  Table 3, captions, y-axis labels, and Results prose.
+- Keep underlying code/data column names such as `mutual_viability` unchanged
+  unless a broader artifact migration is explicitly requested.
+- For \emph{FoodShareToy}, clarify if needed that the one-step value is an alive
+  indicator while the corridor value is scaled.
+
+**Acceptance checks**
+
+- Figure 1B/D and relevant Results sentences use `soft mutual viability`.
+- Table 3 makes clear the metric is scaled/continuous in the corridor.
+- `latexmk -pdf main.tex` succeeds after text and figure updates.
+
+## Gap-Analysis Validation Checklist
+
+Run these after T16-T20 are implemented:
+
+- [x] CC BY 4.0 notice appears at the bottom left of page 1 in the compiled
+  PDF.
+- [x] Figure 1A optimal-region labels match the sign of
+  `Delta score (PASS - EAT)`.
+- [x] Figure 1D no longer has a misleading filled-marker claim, or open/filled
+  markers are encoded correctly.
+- [x] `partner rescue` terminology is standardized in user-facing manuscript
+  and figure text.
+- [x] `soft mutual viability` terminology is used where the scaled corridor
+  metric is discussed.
+- [x] `latexmk -pdf main.tex` succeeds.
+- [x] Regenerated PDF is visually inspected.
 
 ## Final Validation Checklist
 
