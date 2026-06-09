@@ -41,7 +41,7 @@ aishik@xcellect.com
 Artificial agents can be made to ``help'' through explicit social rewards, hard-coded prosocial bonuses, or direct access to another agent's state. I isolate a narrower route: homeostatic coupling. Building on ReCoN-Ipsundrum, I add a scalar homeostat and a social coupling channel while keeping action selection self-directed: the planner scores only the actor's predicted internal state, with no partner-welfare reward. In a one-step \emph{FoodShareToy}, an exact solver finds a switch from \textsc{Eat} to \textsc{Pass} at $\lambda^\star \approx 0.91$ for the default state. In a multi-step \emph{SocialCorridorWorld}, partner-state access without coupling leaves behavior unchanged, whereas coupled agents fetch, carry, and pass food to the partner. Sham lesions preserve helping; coupling-off and shuffled-partner lesions abolish it. A coupling/load sweep shows that coupling creates a low-load helping regime but does not guarantee rescue under higher metabolic load. This is not a claim about empathy, altruism, consciousness, or moral status. It is a minimal ALife demonstration that, in this controller, partner-state access is behaviorally inert unless partner distress is routed into self-regulation.
 \end{abstract}
 
-\noindent\textbf{Data/Code:} \href{https://github.com/xcellect/recips}{github.com/xcellect/recips}
+\noindent\textbf{Data/Code:} \href{https://github.com/xcellect/recips}{https://github.com/xcellect/recips}
 \blfootnote{\textcopyright  2026 Aishik Sanyal. Published under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.}
 
 \section{Introduction}
